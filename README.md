@@ -1,6 +1,7 @@
 # cs107-FinalProject
 
-https://app.travis-ci.com/cs107-BCXY/cs107-FinalProject.svg?token=yTx8EKGf6bwYgTnyvSiH&branch=main
+##TravisCI
+[![Build Status](https://app.travis-ci.com/cs107-BCXY/cs107-FinalProject.svg?token=yTx8EKGf6bwYgTnyvSiH&branch=xiang-dev)](https://app.travis-ci.com/cs107-BCXY/cs107-FinalProject)
 
 Group Name: cs107-BCXY  
 Group Number: 12  
