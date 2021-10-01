@@ -1,16 +1,7 @@
 language: python
-python:
-  - "3.4"
-  - "3.5"
-  - "3.6"
-  - "3.7"
-  - "3.8"
-  - "3.9"
-install:
-  -pip install -r requirements.txt
-steps:
-  - name: "Upload coverage to Codecov"
-    uses: codecov/codecov-action@v2
-    with:
-      fail_ci_if_error: true
-      token: ${{ secrets.CODECOV_TOKEN }}
+script:
+  - python -V
+  - gcc --version
+  - pwd
+  - uname -m && cat /etc/*release  # verify supported version of Linux
+  - uname -a                       # display system info
