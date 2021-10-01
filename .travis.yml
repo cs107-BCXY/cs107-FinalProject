@@ -3,5 +3,5 @@ script:
   - python -V
   - gcc --version
   - pwd
-  - uname -m && cat /etc/*release
-  - uname -a
+  - uname -m && cat /etc/*release  # verify supported version of Linux
+  - uname -a                       # display system info
