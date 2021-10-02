@@ -6,3 +6,4 @@ script:
   - pwd
   - uname -m && cat /etc/*release  # verify supported version of Linux
   - uname -a                       # display system info
+  - python -m unittest --verbose
