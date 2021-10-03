@@ -1,14 +1,14 @@
 language: python
 
+install:
+  - pip install -r requirements.txt
+
 before_script:
   - python -V                      # python version
   - gcc --version
   - pwd
   - uname -m && cat /etc/*release  # verify supported version of Linux
   - uname -a                       # display system info
-
-install:
-  - pip install -r requirements.txt
 
 script:
 #  - python -m unittest --verbose
@@ -17,4 +17,4 @@ script:
 
   - curl -Os https://uploader.codecov.io/latest/linux/codecov
   - chmod +x codecov
-  - ./codecov -t ${CODECOV_TOKEN} -F unittests -v
+  - ./codecov -t ${CODECOV_TOKEN} -F unittests -f coverage.xml -v
