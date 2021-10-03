@@ -14,6 +14,7 @@ script:
 #  - python -m unittest --verbose
   - coverage run --branch --source=src -m unittest discover --start-directory tests --pattern test_*.py --verbose
   - coverage report --show-missing
+  - coverage xml
 
   - curl -Os https://uploader.codecov.io/latest/linux/codecov
   - chmod +x codecov
