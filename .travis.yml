@@ -19,6 +19,3 @@ script:
   - curl -Os https://uploader.codecov.io/latest/linux/codecov
   - chmod +x codecov
   - ./codecov -t ${CODECOV_TOKEN} -F unittests -f coverage.xml -v
-  - echo ${CODECOV_TOKEN}
-  - pwd
-  - ls
