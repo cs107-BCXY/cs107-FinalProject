@@ -1,9 +1,11 @@
 language: python
 
-script:
-  - python -V
+before_script:
+  - python -V                      # python version
   - gcc --version
   - pwd
   - uname -m && cat /etc/*release  # verify supported version of Linux
   - uname -a                       # display system info
+
+script:
   - python -m unittest --verbose
