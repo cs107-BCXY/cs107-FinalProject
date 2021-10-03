@@ -7,11 +7,14 @@ before_script:
   - uname -m && cat /etc/*release  # verify supported version of Linux
   - uname -a                       # display system info
 
+install:
+  - pip install -r requirements.txt
+
 script:
 #  - python -m unittest --verbose
   - coverage run --branch --source=src -m unittest discover --start-directory tests --pattern test_*.py --verbose
   - coverage report --show-missing
-  
+
   - curl -Os https://uploader.codecov.io/latest/linux/codecov
   - chmod +x codecov
   - ./codecov -t ${CODECOV_TOKEN} -F unittests -v
