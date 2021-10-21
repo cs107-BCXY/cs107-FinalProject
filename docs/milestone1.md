@@ -33,6 +33,9 @@ One option is to explicitly write down a function which computes the exact deriv
 
 The package is currently under development and will be distributed to [`PyPI`](https://pypi.org/).
 
+For packaging the software, we can look into utilizing Wheels as shown in lecture material, in which case, the installation can be done simply with 'pip'.
+
+
 ### Directory Structure 
 <div class="highlight"><pre><span></span><code>cs107-FinalProject/
 ├── docs
