@@ -11,7 +11,7 @@ Derivatives are required at the core of many numerical algorithms.
 
 However, they are usually computed inefficiently and approximately by some variant of the finite difference approach
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?f^\prime&space;\left(&space;x&space;\right&space;)&space;\approx&space;\frac{f\left(x&space;&plus;&space;h\right)&space;-&space;f\left(&space;x&space;\right)}{h}" title="f^\prime \left( x \right ) \approx \frac{f\left(x + h\right) - f\left( x \right)}{h}" /> 
+  <img src="https://latex.codecogs.com/svg.latex?f'(x)\approx\frac{f(x+h)-f(x)}{h},"> 
 </p>
 <p>for <img src="https://latex.codecogs.com/svg.latex?h"> small.</p>
 The method is ineffecient, since it requires 
