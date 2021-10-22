@@ -41,15 +41,19 @@ import cs107-BCXY as ad
 vars = ad.variables(n = 1, vals = (1))
 x = vars[0]
 ```
-Once they have done this, they can define their function of interest. Having completed this, they can then execute automatic differentiation with their chosen method.
+Once they have done this, they can define their function of interest. Having completed this, they can then execute automatic differentiation with their chosen method. The user can then look at the value and derivative of the function using the instance attributes.
 ```{python}
-func = ad.elementary_functions.exp(x)
-ad.autodiff.forward(func)
+func = ad.exp(x)
+fmode = ad.forward(func)
+rmode = ad.reverse(func)
+print(fmode.get_value())
+print(fmode.get_derivative())
 ```
 
 ## Software Organization
 
 ### Directory Structure 
+Our directory structure will be the following.
 ```
 ├── docs
 │   └── milestone1
@@ -90,19 +94,17 @@ The package is currently under development and will be distributed to [`PyPI`](h
 For packaging the software, we can look into utilizing Wheels as shown in lecture material since we do not expect our package will not be extremely complex and will not need many dependencies. In this case, the installation can be done simply with `pip`. Alternatively, we may also be able to use Conda-Forge as the [conda package system](https://docs.conda.io/en/latest/) is known to be quite good at supporting multiple applications with different dependencies.
 
 ## Implementation
-We will be able to take in lists and/or tuples of inputs in our implementation.
 
-If f is a composite function of the following forms:
+### Data Structures
 
-* f = g + h
-* f = g - h
-* f = g * h
-* f = g / h
-* f = g(h)
-where g and f are also functions, then these will be addressed in our package.
+### Classes
 
-For elementary functions `sin`, `sqrt`, `log`, `exp`, etc.. mentioned in the prompt, the package can rely on the `numpy` and  [`SymPy`](https://www.sympy.org/en/index.html) module as it holds a well curated list of basic functions for differentiation.
+### Method and Attributes
 
-### Licensing
+### External Dependencies
+
+At this point, we have identified [`NumPy`](https://numpy.org/) and [`SymPy`](https://www.sympy.org/en/index.html) as two dependencies that our package will have. It is possible that more dependencies will occur as we develop, but we expect the total amount to be relatively small.
+
+## Licensing
 [MIT License](/LICENSE) is chosen since it puts only very limited restriction and we would like to follow the spirit of open source.
 
