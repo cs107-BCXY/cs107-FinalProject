@@ -1,4 +1,3 @@
-
 ## Introduction
 
 A [`python`](https://www.python.org/) [**automatic differentiation**](https://en.wikipedia.org/wiki/Automatic_differentiation) (AD) library.
@@ -7,7 +6,7 @@ Many methods in science for example machine learning require the evaluation of d
 
 
 ## Background
-Derivatives are required at the core of many numerical algorithms. 
+Derivatives are required at the core of many numerical algorithms.  
 
 However, they are usually computed inefficiently and approximately by some variant of the finite difference approach
 <p align="center">
@@ -33,16 +32,15 @@ One option is to explicitly write down a function which computes the exact deriv
 
 ## How to use the package [BCXY](https://github.com/cs107-BCXY/cs107-FinalProject)
 
-For this Python package we will aim to be easily implementable where calling for example `python -m pip install [package-name]` will download the package and address dependencies such as [`NumPy`](https://numpy.org/).
+For this Python package we will aim to be easily implementable where calling for example `python -m pip install [package-name]` will download the package and address dependencies such as [`NumPy`](https://numpy.org/).  
 
 To instantiate the AD objects, simply running autodiff class and inputting parameters options `method`, `func`, and `values` will run.
-D
------
+```
      import autodiff as ad
 
      ad1 = ad(values = [], func = f_examples, method = "reverse")
      ad1.calculate()
------
+```
 
 ## Software Organization
 [`TravisCI`](https://travis-ci.org/) and [`Codecov`](https://about.codecov.io/) are used for automated testing and coverage report.
