@@ -97,6 +97,12 @@ For packaging the software, we can look into utilizing Wheels as shown in lectur
 
 ### Data Structures
 
+Our primary data structure for automatic differentiation will be the standard Python dictionary. This will allow us to easily track and access each element within the trace. A single node in the trace will have the following format (items in brackets represent placeholders):
+```{python}
+{[trace]: "elem_op":[elementary operation], "value":[value], "elem_der":[elementary derivative], "derx1":[directional derivative]}
+```
+The entire trace will be a dictionary of dictionaries - one for each node in the trace. Of note, the size of the node dictionary shown above can alter depending on the number of variables.
+
 ### Classes
 
 ### Method and Attributes
