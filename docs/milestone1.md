@@ -34,49 +34,60 @@ One option is to explicitly write down a function which computes the exact deriv
 
 For this Python package we will aim to be easily implementable where calling for example `python -m pip install cs107-BCXY` will download the package and address dependencies such as [`NumPy`](https://numpy.org/).  
 
-To instantiate the AD objects, simply running autodiff class and inputting parameters options `method`, `func`, and `values` will run.
+To use the package, users first need to instantiate variables, whether real or dual. This generates the specified number of variables with their symbolic representations, their current values, and derivatives.
 ```{python}
-import autodiff as ad
+import cs107-BCXY as ad
 
-ad1 = ad(values = [], func = f_examples, method = "reverse")
-ad1.calculate()
+vars = ad.variables(n = 1, vals = (1))
+x = vars[0]
+```
+Once they have done this, they can define their function of interest. Having completed this, they can then execute automatic differentiation with their chosen method.
+```{python}
+func = ad.elementary_functions.exp(x)
+ad.autodiff.forward(func)
 ```
 
 ## Software Organization
-[`TravisCI`](https://travis-ci.org/) and [`Codecov`](https://about.codecov.io/) are used for automated testing and coverage report.
+
+### Directory Structure 
+```
+├── docs
+│   └── milestone1
+├── src
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── autodiff.py
+│   ├── elementary_functions.py
+│   ├── variables.py
+│   ├── dual_variables.py
+│   └── ...
+├── tests
+├── .gitignore
+├── .travis.yml
+├── LICENSE
+├── README.md
+├── requirements.txt
+└── ...
+```
+Our main source code are placed in the directory [`src`](/src) and our tests are put in the directory [`tests`](/tests). Our package documentation will located in the [`docs`](/docs) directory. Top-level package information and documents (e.g. our licensing) will be in the root directory.
+
+### Modules
+We will have three modules within our package:  
+1. `autodiff.py` - this module contains our implementation of automatic differntiation, including both forward and reverse modes.  
+2. `elementary_functions.py` - this module contains our definitions of all elementary functions.  
+3. `variables.py` - this module handles our implementation of real variables within automatic differentiation.  
+4. `dual_variables.py` - this module handles our implementation of dual variables within automatic differentiation.
+
+### Testing
+Our testing suite is located within our [`tests`](/tests) directory. We will use both [`TravisCI`](https://travis-ci.org/) and [`Codecov`](https://about.codecov.io/) for automated testing and coverage reporting respectively.
+
+### Distribution
 
 The package is currently under development and will be distributed to [`PyPI`](https://pypi.org/).
 
+### Packaging
+
 For packaging the software, we can look into utilizing Wheels as shown in lecture material since we do not expect our package will not be extremely complex and will not need many dependencies. In this case, the installation can be done simply with `pip`. Alternatively, we may also be able to use Conda-Forge as the [conda package system](https://docs.conda.io/en/latest/) is known to be quite good at supporting multiple applications with different dependencies.
-
-
-### Directory Structure 
-<!-- <div class="highlight"><pre><span></span><code>cs107-FinalProject/
-├── docs
-│   └── milestone1
-├── src
-├── tests
-├── .gitignore
-├── .travis.yml
-├── LICENSE
-├── README.md
-├── requirements.txt
-└── ...
-</code></pre></div> -->
-```
-├── docs
-│   └── milestone1
-├── src
-├── tests
-├── .gitignore
-├── .travis.yml
-├── LICENSE
-├── README.md
-├── requirements.txt
-└── ...
-```
-
-Main source code are placed in the directory [`src`](/src). Tests are put in the directory [`tests`](/tests).
 
 ## Implementation
 We will be able to take in lists and/or tuples of inputs in our implementation.
