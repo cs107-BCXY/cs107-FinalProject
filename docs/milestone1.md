@@ -99,13 +99,21 @@ For packaging the software, we can look into utilizing Wheels as shown in lectur
 
 Our primary data structure for automatic differentiation will be the standard Python dictionary. This will allow us to easily track and access each element within the trace. A single node in the trace will have the following format (items in brackets represent placeholders):
 ```{python}
-{[trace]: "elem_op":[elementary operation], "value":[value], "elem_der":[elementary derivative], "derx1":[directional derivative]}
+{[trace]: "elem_op":[elementary operation], "value":[value], "elem_der":[elementary derivative], "dd_x1":[directional derivative]}
 ```
 The entire trace will be a dictionary of dictionaries - one for each node in the trace. Of note, the size of the node dictionary shown above can alter depending on the number of variables.
 
 ### Classes
 
+- Variables - this class will instantiate the variales for a given function, if said variables are real-valued.  
+- DualVariables - this class will instantiate the variables for a given function, if said variables are dual.  
+- AutoDiff - this class will be the interface through which the user executes automatic differentiation. They will specify whether to use forward or reverse mode.  
+
+We will also create classes for each elementary function (e.g. +, sin, etc.) to for use in function definition. These classes will contain both the function evaluation and its derivative evaluation.
+
 ### Method and Attributes
+
+Every class will contain ``__init__``, ``__repr__``, and ``__str__`` methods. Our ``DualVariables`` class will also contain the classes ``__add__``, ``__radd__``, ``__mul__``, ``__rmul__``, ``__truediv__``, and ``__pow__`` to handle all of these operations for dual numbers. Our ``Variables`` and ``DualVariables`` classes will have ``value`` and ``derivate`` attributes. Finally, our ``AutoDiff`` class will have a ``forward`` method for forward automatic differentiation, and ``reverse`` for reverse mode.
 
 ### External Dependencies
 
