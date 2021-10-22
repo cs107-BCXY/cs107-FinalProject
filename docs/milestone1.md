@@ -32,7 +32,7 @@ One option is to explicitly write down a function which computes the exact deriv
 
 ## How to use the package [BCXY](https://github.com/cs107-BCXY/cs107-FinalProject)
 
-For this Python package we will aim to be easily implementable where calling for example `python -m pip install [package-name]` will download the package and address dependencies such as [`NumPy`](https://numpy.org/).  
+For this Python package we will aim to be easily implementable where calling for example `python -m pip install cs107-BCXY` will download the package and address dependencies such as [`NumPy`](https://numpy.org/).  
 
 To instantiate the AD objects, simply running autodiff class and inputting parameters options `method`, `func`, and `values` will run.
 ```{python}
@@ -50,8 +50,8 @@ The package is currently under development and will be distributed to [`PyPI`](h
 For packaging the software, we can look into utilizing Wheels as shown in lecture material since we do not expect our package will not be extremely complex and will not need many dependencies. In this case, the installation can be done simply with `pip`. Alternatively, we may also be able to use Conda-Forge as the [conda package system](https://docs.conda.io/en/latest/) is known to be quite good at supporting multiple applications with different dependencies.
 
 
-## Directory Structure 
-<div class="highlight"><pre><span></span><code>cs107-FinalProject/
+### Directory Structure 
+<!-- <div class="highlight"><pre><span></span><code>cs107-FinalProject/
 ├── docs
 │   └── milestone1
 ├── src
@@ -62,7 +62,19 @@ For packaging the software, we can look into utilizing Wheels as shown in lectur
 ├── README.md
 ├── requirements.txt
 └── ...
-</code></pre></div>
+</code></pre></div> -->
+```
+├── docs
+│   └── milestone1
+├── src
+├── tests
+├── .gitignore
+├── .travis.yml
+├── LICENSE
+├── README.md
+├── requirements.txt
+└── ...
+```
 
 Main source code are placed in the directory [`src`](/src). Tests are put in the directory [`tests`](/tests).
 
