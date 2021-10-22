@@ -37,9 +37,10 @@ For this Python package we will aim to be easily implementable where calling for
 To instantiate the AD objects, simply running autodiff class and inputting parameters options `method`, `func`, and `values` will run.
 
 -----
-     import autodiff
+     import autodiff as ad
 
-     ad1 = autodiff(values = [], func = f_examples, method = "reverse")
+     ad1 = ad(values = [], func = f_examples, method = "reverse")
+     ad1.calculate()
 
 -----
 
@@ -69,7 +70,16 @@ Main source code are placed in the directory [`src`](https://github.com/cs107-BC
 
 ## Implementation
 
-For elementary functions `sin`,`sqrt` etc.. mentioned in the prompt, the package can rely on the `sympy` module as it holds a well curated list of basic functions for differentiation.
+We will be able to take in lists and/or tuples of inputs in our implementation.
+
+For elementary functions `sin`,`sqrt` etc.. mentioned in the prompt, the package can rely on the `numpy` module as it holds a well curated list of basic functions for differentiation. If f is a composite function of the following forms:
+
+* f = g + h
+* f = g - h
+* f = g * h
+* f = g / h
+* f = g(h)
+where g and f are also functions, then these will be addressed in our package.
 
 
 ### Licensing
