@@ -35,11 +35,11 @@ One option is to explicitly write down a function which computes the exact deriv
 For this Python package we will aim to be easily implementable where calling for example `python -m pip install [package-name]` will download the package and address dependencies such as [`NumPy`](https://numpy.org/).  
 
 To instantiate the AD objects, simply running autodiff class and inputting parameters options `method`, `func`, and `values` will run.
-```
-     import autodiff as ad
+```{python}
+import autodiff as ad
 
-     ad1 = ad(values = [], func = f_examples, method = "reverse")
-     ad1.calculate()
+ad1 = ad(values = [], func = f_examples, method = "reverse")
+ad1.calculate()
 ```
 
 ## Software Organization
