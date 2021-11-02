@@ -122,3 +122,8 @@ At this point, we have identified [`NumPy`](https://numpy.org/) and [`SymPy`](ht
 ## Licensing
 [MIT License](/LICENSE) is chosen since it puts only very limited restriction and we would like to follow the spirit of open source.
 
+## Feedback
+
+### Milestone 1
+
+The only feedback that we received on Milestone 1 was "Why depend on [`SymPy`](https://www.sympy.org/en/index.html)?", though no points were deducted. We intend to use [`SymPy`](https://www.sympy.org/en/index.html) primarily for its function printing - it displays mathematical equations in a symbolically aesthetic manner. We also will potentially use [`SymPy`](https://www.sympy.org/en/index.html) in our testing, utilizing its [calculus](https://docs.sympy.org/latest/modules/calculus/index.html) module to confirm that we are computing the correct derivatives.
