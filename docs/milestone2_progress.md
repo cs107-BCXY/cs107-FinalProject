@@ -1,8 +1,6 @@
-# Milestone 2a
+# Milestone 2b - Progress Check
 
-## Progress Check
-
-Specifically, for each member of the group, please answer the following questions.
+This progress report includes (1) what tasks each group member has been assigned for Milestone 2 and (2) what each group member has done since the submission of Milestone 1. The descriptions of what tasks each member has been assigned will be broad, describing the general areas that each member will work on. Each of these areas will include the module development, testing, and documentation for that area.
 
 What tasks has each group member been assigned to for Milestone2.
 What has each group member done since the submission of Milestone1.i
@@ -20,3 +18,6 @@ Yaxin is working with Bowen on allow autodiff to work with dual variables and po
 The group will handle the documentation for their specific sections but will review the documentation as a whole and ensure that the code coverage is at the min of 90%. We will also convene about the organization of the package/modules together.
 
 
+### Tasks assigned
+
+### Work completed
