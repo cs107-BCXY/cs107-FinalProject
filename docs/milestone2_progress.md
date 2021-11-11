@@ -4,6 +4,6 @@ This progress report includes (1) what tasks each group member has been assigned
 
 ## Charlie
 
-1. Tasks assigned
+### Tasks assigned
 
-2. Work completed
+### Work completed
