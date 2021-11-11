@@ -1,8 +1,9 @@
-# Milestone 2a
+# Milestone 2b - Progress Check
 
-## Progress Check
+This progress report includes (1) what tasks each group member has been assigned for Milestone 2 and (2) what each group member has done since the submission of Milestone 1. The descriptions of what tasks each member has been assigned will be broad, describing the general areas that each member will work on. Each of these areas will include the module development, testing, and documentation for that area.
 
-Specifically, for each member of the group, please answer the following questions.
+## Charlie
 
-What tasks has each group member been assigned to for Milestone2.
-What has each group member done since the submission of Milestone1.
+1. Tasks assigned
+
+2. Work completed
