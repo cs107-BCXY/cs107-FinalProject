@@ -1,0 +1,21 @@
+name: build
+on: [push, pull_request]
+jobs:
+  unittest:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate test Report
+        run: |
+          pip install coverage
+          coverage run --source=src -m unittest discover --start-directory tests --pattern test_*.py --verbose
+          coverage report --show-missing
+          coverage xml
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          fail_ci_if_error: true
