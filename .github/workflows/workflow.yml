@@ -11,10 +11,11 @@ jobs:
         run: |
           pip install coverage
           coverage run --source=src -m unittest discover --start-directory tests --pattern test_*.py --verbose
-          coverage report --show-missing
           coverage xml
+          coverage report --show-missing --fail-under=90
 
       - name: Upload Coverage to Codecov
+        if: always()
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
