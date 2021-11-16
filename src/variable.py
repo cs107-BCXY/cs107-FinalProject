@@ -118,7 +118,7 @@ class Variable(object):
 		if isinstance(other, int) or isinstance(other, float):
 			return Variable(val = self.val + other, der = self.der)
 		elif isinstance(other, Variable):
-			return Variable(value = self.val + other.val, der = self.der + other.der)
+			return Variable(val = self.val + other.val, der = self.der + other.der)
 		else:
 			# other is not Variable, int, or float
 			raise TypeError(f"unsupported operand type(s) for +: '{type(self)}' and '{type(other)}'")
