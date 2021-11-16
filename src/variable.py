@@ -1,5 +1,7 @@
 """
-This file contains the Variable module for the cs107-BCXY package.
+This file contains the Variable module for the cs107-BCXY package. It includes the Variable class,
+which implements the creation of the Variable object, as well as numerous basic operations on the
+Variable.
 """
 import math
 
