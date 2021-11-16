@@ -4,6 +4,7 @@ This file contains the Variable module for the cs107-BCXY package.
 
 from math import log
 
+__all__ = ['Variable']
 
 class Variable(object):
 	"""
