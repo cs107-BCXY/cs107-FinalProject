@@ -1,8 +1,7 @@
 """
 This file contains the Variable module for the cs107-BCXY package.
 """
-
-from math import log
+import math
 
 
 class Variable(object):
@@ -337,7 +336,7 @@ class Variable(object):
 		"""
 		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
-			return Variable(other**self.val, other**self.val*log(other)*self.der)
+			return Variable(other**self.val, other**self.val*math.log(other)*self.der)
 		else:
 			raise TypeError(f"unsupported operand type(s) for ** or pow(): '{type(other)}' and '{type(self)}'")
 
@@ -361,7 +360,7 @@ class Variable(object):
 		else:
 			der = self.der
 		return Variable(val, der)
-    
+
 	def __eq__(self, other):
 		"""Overload of the '==' operator. Determines whether Variable is equal to
 		another object.
