@@ -1,7 +1,6 @@
 import unittest
-import sys
-sys.path.append(sys.path[0][:-5] + 'src')
-from variable import Variable
+from cs107-FinalProject.src.variable import Variable
+# TODO: fix this import
 
 
 class TestVariable(unittest.TestCase):
