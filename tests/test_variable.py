@@ -1,6 +1,5 @@
 import unittest
-from cs107-FinalProject.src.variable import Variable
-# TODO: fix this import
+from src.variable import Variable
 
 
 class TestVariable(unittest.TestCase):
