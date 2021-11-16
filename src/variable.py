@@ -314,10 +314,14 @@ class Variable(object):
 		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
 			return Variable(self.val**other, other*self.val**(other - 1)*self.der)
-		elif isinstance(other, Variable):			
-			return Variable(self.val**other.val, 
-				other.val*self.val**(other.val - 1)*self.der + \
-				self.val**other.val*log(self.val)*other.der)
+		elif isinstance(other, Variable):
+			if self.val > 0:
+				return Variable(self.val**other.val,
+								self.val**other.val * (
+										math.log(self.val) * other.der
+										+ self.der / self.val * other.val))
+			else:
+				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 		else:
 			raise TypeError(f"unsupported operand type(s) for ** or pow(): '{type(self)}' and '{type(other)}'")
 
@@ -336,7 +340,10 @@ class Variable(object):
 		"""
 		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
-			return Variable(other**self.val, other**self.val*math.log(other)*self.der)
+			if other > 0:
+				return Variable(other**self.val, other**self.val*math.log(other)*self.der)
+			else:
+				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 		else:
 			raise TypeError(f"unsupported operand type(s) for ** or pow(): '{type(other)}' and '{type(self)}'")
 
