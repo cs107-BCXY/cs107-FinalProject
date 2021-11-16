@@ -378,15 +378,12 @@ class Variable(object):
 		"""
 		# TODO: write examples for docstring
 		if isinstance(other, Variable):
-			return (self.val == other.val, self.der == other.der)
-		elif isinstance(other, int) or isinstance(other, float):
-			return (self.val == other, False)
-		else:
-			return (False, False)
+			return self.val == other.val and self.der == other.der
+		return False
 
 	def __str__(self) -> str:
 		return f"Variable(val = {self.val}, der = {self.der})"
-	
+
 	def __repr__(self) -> str:
 		return str(self)
 
