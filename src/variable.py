@@ -233,7 +233,7 @@ class Variable(object):
 		Returns:
 			Variable: resulting Variable object
 		"""
-		if isinstance(other, int) or isinstance(other, float) or isinstance(other, Variable):
+		if isinstance(other, int) or isinstance(other, float):
 			return (-1)*self + other
 		else:
 			raise TypeError(f"unsupported operand type(s) for -: '{type(other)}' and '{type(self)}'")
@@ -285,7 +285,7 @@ class Variable(object):
 		Returns:
 			Variable: resulting Variable object
 		"""
-		if isinstance(other, int) or isinstance(other, float) or isinstance(other, Variable):
+		if isinstance(other, int) or isinstance(other, float):
 			if self.val == 0:
 				raise ZeroDivisionError("division by zero")
 			else:
@@ -336,7 +336,7 @@ class Variable(object):
 		--------
 		"""
 		# TODO: write examples for docstring
-		if isinstance(other, int) or isinstance(other, float) or isinstance(other, Variable):
+		if isinstance(other, int) or isinstance(other, float):
 			return Variable(other**self.val, other**self.val*log(other)*self.der)
 		else:
 			raise TypeError(f"unsupported operand type(s) for ** or pow(): '{type(other)}' and '{type(self)}'")
