@@ -287,10 +287,7 @@ class Variable(object):
 			Variable: resulting Variable object
 		"""
 		if isinstance(other, int) or isinstance(other, float):
-			if self.val == 0:
-				raise ZeroDivisionError("division by zero")
-			else:
-				return other*(self**-1)
+			return other*(self**-1)
 		else:
 			raise TypeError(f"unsupported operand type(s) for /: '{type(other)}' and '{type(self)}'")
 
