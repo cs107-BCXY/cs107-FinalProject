@@ -12,10 +12,10 @@ from variable import Variable
 
 
 def log(input, base=math.e):
-    """Executes logarithm operation on Variable, int, or float and returns the result.
+    """Executes logarithm operation (log()) on Variable, int, or float and returns the result.
 
     Args:
-        var (Variable, int, or float): item to apply logarithm to
+        input (Variable, int, or float): item to apply logarithm to
         base (int or float, optional): logarithm base. Defaults to math.e which uses natural logarithm.
 
     Returns:
@@ -37,6 +37,26 @@ def log(input, base=math.e):
             return Variable(val = math.log(input.val, base), der = input.der/(input.val * math.log(base)))
         else:
             raise ValueError("math domain error")
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def exp(input):
+    """Executes exponential operation (exp()) on Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply exponential to
+
+    Returns:
+        Variable, int, or float: resulting exponential value
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.exp(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.exp(input.val), der = math.exp(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
