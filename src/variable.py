@@ -391,9 +391,3 @@ class Variable(object):
 
 	def __repr__(self) -> str:
 		return str(self)
-
-
-if __name__ == '__main__':
-	v1 = Variable(30, 3)
-	v2 = Variable(20, 1)
-	print("Multiply ", (v1*v2).val)
