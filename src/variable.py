@@ -346,27 +346,6 @@ class Variable(object):
 		else:
 			raise TypeError(f"unsupported operand type(s) for ** or pow(): '{type(other)}' and '{type(self)}'")
 
-	def __abs__(self):
-		"""Overload of the 'abs()' operator. Calculates the value and derivative resulting
-		from taking the absolute value of the Variable.
-
-		Returns:
-			Variable: resulting Variable object
-
-		Examples
-		--------
-		"""
-		# TODO: write examples for docstring
-		if self.val < 0:
-			val = -1*self.val
-		else:
-			val = self.val
-		if self.der < 0:
-			der = -1*self.der
-		else:
-			der = self.der
-		return Variable(val, der)
-
 	def __eq__(self, other):
 		"""Overload of the '==' operator. Determines whether Variable is equal to
 		another object.
