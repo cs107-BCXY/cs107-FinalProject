@@ -7,7 +7,10 @@ class TestElementaryFunctions(unittest.TestCase):
 
     def setUp(self):
         """Prepare the test fixture. Executed before each test method."""
-        pass
+        self.var1 = Variable(3)
+        self.var2 = Variable(4., 5.)
+        self.fp = 3.5
+        self.i = 2
 
     def test_log(self):
         """Test the logarithm function with the following arguments:
