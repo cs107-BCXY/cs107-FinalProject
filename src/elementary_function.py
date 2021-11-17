@@ -12,7 +12,7 @@ from variable import Variable
 
 
 def log(input, base=math.e):
-    """Executes logarithm operation (log()) on Variable, int, or float and returns the result.
+    """Calculates logarithm (log()) of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply logarithm to
@@ -41,7 +41,7 @@ def log(input, base=math.e):
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
 def exp(input):
-    """Executes exponential operation (exp()) on Variable, int, or float and returns the result.
+    """Calculates exponential (exp()) of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply exponential to
@@ -57,6 +57,25 @@ def exp(input):
         return math.exp(input)
     elif isinstance(input, Variable):
         return Variable(val = math.exp(input.val), der = math.exp(input.val)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def root(input, base=2):
+    """Executes root operation (square root, cube root, etc.) of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply square root to
+        base (int or float, optional): root base. Defaults to 2 which is the square root.
+
+    Returns:
+        Variable, int, or float: resulting exponential value
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float) or isinstance(input, Variable):
+        return input**(1.0/base)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
