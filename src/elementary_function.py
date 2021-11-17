@@ -60,22 +60,42 @@ def exp(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
-def root(input, base=2):
-    """Executes root operation (square root, cube root, etc.) of Variable, int, or float and returns the result.
+def root(input, n=2):
+    """Calculates nth root (square root, cube root, etc.) of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply square root to
-        base (int or float, optional): root base. Defaults to 2 which is the square root.
+        n (int or float, optional): root base. Defaults to 2 which is the square root.
 
     Returns:
-        Variable, int, or float: resulting exponential value
+        Variable, int, or float: resulting root value
 
     Examples
     --------
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float) or isinstance(input, Variable):
-        return input**(1.0/base)
+        return input**(1.0/n)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def sin(input):
+    """Calculates trigonometric sine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply sine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.sin(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.sin(input.val), der = math.cos(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
