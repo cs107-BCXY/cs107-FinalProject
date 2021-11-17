@@ -178,3 +178,23 @@ def cosh(input):
         return Variable(val = math.cosh(input.val), der = math.sinh(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def tanh(input):
+    """Calculates hyperbolic tangent of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply hyperbolic tangent function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.tanh(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.tanh(input.val), der = (1 - math.tanh(input.val)**2)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
