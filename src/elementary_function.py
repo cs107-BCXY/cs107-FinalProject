@@ -119,6 +119,22 @@ def cos(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
+def tan(input):
+    """Calculates trigonometric tangent of Variable, int, or float and returns the result.
 
-if __name__ == "__main__":
-    print(log('a'))
+    Args:
+        input (Variable, int, or float): item to apply tangent function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.tan(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.tan(input.val), der = input.der*(1/math.cos(input.val)**2))
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
