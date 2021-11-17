@@ -1,0 +1,39 @@
+"""
+This file contains the Forward module for the cs107-BCXY package. It includes the Forward class,
+which implements the forward mode of automatic differentiation.
+"""
+
+
+class Forward(object):
+    """
+    This class implements the forward mode of automatic differentiation. The user inputs the
+    function and the variables for that function and then can access the value and derivative
+    of the function.
+
+    Examples
+    --------
+
+    # Compute the value and derivative of a function consisting of basic operations
+    >>> x = Variable(3)
+    >>> f = lambda t: t**2
+    >>> fmode = Forward(f, x)
+    >>> fmode.value
+    9
+    >>> fmode.derivative
+    6
+    """
+    # TODO: write more examples for the doctstring, including complicated functions
+
+    def __init__(self, func, vars):
+        """Constructor for the Forward class.
+
+        Args:
+            func (function): function of interest
+            vars (Variable, list, or tuple): Variable object or list/tuple of Variables
+                                             to evaluate the function
+        """
+        self._func = func
+        if not isinstance(vars, list) or not isinstance(vars, tuple):
+            self._vars = tuple(vars)
+        else:
+            self._vars = vars
