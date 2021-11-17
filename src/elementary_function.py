@@ -180,7 +180,7 @@ def cosh(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
-def arcsos(input):
+def arccos(input):
     """Calculates hyperbolic arc cosine of Variable, int, or float and returns the result.
 
     Args:
