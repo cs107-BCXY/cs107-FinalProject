@@ -37,3 +37,24 @@ class Forward(object):
             self._vars = tuple(vars)
         else:
             self._vars = vars
+
+    @property
+    def func(self):
+        """Get the function of the Forward instance."""
+        return self._func
+
+    @property
+    def vars(self):
+        """Get the Variable(s) of the Forward instance."""
+        return self._vars
+
+    @func.setter
+    def func(self, func):
+        """Set the function for the forward mode. Used to quickly make changes to
+        function if Variables are the same.
+
+        Args:
+            func (function): new function to implement forward mode on
+        """
+        # TODO: write examples for docstring
+        self._func = func
