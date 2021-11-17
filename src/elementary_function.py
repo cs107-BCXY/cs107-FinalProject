@@ -4,11 +4,7 @@ of basic functions on the Variable objects that are not dunder methods. Such fun
 functions, logarithms, etcetera.
 """
 import math
-# from src.variable import Variable
-import sys
-sys.path.append(sys.path[0][:-5] + 'src')
-from variable import Variable
-# TODO: remove path editing, using for development purposes
+from src.variable import Variable
 
 
 def log(input, base=math.e):
@@ -260,3 +256,5 @@ def arctan(input):
         return Variable(val = math.atan(input.val), der = input.der/(1 + input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+# TODO: potentially define more basic functions (e.g. inverse hyperbolic functions)
