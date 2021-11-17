@@ -180,7 +180,26 @@ def cosh(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
-# TODO: implement arcos
+def arcsos(input):
+    """Calculates hyperbolic arc cosine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply arc cosine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    # don't need to check for -1 <= input <= 1, math.acos will handle it
+    if isinstance(input, int) or isinstance(input, float):
+        return math.acos(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.acos(input.val), der = -1*input.der/math.sqrt(1 - input.val**2))
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
 def tan(input):
     """Calculates trigonometric tangent of Variable, int, or float and returns the result.
