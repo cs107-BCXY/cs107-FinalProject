@@ -58,3 +58,7 @@ class Forward(object):
         """
         # TODO: write examples for docstring
         self._func = func
+
+    def calculate(self):
+        """Evaluate the given function with the Variables"""
+        self._res = self._func(*self._vars) # will be a Variable object
