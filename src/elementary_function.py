@@ -99,6 +99,26 @@ def sin(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
+def cos(input):
+    """Calculates trigonometric cosine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply cosine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.cos(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.cos(input.val), der = -1*math.sin(input.val)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
 
 if __name__ == "__main__":
     print(log('a'))
