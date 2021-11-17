@@ -77,3 +77,17 @@ class Forward(object):
         if not self._res:
             raise ValueError("value and derivative have not been calculated yet, call 'calculate' method")
         return self._res.val
+
+    @property
+    def derivative(self):
+        """Get the derivative of the function evaluated at the Variables.
+
+        Raises:
+            ValueError: if 'calculate' method has not been called
+
+        Returns:
+            float or int: derivative of the function evaluated at the Variable
+        """
+        if not self._res:
+            raise ValueError("value and derivative have not been calculated yet, call 'calculate' method")
+        return self._res.der
