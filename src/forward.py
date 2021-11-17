@@ -37,6 +37,7 @@ class Forward(object):
             self._vars = tuple(vars)
         else:
             self._vars = vars
+        self._res = None
 
     @property
     def func(self):
@@ -62,3 +63,17 @@ class Forward(object):
     def calculate(self):
         """Evaluate the given function with the Variables"""
         self._res = self._func(*self._vars) # will be a Variable object
+
+    @property
+    def value(self):
+        """Get the value of the function evaluated at the Variables.
+
+        Raises:
+            ValueError: if 'calculate' method has not been called
+
+        Returns:
+            float or int: value of the function evaluated at the Variable
+        """
+        if not self._res:
+            raise ValueError("value and derivative have not been calculated yet, call 'calculate' method")
+        return self._res.val
