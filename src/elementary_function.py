@@ -120,7 +120,7 @@ def sinh(input):
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
 def arcsin(input):
-    """Calculates hyperbolic arc sine of Variable, int, or float and returns the result.
+    """Calculates arc sine of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply arc sine function to
@@ -181,7 +181,7 @@ def cosh(input):
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
 def arccos(input):
-    """Calculates hyperbolic arc cosine of Variable, int, or float and returns the result.
+    """Calculates arc cosine of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply arc cosine function to
@@ -242,7 +242,7 @@ def tanh(input):
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
 def arctan(input):
-    """Calculates hyperbolic arc tangent of Variable, int, or float and returns the result.
+    """Calculates arc tangent of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply arc tangent function to
