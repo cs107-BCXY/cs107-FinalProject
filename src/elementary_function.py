@@ -241,4 +241,22 @@ def tanh(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
-# TODO: implement arctan
+def arctan(input):
+    """Calculates hyperbolic arc tangent of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply arc tangent function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.atan(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.atan(input.val), der = input.der/(1 + input.val**2))
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
