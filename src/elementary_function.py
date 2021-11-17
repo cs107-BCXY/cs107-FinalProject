@@ -99,46 +99,6 @@ def sin(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
-def cos(input):
-    """Calculates trigonometric cosine of Variable, int, or float and returns the result.
-
-    Args:
-        input (Variable, int, or float): item to apply cosine function to
-
-    Returns:
-        Variable, int, or float: resulting value object
-
-    Examples
-    --------
-    """
-    # TODO: write examples for docstring
-    if isinstance(input, int) or isinstance(input, float):
-        return math.cos(input)
-    elif isinstance(input, Variable):
-        return Variable(val = math.cos(input.val), der = -1*math.sin(input.val)*input.der)
-    else:
-        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
-
-def tan(input):
-    """Calculates trigonometric tangent of Variable, int, or float and returns the result.
-
-    Args:
-        input (Variable, int, or float): item to apply tangent function to
-
-    Returns:
-        Variable, int, or float: resulting value object
-
-    Examples
-    --------
-    """
-    # TODO: write examples for docstring
-    if isinstance(input, int) or isinstance(input, float):
-        return math.tan(input)
-    elif isinstance(input, Variable):
-        return Variable(val = math.tan(input.val), der = input.der*(1/math.cos(input.val)**2))
-    else:
-        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
-
 def sinh(input):
     """Calculates hyperbolic sine of Variable, int, or float and returns the result.
 
@@ -156,6 +116,47 @@ def sinh(input):
         return math.sinh(input)
     elif isinstance(input, Variable):
         return Variable(val = math.sinh(input.val), der = math.cosh(input.val)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def arcsin(input):
+    """Calculates hyperbolic arc sine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply arc sine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    # don't need to check for -1 <= input <= 1, math.asin will handle it
+    if isinstance(input, int) or isinstance(input, float):
+        return math.asin(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.asin(input.val), der = input.der/math.sqrt(1 - input.val**2))
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def cos(input):
+    """Calculates trigonometric cosine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply cosine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.cos(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.cos(input.val), der = -1*math.sin(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -179,6 +180,28 @@ def cosh(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
+# TODO: implement arcos
+
+def tan(input):
+    """Calculates trigonometric tangent of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply tangent function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.tan(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.tan(input.val), der = input.der*(1/math.cos(input.val)**2))
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
 def tanh(input):
     """Calculates hyperbolic tangent of Variable, int, or float and returns the result.
 
@@ -198,3 +221,5 @@ def tanh(input):
         return Variable(val = math.tanh(input.val), der = (1 - math.tanh(input.val)**2)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+# TODO: implement arctan
