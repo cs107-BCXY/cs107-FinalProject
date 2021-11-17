@@ -158,3 +158,23 @@ def sinh(input):
         return Variable(val = math.sinh(input.val), der = math.cosh(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def cosh(input):
+    """Calculates hyperbolic cosine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply hyperbolic cosine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.cosh(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.cosh(input.val), der = math.sinh(input.val)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
