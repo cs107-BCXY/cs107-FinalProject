@@ -70,7 +70,7 @@ class Forward(object):
             vars (Variable or tuple/list of Variables): new Variable(s) to implement forward mode on
         """
         # TODO: write examples for docstring
-        if not isinstance(vars, list) or not isinstance(vars, tuple):
+        if not isinstance(vars, list) and not isinstance(vars, tuple):
             self._vars = [vars]
         else:
             self._vars = vars
