@@ -34,7 +34,7 @@ class Forward(object):
                                              to evaluate the function
         """
         self._func = func
-        if not isinstance(vars, list) or not isinstance(vars, tuple):
+        if not isinstance(vars, list) and not isinstance(vars, tuple):
             self._vars = [vars]
         else:
             self._vars = vars
