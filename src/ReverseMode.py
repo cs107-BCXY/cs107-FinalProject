@@ -61,6 +61,7 @@ class RevMod:
             self.grad = None
 
         return new_RevMod
+
     # division
     def __truediv__(self, other):
         try:
@@ -95,7 +96,24 @@ class RevMod:
         return self.val
 
     def __repr__(self):
-        return 'RevMod({})'.format(self.val)
+        """ Prints self in the form of Dual(value = [val], derivative = [der])
+        
+        Parameters
+        ----------
+        self: Dual object
+        
+        Returns
+        ------- 
+        z: Dual object with val and der if z is a scalar
+        z: Dual object with val and vector der if z is a combination of vectors
+        
+        Examples
+        -------- 
+        >>> z = Dual(2, 1)
+        >>> print(z)
+        Dual(value=2, derivative=1)
+        """
+        return (f"{class_name=type(self).__name__}(value={self.val}, derivative={self.der})")
 
     def __str__(self):
         return 'RevMod({})'.format(self.val)
@@ -121,5 +139,8 @@ class RevMod:
         return new_RevMod
 
 
-
+#Still needed to add
+# negation 
+# exp
+# eq. ne etc.. comparison dunder methods?
 
