@@ -35,7 +35,7 @@ class Forward(object):
         """
         self._func = func
         if not isinstance(vars, list) or not isinstance(vars, tuple):
-            self._vars = tuple(vars)
+            self._vars = [vars]
         else:
             self._vars = vars
         self._res = None
