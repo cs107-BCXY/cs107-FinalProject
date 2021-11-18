@@ -72,6 +72,9 @@ def root(input, n=2):
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float) or isinstance(input, Variable):
         return input**(1.0/n)
+    elif isinstance(input, Variable):
+        print("constant is {}, input is {}, power is {}".format(1.0/n, input, power))
+        return Variable(val = input**(1.0/n), der = (1.0/n) * input ** (1.0/n - 1))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 

@@ -9,20 +9,26 @@ import math
 class TestElementaryFunctions(unittest.TestCase):
 
     def setUp(self):
-        """Prepare the test fixture. Executed before each test method."""
+        """
+        Prepare the test fixture. 
+        Executed before each test method.
+        """
         self.var1 = Variable(3)
         self.var2 = Variable(4., 5.)
         self.fp = 3.5
         self.i = 2
 
+
     def test_log(self):
-        """Test the logarithm function with the following arguments:
+        """
+        Test the logarithm function with the following arguments:
             a Variable object,
             a Variable object and a base > 0, /= e, /= 1,
             a Variable object and base 1,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
 
         # a variable object with base e
         log_result = log(self.var2)
@@ -38,12 +44,15 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 10
         self.assertEqual(log(var), math.log(var))
 
+
     def test_exp(self):
-        """Test the exponential function with the following arguments:
+        """
+        Test the exponential function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         exp_result = exp(self.var2)
         self.assertEqual(exp_result.val, math.exp(self.var2.val))
         self.assertEqual(exp_result.der, math.exp(self.var2.val) * self.var2.der)
@@ -53,34 +62,46 @@ class TestElementaryFunctions(unittest.TestCase):
         self.assertEqual(exp_result, math.exp(20))
 
     def test_root(self):
-        """Test the root function with the following arguments:
+        """
+        Test the root function with the following arguments:
             a Variable object,
             a Variable object and n /= 2,
             a floating point number,
             a floating point number and n /= 2,
             an integer,
             an integer and n /= 2,
-            an object of an invalid type."""
-        pass
+            an object of an invalid type.
+        """
+        # normal sqaure root
+        root_result = root(self.var2)
+        self.assertEqual(root_result.val, self.var2.val ** 0.5)
+        self.assertEqual(root_result.der, 0.5 * self.var2.val ** (-0.5))
+
+        # nth root
 
     def test_sin(self):
-        """Test the sin function with the following arguments:
+        """
+        Test the sin function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         pass
 
     def test_sinh(self):
-        """Test the sinh function with the following arguments:
+        """
+        Test the sinh function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         pass
 
     def test_arcsin(self):
-        """Test the arcsin function with the following arguments:
+        """
+        Test the arcsin function with the following arguments:
             a Variable object with -1 <= value < 1,
             a Variable object with value < -1,
             a Variable object with value > 1,
@@ -90,15 +111,18 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer between -1 and 1 (inclusive),
             an integer less than -1,
             an integer greater than 1,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         pass
 
     def test_cos(self):
-        """Test the cos function with the following arguments:
+        """
+        Test the cos function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         pass
 
     def test_cosh(self):
