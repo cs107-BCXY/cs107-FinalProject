@@ -141,7 +141,16 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer,
             an object of an invalid type.
         """
-        pass
+        cos_result = cos(self.var2)
+        self.assertEqual(cos_result.val, math.cos(self.var2.val))
+        self.assertEqual(cos_result.der, -math.sin(self.var2.val) * self.var2.der)
+
+        var = math.pi
+        self.assertAlmostEqual(cos(var), -1, places=7)
+
+        var = 0
+        self.assertAlmostEqual(cos(var), 1, places=7)
+
 
     def test_cosh(self):
         """Test the cosh function with the following arguments:
