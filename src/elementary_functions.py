@@ -70,6 +70,7 @@ def root(input, n=2):
     --------
     """
     # TODO: write examples for docstring
+    print("----------------")
     if isinstance(input, int) or isinstance(input, float) or isinstance(input, Variable):
         return input**(1.0/n)
     elif isinstance(input, Variable):
