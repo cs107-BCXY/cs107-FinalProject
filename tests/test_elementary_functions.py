@@ -131,7 +131,20 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer greater than 1,
             an object of an invalid type.
         """
-        pass
+        var2 = Variable(0.9, 0.5)
+        arcsin_result = arcsin(var2)
+        self.assertEqual(arcsin_result.val, math.asin(var2.val))
+        self.assertEqual(arcsin_result.der, var2.der/math.sqrt(1-var2.val**2))
+
+
+        var2 = Variable(-0.7, 0.5)
+        arcsin_result = arcsin(var2)
+        self.assertEqual(arcsin_result.val, math.asin(var2.val))
+        self.assertEqual(arcsin_result.der, var2.der/math.sqrt(1-var2.val**2))
+
+        var = 0.8
+        self.assertEqual(arcsin(var), math.asin(var))
+
 
     def test_cos(self):
         """
@@ -153,11 +166,13 @@ class TestElementaryFunctions(unittest.TestCase):
 
 
     def test_cosh(self):
-        """Test the cosh function with the following arguments:
+        """
+        Test the cosh function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         cosh_result = cosh(self.var2)
         self.assertEqual(cosh_result.val, math.cosh(self.var2.val))
         self.assertEqual(cosh_result.der, math.sinh(self.var2.val) * self.var2.der)
@@ -167,7 +182,8 @@ class TestElementaryFunctions(unittest.TestCase):
 
 
     def test_arccos(self):
-        """Test the arccos function with the following arguments:
+        """
+        Test the arccos function with the following arguments:
             a Variable object with -1 <= value < 1,
             a Variable object with value < -1,
             a Variable object with value > 1,
@@ -177,32 +193,48 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer between -1 and 1 (inclusive),
             an integer less than -1,
             an integer greater than 1,
-            an object of an invalid type."""
-        pass
+            an object of an invalid type.
+        """
+        cosh_result = cosh(self.var2)
+        self.assertEqual(cosh_result.val, math.cosh(self.var2.val))
+        self.assertEqual(cosh_result.der, math.sinh(self.var2.val) * self.var2.der)
+
+        var = math.pi
+        self.assertEqual(cosh(var), math.cosh(var))
+
 
     def test_tan(self):
-        """Test the tan function with the following arguments:
+        """
+        Test the tan function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         pass
+
 
     def test_tanh(self):
-        """Test the tanh function with the following arguments:
+        """
+        Test the tanh function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         pass
 
+
     def test_arctan(self):
-        """Test the arctan function with the following arguments:
+        """
+        Test the arctan function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
-            an object of an invalid type."""
+            an object of an invalid type.
+        """
         pass
+
 
 
 if __name__ == "__main__":
