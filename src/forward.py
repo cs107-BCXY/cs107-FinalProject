@@ -17,6 +17,7 @@ class Forward(object):
     >>> x = Variable(3)
     >>> f = lambda t: t**2
     >>> fmode = Forward(f, x)
+    >>> fmode.calculate()
     >>> fmode.value
     9
     >>> fmode.derivative
