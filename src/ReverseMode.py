@@ -42,6 +42,18 @@ class RevMod:
             self.grad = None
         return new_RevMod
 
+
+    ### function creating gradient ***
+    
+    def get_gradient(self):
+        if self.grad is None:
+            grad = 0
+            for der, child in self.children:
+                grad += der * child.get_gradient()
+            self.grad = grad
+        return self.grad
+
+
     def get_value(self):
         return self.val
 
@@ -77,4 +89,3 @@ class RevMod:
 
 
 
-        
