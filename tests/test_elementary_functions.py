@@ -109,6 +109,10 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer,
             an object of an invalid type.
         """
+        sinh_result = sinh(self.var2)
+        self.assertEqual(sinh_result.val, math.sinh(self.var2.val))
+        self.assertEqual(sinh_result.der, self.var2.der * sin(self.var2).der * root(sin(self.var2), -1).der)
+
         
 
 
