@@ -1,10 +1,10 @@
 """
-This file contains the Variable module for the cs107-BCXY package.
+This file contains the Variable module for the cs107-BCXY package. It includes the Variable class,
+which implements the creation of the Variable object, as well as numerous basic operations on the
+Variable.
 """
+import math
 
-from math import log
-
-__all__ = ['Variable']
 
 class Variable(object):
 	"""
@@ -119,7 +119,7 @@ class Variable(object):
 		if isinstance(other, int) or isinstance(other, float):
 			return Variable(val = self.val + other, der = self.der)
 		elif isinstance(other, Variable):
-			return Variable(value = self.val + other.val, der = self.der + other.der)
+			return Variable(val = self.val + other.val, der = self.der + other.der)
 		else:
 			# other is not Variable, int, or float
 			raise TypeError(f"unsupported operand type(s) for +: '{type(self)}' and '{type(other)}'")
@@ -234,7 +234,7 @@ class Variable(object):
 		Returns:
 			Variable: resulting Variable object
 		"""
-		if isinstance(other, int) or isinstance(other, float) or isinstance(other, Variable):
+		if isinstance(other, int) or isinstance(other, float):
 			return (-1)*self + other
 		else:
 			raise TypeError(f"unsupported operand type(s) for -: '{type(other)}' and '{type(self)}'")
@@ -286,11 +286,8 @@ class Variable(object):
 		Returns:
 			Variable: resulting Variable object
 		"""
-		if isinstance(other, int) or isinstance(other, float) or isinstance(other, Variable):
-			if self.val == 0:
-				raise ZeroDivisionError("division by zero")
-			else:
-				return other*(self**-1)
+		if isinstance(other, int) or isinstance(other, float):
+			return other*(self**-1)
 		else:
 			raise TypeError(f"unsupported operand type(s) for /: '{type(other)}' and '{type(self)}'")
 
@@ -316,10 +313,14 @@ class Variable(object):
 		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
 			return Variable(self.val**other, other*self.val**(other - 1)*self.der)
-		elif isinstance(other, Variable):			
-			return Variable(self.val**other.val, 
-				other.val*self.val**(other.val - 1)*self.der + \
-				self.val**other.val*log(self.val)*other.der)
+		elif isinstance(other, Variable):
+			if self.val > 0:
+				return Variable(self.val**other.val,
+								self.val**other.val * (
+										math.log(self.val) * other.der
+										+ self.der / self.val * other.val))
+			else:
+				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 		else:
 			raise TypeError(f"unsupported operand type(s) for ** or pow(): '{type(self)}' and '{type(other)}'")
 
@@ -337,32 +338,14 @@ class Variable(object):
 		--------
 		"""
 		# TODO: write examples for docstring
-		if isinstance(other, int) or isinstance(other, float) or isinstance(other, Variable):
-			return Variable(other**self.val, other**self.val*log(other)*self.der)
+		if isinstance(other, int) or isinstance(other, float):
+			if other > 0:
+				return Variable(other**self.val, other**self.val*math.log(other)*self.der)
+			else:
+				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 		else:
 			raise TypeError(f"unsupported operand type(s) for ** or pow(): '{type(other)}' and '{type(self)}'")
 
-	def __abs__(self):
-		"""Overload of the 'abs()' operator. Calculates the value and derivative resulting
-		from taking the absolute value of the Variable.
-
-		Returns:
-			Variable: resulting Variable object
-
-		Examples
-		--------
-		"""
-		# TODO: write examples for docstring
-		if self.val < 0:
-			val = -1*self.val
-		else:
-			val = self.val
-		if self.der < 0:
-			der = -1*self.der
-		else:
-			der = self.der
-		return Variable(val, der)
-    
 	def __eq__(self, other):
 		"""Overload of the '==' operator. Determines whether Variable is equal to
 		another object.
@@ -379,20 +362,11 @@ class Variable(object):
 		"""
 		# TODO: write examples for docstring
 		if isinstance(other, Variable):
-			return (self.val == other.val, self.der == other.der)
-		elif isinstance(other, int) or isinstance(other, float):
-			return (self.val == other, False)
-		else:
-			return (False, False)
+			return self.val == other.val and self.der == other.der
+		return False
 
 	def __str__(self) -> str:
 		return f"Variable(val = {self.val}, der = {self.der})"
-	
+
 	def __repr__(self) -> str:
 		return str(self)
-
-
-if __name__ == '__main__':
-	v1 = Variable(30, 3)
-	v2 = Variable(20, 1)
-	print("Multiply ", (v1*v2).val)
