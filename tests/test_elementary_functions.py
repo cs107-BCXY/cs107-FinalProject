@@ -158,7 +158,13 @@ class TestElementaryFunctions(unittest.TestCase):
             a floating point number,
             an integer,
             an object of an invalid type."""
-        pass
+        cosh_result = cosh(self.var2)
+        self.assertEqual(cosh_result.val, math.cosh(self.var2.val))
+        self.assertEqual(cosh_result.der, math.sinh(self.var2.val) * self.var2.der)
+
+        var = math.pi
+        self.assertEqual(cosh(var), math.cosh(var))
+
 
     def test_arccos(self):
         """Test the arccos function with the following arguments:
