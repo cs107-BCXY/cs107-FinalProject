@@ -104,5 +104,5 @@ class Forward(object):
             float or int: derivative of the function evaluated at the Variable
         """
         if not self._res:
-            raise ValueError("value and derivative have not been calculated yet, call 'calculate' method")
+            raise AttributeError("value and derivative have not been calculated yet, call 'calculate' method")
         return self._res.der
