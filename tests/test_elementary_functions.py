@@ -264,7 +264,19 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer,
             an object of an invalid type.
         """
-        pass
+        var2 = Variable(0.9, 0.5)
+        arctan_result = arctan(var2)
+        self.assertEqual(arctan_result.val, math.atan(var2.val))
+        self.assertEqual(arctan_result.der, var2.der/ (1 + var2.val ** 2))
+
+
+        var2 = Variable(-0.7, 0.5)
+        arctan_result = arctan(var2)
+        self.assertEqual(arctan_result.val, math.atan(var2.val))
+        self.assertEqual(arctan_result.der, var2.der/ (1 + var2.val ** 2))
+
+        var = 0.8
+        self.assertEqual(arctan(var), math.atan(var))
 
 
 
