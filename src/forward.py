@@ -61,6 +61,20 @@ class Forward(object):
         # TODO: write examples for docstring
         self._func = func
 
+    @vars.setter
+    def vars(self, vars):
+        """Set the Variables for the forward mode. Used to quickly make changes to
+        Variables if function is the same.
+
+        Args:
+            vars (Variable or tuple/list of Variables): new Variable(s) to implement forward mode on
+        """
+        # TODO: write examples for docstring
+        if not isinstance(vars, list) or not isinstance(vars, tuple):
+            self._vars = [vars]
+        else:
+            self._vars = vars
+
     def calculate(self):
         """Evaluate the given function with the Variables"""
         self._res = self._func(*self._vars) # will be a Variable object
