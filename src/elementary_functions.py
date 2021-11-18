@@ -4,7 +4,7 @@ of basic functions on the Variable objects that are not dunder methods. Such fun
 functions, logarithms, etcetera.
 """
 import math
-from src.variable import Variable
+from variable import Variable
 
 
 def log(input, base=math.e):
