@@ -1,6 +1,7 @@
 import unittest
 from src.variable import Variable
 from src.elementary_functions import *
+import math
 
 
 class TestElementaryFunctions(unittest.TestCase):
@@ -20,7 +21,8 @@ class TestElementaryFunctions(unittest.TestCase):
             a floating point number,
             an integer,
             an object of an invalid type."""
-        pass
+        log_result = log(self.var2)
+        self.assertEqual(math.log(self.var2).val, log(self.var2))
 
     def test_exp(self):
         """Test the exponential function with the following arguments:
