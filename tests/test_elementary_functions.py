@@ -77,6 +77,9 @@ class TestElementaryFunctions(unittest.TestCase):
         self.assertEqual(root_result.val, self.var2.val ** 0.5)
         self.assertEqual(root_result.der, 0.5 * self.var2.val ** (-0.5))
 
+        var = 20
+        self.assertEqual(root(20, 3), 20 ** (1.0/3))
+
         # nth root
 
     def test_sin(self):
@@ -87,7 +90,16 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer,
             an object of an invalid type.
         """
-        pass
+        sin_result = sin(self.var2)
+        self.assertEqual(sin_result.val, math.sin(self.var2.val))
+        self.assertEqual(sin_result.der, math.cos(self.var2.val) * self.var2.der)
+
+        var = math.pi
+        self.assertAlmostEqual(sin(var), 0, places=7)
+
+        var = 0
+        self.assertAlmostEqual(sin(var), 0, places=7)
+        
 
     def test_sinh(self):
         """
@@ -97,7 +109,8 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer,
             an object of an invalid type.
         """
-        pass
+        
+
 
     def test_arcsin(self):
         """
