@@ -111,9 +111,10 @@ class TestElementaryFunctions(unittest.TestCase):
         """
         sinh_result = sinh(self.var2)
         self.assertEqual(sinh_result.val, math.sinh(self.var2.val))
-        self.assertEqual(sinh_result.der, self.var2.der * sin(self.var2).der * root(sin(self.var2), -1).der)
+        self.assertEqual(sinh_result.der, cosh(self.var2).val * self.var2.der)
 
-        
+        var = math.pi
+        self.assertEqual(sinh(var), math.sinh(var))
 
 
     def test_arcsin(self):
