@@ -4,26 +4,26 @@ import numpy as np
 For reverse mode autodiff implementation
 
 """
-# Create class variable
+
 
 class RevMod:
     def __init__(self, val):
         self.val = val
         self.grad = 1
-        self.derivs = []
+        self.children = []
 
     def __mul__(self, other):
         try:
             val_mul = self.val * other.val
             new_RevMod = RevMod(val_mul)
-            self.derivs.append((other.val, new_RevMod))
+            self.children.append((other.val, new_RevMod))
             self.grad = None
-            other.derivs.append((self.val, new_RevMod))
+            other.children.append((self.val, new_RevMod))
             other.grad = None
         except AttributeError:
             val_mul = self.val * other
             new_RevMod = RevMod(val_mul)
-            self.derivs.append((other, new_RevMod))
+            self.children.append((other, new_RevMod))
             self.grad = None
         return new_RevMod
 
@@ -31,19 +31,50 @@ class RevMod:
         try:
             val_add = self.val + other.val
             new_RevMod = RevMod(val_add)
-            self.derivs.append((1, new_RevMod))
+            self.children.append((1, new_RevMod))
             self.grad = None
-            other.derivs.append((1, new_RevMod))
+            other.children.append((1, new_RevMod))
             other.grad = None
         except AttributeError:
             val_add = self.val + other
             new_RevMod = RevMod(val_add)
-            self.derivs.append((1, new_RevMod))
+            self.children.append((1, new_RevMod))
             self.grad = None
         return new_RevMod
+
+    def get_value(self):
+        return self.val
 
     def __repr__(self):
         return 'RevMod({})'.format(self.val)
 
     def __str__(self):
         return 'RevMod({})'.format(self.val)
+
+    # cosine
+    def cos(self):
+        val = np.cos(self.val)
+        new_RevMod = RevMod(val)
+        self.children.append((-np.sin(self.val), new_RevMod))
+        self.grad = None
+        return new_RevMod
+
+    # tangent
+    def tan(self):
+        val = np.tan(self.val)
+        new_RevMod = RevMod(val)
+        self.children.append(( 1/(np.cos(self.val)**2), new_RevMod)) 
+        self.grad = None
+        return new_RevMod
+
+    # sin function
+    def sin(self):
+        new_RevMod = RevMod(np.sin(self.val))
+        self.children.append((np.cos(self.val), new_RevMod))
+        self.grad = None
+        return new_RevMod
+
+
+
+
+        
