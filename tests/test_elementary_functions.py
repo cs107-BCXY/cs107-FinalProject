@@ -35,13 +35,22 @@ class TestElementaryFunctions(unittest.TestCase):
         self.assertEqual(log_result.val, math.log(self.var2.val, base))
         self.assertEqual(log_result.der, self.var2.der / (self.var2.val * math.log(base)))
 
+        var = 10
+        self.assertEqual(log(var), math.log(var))
+
     def test_exp(self):
         """Test the exponential function with the following arguments:
             a Variable object,
             a floating point number,
             an integer,
             an object of an invalid type."""
-        pass
+        exp_result = exp(self.var2)
+        self.assertEqual(exp_result.val, math.exp(self.var2.val))
+        self.assertEqual(exp_result.der, math.exp(self.var2.val) * self.var2.der)
+
+        var = 20
+        exp_result = exp(var)
+        self.assertEqual(exp_result, math.exp(20))
 
     def test_root(self):
         """Test the root function with the following arguments:
