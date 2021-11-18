@@ -5,17 +5,23 @@ from src.forward import Forward
 
 
 class TestForward(unittest.TestCase):
+
+    def setUp(self):
+        """Prepare the test fixture. Executed before each test method."""
+        self.x = Variable(3)
+        self.y = Variable(4., 5.)
+        self.simple_scalar_func = lambda t: t**2
     
     def test_constructor(self):
         """Check the constructor with simple function and single variable.
         Will also check getter methods as they are necessary to test constructor."""
-        x = Variable(3)
-        f = lambda t: t**2
-        fmode = Forward(f, x)
+        fmode = Forward(self.simple_scalar_func, self.x)
         func = fmode.func
         vars = fmode.vars
-        self.assertEqual(f(3), func(3))
-        self.assertEqual([x], vars)
+        self.assertEqual(self.simple_scalar_func(3), func(3))
+        self.assertEqual([self.x], vars)
+
+    
 
 
 if __name__ == "__main__":
