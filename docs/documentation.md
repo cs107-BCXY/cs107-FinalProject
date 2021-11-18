@@ -59,6 +59,7 @@ Our directory structure will be the following.
 ├── README.md
 └── requirements.txt
 </code></pre></div>
+
 Our main source code are placed in the directory [`src`](/src) and our tests are put in the directory [`tests`](/tests). Our package documentation will located in the [`docs`](/docs) directory. Top-level package information and documents (e.g. our licensing) will be in the root directory.
 
 ### Modules
