@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append(sys.path[0][:-5])
 from src.variable import Variable
 from src.elementary_functions import *
 import math
@@ -21,8 +23,17 @@ class TestElementaryFunctions(unittest.TestCase):
             a floating point number,
             an integer,
             an object of an invalid type."""
+
+        # a variable object with base e
         log_result = log(self.var2)
-        self.assertEqual(math.log(self.var2).val, log(self.var2))
+        self.assertEqual(log_result.val, math.log(self.var2.val))
+        self.assertEqual(log_result.der, self.var2.der / (self.var2.val * math.log(math.e)))
+
+        # a variable object with a non-default base=8
+        base = 8
+        log_result = log(self.var2, base)
+        self.assertEqual(log_result.val, math.log(self.var2.val, base))
+        self.assertEqual(log_result.der, self.var2.der / (self.var2.val * math.log(base)))
 
     def test_exp(self):
         """Test the exponential function with the following arguments:
