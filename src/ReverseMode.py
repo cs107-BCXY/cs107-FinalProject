@@ -4,7 +4,7 @@ import numpy as np
 For reverse mode autodiff implementation
 
 """
-
+# Create class variable
 
 class RevMod:
     def __init__(self, val):
@@ -41,3 +41,9 @@ class RevMod:
             self.derivs.append((1, new_RevMod))
             self.grad = None
         return new_RevMod
+
+    def __repr__(self):
+        return 'RevMod({})'.format(self.val)
+
+    def __str__(self):
+        return 'RevMod({})'.format(self.val)
