@@ -37,11 +37,16 @@ class TestForward(unittest.TestCase):
         vars = fmode.vars
         self.assertEqual(self.simple_single_var(3), func(3))
         self.assertEqual([self.x], vars)
+
         newf = lambda t: ((3*t)**2)/4
         fmode.func = newf
         fmode.vars = self.y
         self.assertEqual(newf(4), fmode.func(4))
         self.assertEqual([self.y], fmode.vars)
+
+        fmode.vars = (self.x, self.y)
+        self.assertEqual(fmode.vars, (self.x, self.y))
+        
 
     def test_attribute_error(self):
         """Test that Attribute error is raised if 'calculate' method has
@@ -87,6 +92,11 @@ class TestForward(unittest.TestCase):
         fmode.calculate()
         self.assertEqual(fmode.value, 12.0)
         self.assertEqual(fmode.derivative, 19.0)
+
+    # TODO: add tests for more complicated functions of two variables
+    # not necessary for Milestone 2, as instructions state "for this
+    # milestone, the Jacoabian will just be a scalar", meaning they are
+    # using a single function of one variable
 
 
 
