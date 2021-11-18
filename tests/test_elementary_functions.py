@@ -195,12 +195,19 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer greater than 1,
             an object of an invalid type.
         """
-        cosh_result = cosh(self.var2)
-        self.assertEqual(cosh_result.val, math.cosh(self.var2.val))
-        self.assertEqual(cosh_result.der, math.sinh(self.var2.val) * self.var2.der)
+        var2 = Variable(0.9, 0.5)
+        arccos_result = arccos(var2)
+        self.assertEqual(arccos_result.val, math.acos(var2.val))
+        self.assertEqual(arccos_result.der, -var2.der/math.sqrt(1-var2.val**2))
 
-        var = math.pi
-        self.assertEqual(cosh(var), math.cosh(var))
+
+        var2 = Variable(-0.7, 0.5)
+        arccos_result = arccos(var2)
+        self.assertEqual(arccos_result.val, math.acos(var2.val))
+        self.assertEqual(arccos_result.der, -var2.der/math.sqrt(1-var2.val**2))
+
+        var = 0.8
+        self.assertEqual(arccos(var), math.acos(var))
 
 
     def test_tan(self):
