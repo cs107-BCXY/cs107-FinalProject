@@ -1,13 +1,8 @@
 import unittest
 import copy
-# from src.variable import Variable
-# from src.elementary_functions import *
-# from src.forward import Forward
-import sys
-sys.path.append(sys.path[0][:-5] + 'src')
-from variable import Variable
-from elementary_functions import *
-from forward import Forward
+from src.variable import Variable
+from src.elementary_functions import *
+from src.forward import Forward
 
 
 class TestForward(unittest.TestCase):
@@ -49,17 +44,30 @@ class TestForward(unittest.TestCase):
         with self.assertRaises(AttributeError):
             self.fmode1.derivative
 
-    def test_single_variable_scalar(self):
+    def test_simple_single_variable(self):
         """Test forward mode on a simple scalar function with a single variable
         input. Will also test value and derivative getter methods."""
         self.fmode1.calculate()
         self.assertEqual(self.fmode1.value, 9)
         self.assertEqual(self.fmode1.derivative, 6)
-        
+
         fmode = Forward(self.simple_scalar_func, self.y)
         fmode.calculate()
         self.assertEqual(fmode.value, 16.0)
         self.assertEqual(fmode.derivative, 40.0)
+
+    def test_complicated_single_variable(self):
+        """Test forward mode on a more complicated function with a single variable input."""
+        f = lambda x: (exp(cos(x)))/(sin(x)**2)
+        fmode1 = Forward(f, self.x)
+        fmode1.calculate()
+        self.assertEqual(fmode1.value, 18.658405892057388)
+        self.assertEqual(fmode1.derivative, 259.153784690042)
+
+        fmode2 = Forward(f, self.y)
+        fmode2.calculate()
+        self.assertEqual(fmode2.value, 0.9081572861687339)
+        self.assertEqual(fmode2.derivative, -4.407195647615257)
 
 
 if __name__ == "__main__":
