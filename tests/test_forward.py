@@ -21,7 +21,18 @@ class TestForward(unittest.TestCase):
         self.assertEqual(self.simple_scalar_func(3), func(3))
         self.assertEqual([self.x], vars)
 
-    
+    def test_setter(self):
+        """Test the variable and function setters."""
+        fmode = Forward(self.simple_scalar_func, self.x)
+        func = fmode.func
+        vars = fmode.vars
+        self.assertEqual(self.simple_scalar_func(3), func(3))
+        self.assertEqual([self.x], vars)
+        newf = lambda t: ((3*t)**2)/4
+        fmode.func = newf
+        fmode.vars = self.y
+        self.assertEqual(newf(4), fmode.func(4))
+        self.assertEqual([self.y], fmode.vars)
 
 
 if __name__ == "__main__":
