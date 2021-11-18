@@ -241,7 +241,19 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer,
             an object of an invalid type.
         """
-        pass
+        var2 = Variable(0.9, 0.5)
+        tanh_result = tanh(var2)
+        self.assertEqual(tanh_result.val, math.tanh(var2.val))
+        self.assertEqual(tanh_result.der, (1 - math.tanh(var2.val)**2) * var2.der)
+
+
+        var2 = Variable(-0.7, 0.5)
+        tanh_result = tanh(var2)
+        self.assertEqual(tanh_result.val, math.tanh(var2.val))
+        self.assertEqual(tanh_result.der, (1 - math.tanh(var2.val)**2) * var2.der)
+
+        var = 0.8
+        self.assertEqual(tanh(var), math.tanh(var))
 
 
     def test_arctan(self):
