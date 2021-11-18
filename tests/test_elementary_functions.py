@@ -218,7 +218,19 @@ class TestElementaryFunctions(unittest.TestCase):
             an integer,
             an object of an invalid type.
         """
-        pass
+        var2 = Variable(0.9, 0.5)
+        tan_result = tan(var2)
+        self.assertEqual(tan_result.val, math.tan(var2.val))
+        self.assertEqual(tan_result.der, (1 + (math.sin(0.9)/math.cos(0.9)) ** 2) * 0.5)
+
+
+        var2 = Variable(-0.7, 0.5)
+        tan_result = tan(var2)
+        self.assertEqual(tan_result.val, math.tan(var2.val))
+        self.assertEqual(tan_result.der, (1 + (math.sin(-0.7)/math.cos(-0.7)) ** 2) * 0.5)
+
+        var = 0.8
+        self.assertEqual(tan(var), math.tan(var))
 
 
     def test_tanh(self):
