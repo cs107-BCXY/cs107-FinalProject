@@ -1,6 +1,4 @@
 import unittest
-import sys
-sys.path.append(sys.path[0][:-5])
 from src.variable import Variable
 from src.elementary_functions import *
 import math
