@@ -44,6 +44,11 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 10
         self.assertEqual(log(var), math.log(var))
 
+        with self.assertRaises(ValueError):
+            log(-1)
+        with self.assertRaises(TypeError):
+            log(None)
+
 
     def test_exp(self):
         """
@@ -60,6 +65,15 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 20
         exp_result = exp(var)
         self.assertEqual(exp_result, math.exp(20))
+
+        with self.assertRaises(TypeError):
+            exp(None)
+        with self.assertRaises(TypeError):
+            exp(tuple())
+        with self.assertRaises(TypeError):
+            exp(list())
+
+
 
     def test_root(self):
         """
@@ -80,7 +94,12 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 20
         self.assertEqual(root(20, 3), 20 ** (1.0/3))
 
-        # nth root
+        with self.assertRaises(TypeError):
+            root(None)
+        with self.assertRaises(TypeError):
+            root(tuple())
+        with self.assertRaises(TypeError):
+            root(list())
 
     def test_sin(self):
         """
@@ -100,6 +119,13 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 0
         self.assertAlmostEqual(sin(var), 0, places=7)
         
+        with self.assertRaises(TypeError):
+            sin(None)
+        with self.assertRaises(TypeError):
+            sin(tuple())
+        with self.assertRaises(TypeError):
+            sin(list())
+
 
     def test_sinh(self):
         """
@@ -116,6 +142,12 @@ class TestElementaryFunctions(unittest.TestCase):
         var = math.pi
         self.assertEqual(sinh(var), math.sinh(var))
 
+        with self.assertRaises(TypeError):
+            sinh(None)
+        with self.assertRaises(TypeError):
+            sinh(tuple())
+        with self.assertRaises(TypeError):
+            sinh(list())
 
     def test_arcsin(self):
         """
@@ -145,6 +177,13 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 0.8
         self.assertEqual(arcsin(var), math.asin(var))
 
+        with self.assertRaises(TypeError):
+            arcsin(None)
+        with self.assertRaises(TypeError):
+            arcsin(tuple())
+        with self.assertRaises(TypeError):
+            arcsin(list())
+
 
     def test_cos(self):
         """
@@ -164,6 +203,13 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 0
         self.assertAlmostEqual(cos(var), 1, places=7)
 
+        with self.assertRaises(TypeError):
+            cos(None)
+        with self.assertRaises(TypeError):
+            cos(tuple())
+        with self.assertRaises(TypeError):
+            cos(list())
+
 
     def test_cosh(self):
         """
@@ -179,6 +225,13 @@ class TestElementaryFunctions(unittest.TestCase):
 
         var = math.pi
         self.assertEqual(cosh(var), math.cosh(var))
+
+        with self.assertRaises(TypeError):
+            cosh(None)
+        with self.assertRaises(TypeError):
+            cosh(tuple())
+        with self.assertRaises(TypeError):
+            cosh(list())
 
 
     def test_arccos(self):
@@ -200,7 +253,6 @@ class TestElementaryFunctions(unittest.TestCase):
         self.assertEqual(arccos_result.val, math.acos(var2.val))
         self.assertEqual(arccos_result.der, -var2.der/math.sqrt(1-var2.val**2))
 
-
         var2 = Variable(-0.7, 0.5)
         arccos_result = arccos(var2)
         self.assertEqual(arccos_result.val, math.acos(var2.val))
@@ -208,6 +260,13 @@ class TestElementaryFunctions(unittest.TestCase):
 
         var = 0.8
         self.assertEqual(arccos(var), math.acos(var))
+
+        with self.assertRaises(TypeError):
+            arccos(None)
+        with self.assertRaises(TypeError):
+            arccos(tuple())
+        with self.assertRaises(TypeError):
+            arccos(list())
 
 
     def test_tan(self):
@@ -232,6 +291,13 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 0.8
         self.assertEqual(tan(var), math.tan(var))
 
+        with self.assertRaises(TypeError):
+            tan(None)
+        with self.assertRaises(TypeError):
+            tan(tuple())
+        with self.assertRaises(TypeError):
+            tan(list())
+
 
     def test_tanh(self):
         """
@@ -255,6 +321,12 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 0.8
         self.assertEqual(tanh(var), math.tanh(var))
 
+        with self.assertRaises(TypeError):
+            tanh(None)
+        with self.assertRaises(TypeError):
+            tanh(tuple())
+        with self.assertRaises(TypeError):
+            tanh(list())
 
     def test_arctan(self):
         """
@@ -278,7 +350,12 @@ class TestElementaryFunctions(unittest.TestCase):
         var = 0.8
         self.assertEqual(arctan(var), math.atan(var))
 
-
+        with self.assertRaises(TypeError):
+            arctan(None)
+        with self.assertRaises(TypeError):
+            arctan(tuple())
+        with self.assertRaises(TypeError):
+            arctan(list())
 
 if __name__ == "__main__":
     unittest.main()
