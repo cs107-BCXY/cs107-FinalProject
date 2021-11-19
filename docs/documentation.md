@@ -106,3 +106,11 @@ At this point in development, there are no external dependencies to our package.
 ### Elementary Functions
 
 All of our elementary functions that are not dunder methods are contained within our [`elementary_funciotn`](/src/elementary_functions.py) module. Each defined function can take a Variable, floating point number, or integer as an input. If the input is a Variable, a new Variable object will be returned with the updated value and derivative.
+
+## Future Features
+
+At this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to.  
+
+As [External Dependencies](#external-dependencies) states, we are currently not relying on any external libraries and instead are using the built-in [`math`](https://docs.python.org/3/library/math.html) library. In order to extend our package to handle multi-function and multi-variable inputs, we recognize that we will need to replace this with [`NumPy`](https://numpy.org/doc/stable/index.html).  
+
+Finally, we plan on adding another module to handle automatic differentiation using reverse mode.
