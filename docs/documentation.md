@@ -38,26 +38,22 @@ Eventually the package will be uploaded via PyPi for download. It is ready to be
 
 ```python
 from src.variable import Variable
+from src.elementary_functions import *
 from src.forward import Forward
-import math
 
-x = Variable(3)
+x = Variable(3)       # instantiate Variable object
+x.val                 # gives the value of x
+x.der                 # gives the derivative of x
 
-x.val
-x.der
+z = x ** 2            # create new Variable object equal to x^2
+z.val                 # gives value of z
+z.der                 # gives the derivative of x
 
-z = x ** 2
-
-z.val # gives value
-z.der # gives the derivative of Variable
-f = lambda x: math.sin(x)
-
-fmode = Forward(f, x)
-fmode.calculate() #run calculate method to 
-
-fmode.value # yields the 
-fmode.derivative
-
+f = lambda x: sin(x)  # define a function
+fmode = Forward(f, x) # instantiate Forward object with f and x
+fmode.calculate()     # evaluate f at x
+fmode.value           # gives the value of f at x 
+fmode.derivative      # gives the derivative of f at x
 ```
 
 ## Software Organization 
