@@ -32,9 +32,9 @@ One option is to explicitly write down a function which computes the exact deriv
 
 ## How to Use the Package [BCXY](https://github.com/cs107-BCXY/cs107-FinalProject)
 
-Eventually the package will be uploaded via PyPi for download. It is ready to be used by simply cloning our project git. 
+Eventually the package will be uploaded via PyPi for download. It is ready to be used by simply cloning our project git __(see Installation Instructions below for details)__. 
 
-#### Demo
+### Demo
 
 ```python
 from src.variable import Variable
@@ -50,6 +50,8 @@ z = x ** 2
 
 z.val # gives value
 z.der # gives the derivative of Variable
+```
+```python
 f = lambda x: math.sin(x)
 
 fmode = Forward(f, x)
@@ -57,6 +59,11 @@ fmode.calculate() #run calculate method to
 
 fmode.value # yields the 
 fmode.derivative
+
+```
+```python
+
+
 
 ```
 
@@ -99,7 +106,7 @@ The package will be released on [`PyPI`](https://pypi.org/) and can be easily in
 ```
 pip install cs107-BCXY
 ```
-For now the package isn't on [`PyPI`](https://pypi.org/) yet, so one can download the reposity with the command
+For now the package isn't on [`PyPI`](https://pypi.org/) yet, so one can download the repository with the command
 ```
 git clone https://github.com/cs107-BCXY/cs107-FinalProject.git
 ```
@@ -140,4 +147,7 @@ At this point, we are not tracking the computational graph of the automatic diff
 
 As [External Dependencies](#external-dependencies) states, we are currently not relying on any external libraries and instead are using the built-in [`math`](https://docs.python.org/3/library/math.html) library. In order to extend our package to handle multi-function and multi-variable inputs, we recognize that we will need to replace this with [`NumPy`](https://numpy.org/doc/stable/index.html).  
 
-Finally, we plan on adding another module to handle automatic differentiation using reverse mode.
+Finally, we plan on adding another module to handle automatic differentiation using reverse mode. The reverse mode module will work by instantiating a `RevMod` object with some value. It will eventually be able to support running the reverse mode autodifferentiation for all arithmetic operations, trigonometric functions, exponential, and comparison methods, for which we will look into all `__ne__`, `__eq__`, `__lt__` etc.. as was suggested for the forward mode in the final deliverables. We may be also considering briefly reorganizing our test and src directories to separate the forward and reverse mode subsections
+
+
+
