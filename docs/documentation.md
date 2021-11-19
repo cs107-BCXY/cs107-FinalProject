@@ -32,6 +32,33 @@ One option is to explicitly write down a function which computes the exact deriv
 
 ## How to use the package [BCXY](https://github.com/cs107-BCXY/cs107-FinalProject)
 
+Eventually the package will be uploaded via PyPi for download. It is ready to be used by simply cloning our project git. 
+
+#### Demo
+
+```python
+from src.variable import Variable
+from src.forward import Forward
+import math
+
+x = Variable(3)
+
+x.val
+x.der
+
+z = x ** 2
+
+z.val # gives value
+z.der # gives the derivative of Variable
+f = lambda x: math.sin(x)
+
+fmode = Forward(f, x)
+fmode.calculate() #run calculate method to 
+
+fmode.value # yields the 
+fmode.derivative
+
+```
 
 ## Software organization 
 
