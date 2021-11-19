@@ -4,11 +4,7 @@ of basic functions on the Variable objects that are not dunder methods. Such fun
 functions, logarithms, etcetera.
 """
 import math
-# from src.variable import Variable
-import sys
-sys.path.append(sys.path[0][:-5] + 'src')
-from variable import Variable
-# TODO: remove path editing, using for development purposes
+from src.variable import Variable
 
 
 def log(input, base=math.e):
@@ -99,6 +95,47 @@ def sin(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
+def sinh(input):
+    """Calculates hyperbolic sine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply hyperbolic sine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.sinh(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.sinh(input.val), der = math.cosh(input.val)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def arcsin(input):
+    """Calculates arc sine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply arc sine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    # don't need to check for -1 <= input <= 1, math.asin will handle it
+    if isinstance(input, int) or isinstance(input, float):
+        return math.asin(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.asin(input.val), der = input.der/math.sqrt(1 - input.val**2))
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
 def cos(input):
     """Calculates trigonometric cosine of Variable, int, or float and returns the result.
 
@@ -116,6 +153,47 @@ def cos(input):
         return math.cos(input)
     elif isinstance(input, Variable):
         return Variable(val = math.cos(input.val), der = -1*math.sin(input.val)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def cosh(input):
+    """Calculates hyperbolic cosine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply hyperbolic cosine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.cosh(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.cosh(input.val), der = math.sinh(input.val)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def arccos(input):
+    """Calculates arc cosine of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply arc cosine function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    # don't need to check for -1 <= input <= 1, math.acos will handle it
+    if isinstance(input, int) or isinstance(input, float):
+        return math.acos(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.acos(input.val), der = -1*input.der/math.sqrt(1 - input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -138,3 +216,45 @@ def tan(input):
         return Variable(val = math.tan(input.val), der = input.der*(1/math.cos(input.val)**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def tanh(input):
+    """Calculates hyperbolic tangent of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply hyperbolic tangent function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.tanh(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.tanh(input.val), der = (1 - math.tanh(input.val)**2)*input.der)
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def arctan(input):
+    """Calculates arc tangent of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply arc tangent function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    if isinstance(input, int) or isinstance(input, float):
+        return math.atan(input)
+    elif isinstance(input, Variable):
+        return Variable(val = math.atan(input.val), der = input.der/(1 + input.val**2))
+    else:
+        raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+# TODO: potentially define more basic functions (e.g. inverse hyperbolic functions)
