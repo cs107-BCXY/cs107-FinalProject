@@ -105,7 +105,7 @@ At this point in development, there are no external dependencies to our package.
 
 ### Elementary Functions
 
-All of our elementary functions that are not dunder methods are contained within our [`elementary_funciotn`](/src/elementary_functions.py) module. Each defined function can take a Variable, floating point number, or integer as an input. If the input is a Variable, a new Variable object will be returned with the updated value and derivative.
+All of our elementary functions that are not dunder methods are contained within our [`elementary_functions`](/src/elementary_functions.py) module. Each defined function can take a Variable, floating point number, or integer as an input. If the input is a Variable, a new Variable object will be returned with the updated value and derivative.
 
 ## Future Features
 
