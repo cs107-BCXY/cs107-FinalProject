@@ -96,27 +96,10 @@ class RevMod:
         return self.val
 
     def __repr__(self):
-        """ Prints self in the form of Dual(value = [val], derivative = [der])
-        
-        Parameters
-        ----------
-        self: Dual object
-        
-        Returns
-        ------- 
-        z: Dual object with val and der if z is a scalar
-        z: Dual object with val and vector der if z is a combination of vectors
-        
-        Examples
-        -------- 
-        >>> z = Dual(2, 1)
-        >>> print(z)
-        Dual(value=2, derivative=1)
-        """
-        return (f"{class_name=type(self).__name__}(value={self.val}, derivative={self.der})")
+        return (f"{class_name=type(self).__name__}(value={self.val}, derivative={self.grad})")
 
     def __str__(self):
-        return 'RevMod({})'.format(self.val)
+        return (f'RevMod({self.val})')
 
     # cosine
     def cos(self):
