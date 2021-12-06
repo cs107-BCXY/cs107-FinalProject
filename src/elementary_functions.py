@@ -251,9 +251,9 @@ def tanh(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.tanh(input)
+        return np.tanh(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.tanh(input.val), der = (1 - math.tanh(input.val)**2)*input.der)
+        return Variable(val = np.tanh(input.val), der = (1 - np.tanh(input.val)**2)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
