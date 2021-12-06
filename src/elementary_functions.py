@@ -123,9 +123,9 @@ def sinh(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.sinh(input)
+        return np.sinh(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.sinh(input.val), der = math.cosh(input.val)*input.der)
+        return Variable(val = np.sinh(input.val), der = np.cosh(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
