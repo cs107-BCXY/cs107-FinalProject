@@ -206,11 +206,14 @@ def arccos(input):
     --------
     """
     # TODO: write examples for docstring
-    # don't need to check for -1 <= input <= 1, math.acos will handle it
     if isinstance(input, int) or isinstance(input, float):
-        return math.acos(input)
+        if input < -1 or input > 1:
+            raise ValueError("math domain error")
+        return np.arccos(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.acos(input.val), der = -1*input.der/math.sqrt(1 - input.val**2))
+        if input < -1 or input > 1:
+            raise ValueError("math domain error")
+        return Variable(val = np.arccos(input.val), der = -1*input.der/np.sqrt(1 - input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
