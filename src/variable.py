@@ -3,7 +3,7 @@ This file contains the Variable module for the cs107-BCXY package. It includes t
 which implements the creation of the Variable object, as well as numerous basic operations on the
 Variable.
 """
-import math
+import numpy as np
 
 
 class Variable(object):
@@ -317,7 +317,7 @@ class Variable(object):
 			if self.val > 0:
 				return Variable(self.val**other.val,
 								self.val**other.val * (
-										math.log(self.val) * other.der
+										np.log(self.val) * other.der
 										+ self.der / self.val * other.val))
 			else:
 				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
@@ -340,7 +340,7 @@ class Variable(object):
 		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
 			if other > 0:
-				return Variable(other**self.val, other**self.val*math.log(other)*self.der)
+				return Variable(other**self.val, other**self.val*np.log(other)*self.der)
 			else:
 				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 		else:
