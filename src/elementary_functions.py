@@ -142,11 +142,14 @@ def arcsin(input):
     --------
     """
     # TODO: write examples for docstring
-    # don't need to check for -1 <= input <= 1, math.asin will handle it
     if isinstance(input, int) or isinstance(input, float):
-        return math.asin(input)
+        if input < -1 or input > 1:
+            raise ValueError("math domain error")
+        return np.arcsin(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.asin(input.val), der = input.der/math.sqrt(1 - input.val**2))
+        if input.val < -1 or input.val > 1:
+            raise ValueError("math domain error")
+        return Variable(val = np.arcsin(input.val), der = input.der/np.sqrt(1 - input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
