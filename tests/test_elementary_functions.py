@@ -85,7 +85,6 @@ class TestElementaryFunctions(unittest.TestCase):
             exp(list())
 
 
-
     def test_root(self):
         """
         Test the root function with the following arguments:
@@ -111,6 +110,7 @@ class TestElementaryFunctions(unittest.TestCase):
             root(tuple())
         with self.assertRaises(TypeError):
             root(list())
+
 
     def test_sin(self):
         """
@@ -194,6 +194,14 @@ class TestElementaryFunctions(unittest.TestCase):
             arcsin(tuple())
         with self.assertRaises(TypeError):
             arcsin(list())
+        with self.assertRaises(ValueError):
+            arcsin(-2)
+        with self.assertRaises(ValueError):
+            arcsin(2)
+        with self.assertRaises(ValueError):
+            arcsin(self.var1)
+        with self.assertRaises(ValueError):
+            arcsin(Variable(-2))
 
 
     def test_cos(self):
