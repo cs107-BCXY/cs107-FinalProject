@@ -231,9 +231,9 @@ def tan(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.tan(input)
+        return np.tan(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.tan(input.val), der = input.der*(1/math.cos(input.val)**2))
+        return Variable(val = np.tan(input.val), der = input.der*(1/np.cos(input.val)**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
