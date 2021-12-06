@@ -167,9 +167,9 @@ def cos(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.cos(input)
+        return np.cos(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.cos(input.val), der = -1*math.sin(input.val)*input.der)
+        return Variable(val = np.cos(input.val), der = -1*np.sin(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
