@@ -103,9 +103,9 @@ def sin(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.sin(input)
+        return np.sin(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.sin(input.val), der = math.cos(input.val)*input.der)
+        return Variable(val = np.sin(input.val), der = np.cos(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
