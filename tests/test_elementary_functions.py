@@ -52,6 +52,8 @@ class TestElementaryFunctions(unittest.TestCase):
             log(self.var2, -1)
         with self.assertRaises(ZeroDivisionError):
             log(1, 1)
+        with self.assertRaises(ValueError):
+            log(1, -1)
 
 
     def test_exp(self):
