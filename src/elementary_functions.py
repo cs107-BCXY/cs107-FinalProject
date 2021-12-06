@@ -277,4 +277,19 @@ def arctan(input):
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
+def logistic(input):
+    """Calculates logistic [1/(1 + e^-x)] of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply logistic function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    return 1/(1 + exp(-1*input))
+
 # TODO: potentially define more basic functions (e.g. inverse hyperbolic functions)
