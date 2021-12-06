@@ -211,7 +211,7 @@ def arccos(input):
             raise ValueError("math domain error")
         return np.arccos(input)
     elif isinstance(input, Variable):
-        if input < -1 or input > 1:
+        if input.val < -1 or input.val > 1:
             raise ValueError("math domain error")
         return Variable(val = np.arccos(input.val), der = -1*input.der/np.sqrt(1 - input.val**2))
     else:
@@ -271,9 +271,9 @@ def arctan(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return np.atan(input)
+        return np.arctan(input)
     elif isinstance(input, Variable):
-        return Variable(val = np.atan(input.val), der = input.der/(1 + input.val**2))
+        return Variable(val = np.arctan(input.val), der = input.der/(1 + input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
