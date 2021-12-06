@@ -187,9 +187,9 @@ def cosh(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.cosh(input)
+        return np.cosh(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.cosh(input.val), der = math.sinh(input.val)*input.der)
+        return Variable(val = np.cosh(input.val), der = np.sinh(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
