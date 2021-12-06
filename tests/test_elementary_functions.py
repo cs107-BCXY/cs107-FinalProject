@@ -25,7 +25,10 @@ class TestElementaryFunctions(unittest.TestCase):
             a Variable object and base 1,
             a floating point number,
             an integer,
-            an object of an invalid type.
+            an object of an invalid type,
+            an integer and a base 1,
+            an integer and a base < 0,
+            a Variable object with negative value.
         """
 
         # a variable object with base e
@@ -54,6 +57,8 @@ class TestElementaryFunctions(unittest.TestCase):
             log(1, 1)
         with self.assertRaises(ValueError):
             log(1, -1)
+        with self.assertRaises(ValueError):
+            log(Variable(-1))
 
 
     def test_exp(self):
