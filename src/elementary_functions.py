@@ -62,9 +62,9 @@ def exp(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.exp(input)
+        return np.exp(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.exp(input.val), der = math.exp(input.val)*input.der)
+        return Variable(val = np.exp(input.val), der = np.exp(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
