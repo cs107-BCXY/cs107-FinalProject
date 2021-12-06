@@ -3,16 +3,16 @@ This file contains all of the elementary functions for the cs107-BCXY package. I
 of basic functions on the Variable objects that are not dunder methods. Such functions include trigonometric
 functions, logarithms, etcetera.
 """
-import math
+import numpy as np
 from src.variable import Variable
 
 
-def log(input, base=math.e):
+def log(input, base=np.e):
     """Calculates logarithm (log()) of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply logarithm to
-        base (int or float, optional): logarithm base. Defaults to math.e which uses natural logarithm.
+        base (int or float, optional): logarithm base. Defaults to np.e which uses natural logarithm.
 
     Returns:
         Variable, int, or float: resulting logarithm value
@@ -22,15 +22,27 @@ def log(input, base=math.e):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.log(input, base)
+        if base == 1:
+            # as per math.log standard
+            raise ZeroDivisionError("float division by zero")
+        elif base > 0:
+            # this will still apply when base = np.e because np.log(np.e) == 1
+            if input <= 0:
+                # as per math.log standard
+                raise ValueError("math domain error")
+            return np.log(input)/np.log(base)
+        else:
+            raise ValueError("math domain error")
     elif isinstance(input, Variable):
         if base == 1:
             # as per math.log standard
             raise ZeroDivisionError("float division by zero")
         elif base > 0:
-            # this will still apply when base = math.e because math.log(math.e) == 1
-            # if Variable.val < 0, this will be caught by math.log()
-            return Variable(val = math.log(input.val, base), der = input.der/(input.val * math.log(base)))
+            # this will still apply when base = np.e because np.log(np.e) == 1
+            if input.val <= 0:
+                # as per math.log standard
+                raise ValueError("math domain error")
+            return Variable(val = np.log(input.val)/np.log(base), der = input.der/(input.val * np.log(base)))
         else:
             raise ValueError("math domain error")
     else:
