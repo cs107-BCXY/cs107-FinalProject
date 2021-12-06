@@ -271,9 +271,9 @@ def arctan(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.atan(input)
+        return np.atan(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.atan(input.val), der = input.der/(1 + input.val**2))
+        return Variable(val = np.atan(input.val), der = input.der/(1 + input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
