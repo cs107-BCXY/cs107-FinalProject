@@ -286,6 +286,14 @@ class TestElementaryFunctions(unittest.TestCase):
             arccos(tuple())
         with self.assertRaises(TypeError):
             arccos(list())
+        with self.assertRaises(ValueError):
+            arccos(-2)
+        with self.assertRaises(ValueError):
+            arccos(2)
+        with self.assertRaises(ValueError):
+            arccos(self.var1)
+        with self.assertRaises(ValueError):
+            arccos(Variable(-2))
 
 
     def test_tan(self):
