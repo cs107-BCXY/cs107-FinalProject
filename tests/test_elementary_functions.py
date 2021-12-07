@@ -1,6 +1,4 @@
 import unittest
-from src.elementary_functions import logistic
-from src.variable import Variable
 from src.elementary_functions import *
 import math
 
