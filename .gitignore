@@ -1,4 +1,21 @@
-*.pyc
-.idea
-.DS_Store
+# Editor temporary/working/backup files #
+#########################################
+.idea/*
+.vscode/
+.DS_store
 .coverage
+
+# Compiled source #
+###################
+*.py[ocd]
+
+# Python files #
+################
+# setup.cfg working directory
+build
+# setup.cfg dist directory
+dist
+doc/build
+doc/cdoc/build
+# Egg metadata
+*.egg-info
