@@ -4,6 +4,8 @@
 .vscode/
 .DS_store
 .coverage
+__pycache__/
+.pytest_cache/
 
 # Compiled source #
 ###################
