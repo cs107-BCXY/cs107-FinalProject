@@ -1,7 +1,8 @@
 import unittest
 import copy
-from PyAD.elementary_functions import *
-from PyAD.forward import Forward
+from src.PyAD.elementary_functions import *
+from src.PyAD.variable import Variable
+from src.PyAD.forward import Forward
 
 
 class TestForward(unittest.TestCase):

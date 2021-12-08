@@ -1,6 +1,7 @@
 import unittest
-from PyAD.elementary_functions import *
 import math
+from src.PyAD.variable import Variable
+from src.PyAD.elementary_functions import *
 
 
 class TestElementaryFunctions(unittest.TestCase):
