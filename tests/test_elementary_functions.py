@@ -1,5 +1,5 @@
 import unittest
-from src.PyAD.elementary_functions import *
+from PyAD.elementary_functions import *
 import math
 
 

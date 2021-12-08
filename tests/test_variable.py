@@ -1,6 +1,6 @@
 import math
 import unittest
-from src.PyAD.variable import Variable
+from PyAD.variable import Variable
 
 
 class TestVariable(unittest.TestCase):
