@@ -12,6 +12,13 @@ class RevMod:
         self.grad = 1
         self.children = []
 
+## Adding a repr rev class
+    def __repr__(self):
+        return (f'RevMod({self.val})')
+
+    def __str__(self):
+        return (f'RevMod({self.val}), Its Gradient: {self.grad}')
+
 ## basic operations in rev mode
 
 
@@ -120,6 +127,9 @@ class RevMod:
         new_RevMod = RevMod(np.sin(val))
         self.children.append((np.cos(self.val), new_RevMod)) #cosx
         return new_RevMod
+
+
+
 
 
 #Still needed to add
