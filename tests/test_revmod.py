@@ -2,8 +2,17 @@
 
 import numpy as np
 import unittest
-from src.ReverseMode import REvMod
+from src.ReverseMode import RevMod
 
 
 
-## define
+
+## first Testing addition case
+
+def test_add_func():
+    x = RD(20)
+    y = RD(5)
+    summed = x + y
+    assertEqual(float(summed.get_value()), 25)
+
+
