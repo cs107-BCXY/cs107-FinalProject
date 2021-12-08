@@ -1,5 +1,4 @@
 import unittest
-from src.variable import Variable
 from src.elementary_functions import *
 import math
 
@@ -16,7 +15,6 @@ class TestElementaryFunctions(unittest.TestCase):
         self.fp = 3.5
         self.i = 2
 
-
     def test_log(self):
         """
         Test the logarithm function with the following arguments:
@@ -25,7 +23,10 @@ class TestElementaryFunctions(unittest.TestCase):
             a Variable object and base 1,
             a floating point number,
             an integer,
-            an object of an invalid type.
+            an object of an invalid type,
+            an integer and a base 1,
+            an integer and a base < 0,
+            a Variable object with negative value.
         """
 
         # a variable object with base e
@@ -50,7 +51,12 @@ class TestElementaryFunctions(unittest.TestCase):
             log(self.var2, 1)
         with self.assertRaises(ValueError):
             log(self.var2, -1)
-
+        with self.assertRaises(ZeroDivisionError):
+            log(1, 1)
+        with self.assertRaises(ValueError):
+            log(1, -1)
+        with self.assertRaises(ValueError):
+            log(Variable(-1))
 
     def test_exp(self):
         """
@@ -74,8 +80,6 @@ class TestElementaryFunctions(unittest.TestCase):
             exp(tuple())
         with self.assertRaises(TypeError):
             exp(list())
-
-
 
     def test_root(self):
         """
@@ -127,7 +131,6 @@ class TestElementaryFunctions(unittest.TestCase):
             sin(tuple())
         with self.assertRaises(TypeError):
             sin(list())
-
 
     def test_sinh(self):
         """
@@ -185,7 +188,14 @@ class TestElementaryFunctions(unittest.TestCase):
             arcsin(tuple())
         with self.assertRaises(TypeError):
             arcsin(list())
-
+        with self.assertRaises(ValueError):
+            arcsin(-2)
+        with self.assertRaises(ValueError):
+            arcsin(2)
+        with self.assertRaises(ValueError):
+            arcsin(self.var1)
+        with self.assertRaises(ValueError):
+            arcsin(Variable(-2))
 
     def test_cos(self):
         """
@@ -212,7 +222,6 @@ class TestElementaryFunctions(unittest.TestCase):
         with self.assertRaises(TypeError):
             cos(list())
 
-
     def test_cosh(self):
         """
         Test the cosh function with the following arguments:
@@ -234,7 +243,6 @@ class TestElementaryFunctions(unittest.TestCase):
             cosh(tuple())
         with self.assertRaises(TypeError):
             cosh(list())
-
 
     def test_arccos(self):
         """
@@ -269,7 +277,14 @@ class TestElementaryFunctions(unittest.TestCase):
             arccos(tuple())
         with self.assertRaises(TypeError):
             arccos(list())
-
+        with self.assertRaises(ValueError):
+            arccos(-2)
+        with self.assertRaises(ValueError):
+            arccos(2)
+        with self.assertRaises(ValueError):
+            arccos(self.var1)
+        with self.assertRaises(ValueError):
+            arccos(Variable(-2))
 
     def test_tan(self):
         """
@@ -299,7 +314,6 @@ class TestElementaryFunctions(unittest.TestCase):
             tan(tuple())
         with self.assertRaises(TypeError):
             tan(list())
-
 
     def test_tanh(self):
         """
@@ -358,6 +372,16 @@ class TestElementaryFunctions(unittest.TestCase):
             arctan(tuple())
         with self.assertRaises(TypeError):
             arctan(list())
+
+    def test_logistic(self):
+        """
+        Test the logistic function with the following arguments:
+            a Variable object.
+        """
+        log_res = logistic(self.var1)
+        self.assertEqual(log_res.val, 1/(1 + math.exp(-1*self.var1.val)))
+        self.assertEqual(log_res.der, math.exp(-1*self.var1.val)/((1 + math.exp(-1*self.var1.val))**2))
+
 
 if __name__ == "__main__":
     unittest.main()

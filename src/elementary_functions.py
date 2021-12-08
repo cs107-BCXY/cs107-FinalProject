@@ -3,16 +3,16 @@ This file contains all of the elementary functions for the cs107-BCXY package. I
 of basic functions on the Variable objects that are not dunder methods. Such functions include trigonometric
 functions, logarithms, etcetera.
 """
-import math
+import numpy as np
 from src.variable import Variable
 
 
-def log(input, base=math.e):
+def log(input, base=np.e):
     """Calculates logarithm (log()) of Variable, int, or float and returns the result.
 
     Args:
         input (Variable, int, or float): item to apply logarithm to
-        base (int or float, optional): logarithm base. Defaults to math.e which uses natural logarithm.
+        base (int or float, optional): logarithm base. Defaults to np.e which uses natural logarithm.
 
     Returns:
         Variable, int, or float: resulting logarithm value
@@ -22,15 +22,27 @@ def log(input, base=math.e):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.log(input, base)
+        if base == 1:
+            # as per math.log standard
+            raise ZeroDivisionError("float division by zero")
+        elif base > 0:
+            # this will still apply when base = np.e because np.log(np.e) == 1
+            if input <= 0:
+                # as per math.log standard
+                raise ValueError("math domain error")
+            return np.log(input)/np.log(base)
+        else:
+            raise ValueError("math domain error")
     elif isinstance(input, Variable):
         if base == 1:
             # as per math.log standard
             raise ZeroDivisionError("float division by zero")
         elif base > 0:
-            # this will still apply when base = math.e because math.log(math.e) == 1
-            # if Variable.val < 0, this will be caught by math.log()
-            return Variable(val = math.log(input.val, base), der = input.der/(input.val * math.log(base)))
+            # this will still apply when base = np.e because np.log(np.e) == 1
+            if input.val <= 0:
+                # as per math.log standard
+                raise ValueError("math domain error")
+            return Variable(val = np.log(input.val)/np.log(base), der = input.der/(input.val * np.log(base)))
         else:
             raise ValueError("math domain error")
     else:
@@ -50,9 +62,9 @@ def exp(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.exp(input)
+        return np.exp(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.exp(input.val), der = math.exp(input.val)*input.der)
+        return Variable(val = np.exp(input.val), der = np.exp(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -91,9 +103,9 @@ def sin(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.sin(input)
+        return np.sin(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.sin(input.val), der = math.cos(input.val)*input.der)
+        return Variable(val = np.sin(input.val), der = np.cos(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -111,9 +123,9 @@ def sinh(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.sinh(input)
+        return np.sinh(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.sinh(input.val), der = math.cosh(input.val)*input.der)
+        return Variable(val = np.sinh(input.val), der = np.cosh(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -130,11 +142,14 @@ def arcsin(input):
     --------
     """
     # TODO: write examples for docstring
-    # don't need to check for -1 <= input <= 1, math.asin will handle it
     if isinstance(input, int) or isinstance(input, float):
-        return math.asin(input)
+        if input < -1 or input > 1:
+            raise ValueError("math domain error")
+        return np.arcsin(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.asin(input.val), der = input.der/math.sqrt(1 - input.val**2))
+        if input.val < -1 or input.val > 1:
+            raise ValueError("math domain error")
+        return Variable(val = np.arcsin(input.val), der = input.der/np.sqrt(1 - input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -152,9 +167,9 @@ def cos(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.cos(input)
+        return np.cos(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.cos(input.val), der = -1*math.sin(input.val)*input.der)
+        return Variable(val = np.cos(input.val), der = -1*np.sin(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -172,9 +187,9 @@ def cosh(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.cosh(input)
+        return np.cosh(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.cosh(input.val), der = math.sinh(input.val)*input.der)
+        return Variable(val = np.cosh(input.val), der = np.sinh(input.val)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -191,11 +206,14 @@ def arccos(input):
     --------
     """
     # TODO: write examples for docstring
-    # don't need to check for -1 <= input <= 1, math.acos will handle it
     if isinstance(input, int) or isinstance(input, float):
-        return math.acos(input)
+        if input < -1 or input > 1:
+            raise ValueError("math domain error")
+        return np.arccos(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.acos(input.val), der = -1*input.der/math.sqrt(1 - input.val**2))
+        if input.val < -1 or input.val > 1:
+            raise ValueError("math domain error")
+        return Variable(val = np.arccos(input.val), der = -1*input.der/np.sqrt(1 - input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -213,9 +231,9 @@ def tan(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.tan(input)
+        return np.tan(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.tan(input.val), der = input.der*(1/math.cos(input.val)**2))
+        return Variable(val = np.tan(input.val), der = input.der*(1/np.cos(input.val)**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -233,9 +251,9 @@ def tanh(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.tanh(input)
+        return np.tanh(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.tanh(input.val), der = (1 - math.tanh(input.val)**2)*input.der)
+        return Variable(val = np.tanh(input.val), der = (1 - np.tanh(input.val)**2)*input.der)
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
 
@@ -253,10 +271,25 @@ def arctan(input):
     """
     # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
-        return math.atan(input)
+        return np.arctan(input)
     elif isinstance(input, Variable):
-        return Variable(val = math.atan(input.val), der = input.der/(1 + input.val**2))
+        return Variable(val = np.arctan(input.val), der = input.der/(1 + input.val**2))
     else:
         raise TypeError(f"must be a real number or Variable object, not {type(input)}")
+
+def logistic(input):
+    """Calculates logistic [1/(1 + e^-x)] of Variable, int, or float and returns the result.
+
+    Args:
+        input (Variable, int, or float): item to apply logistic function to
+
+    Returns:
+        Variable, int, or float: resulting value object
+
+    Examples
+    --------
+    """
+    # TODO: write examples for docstring
+    return 1/(1 + exp(-1*input))
 
 # TODO: potentially define more basic functions (e.g. inverse hyperbolic functions)

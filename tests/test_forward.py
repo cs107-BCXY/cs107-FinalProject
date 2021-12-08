@@ -1,6 +1,5 @@
 import unittest
 import copy
-from src.variable import Variable
 from src.elementary_functions import *
 from src.forward import Forward
 
