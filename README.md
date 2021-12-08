@@ -1,10 +1,9 @@
-<!-- TODO: may need to rename to PyAD-BCXY -->
-# Welcome to PyAD  
+# Welcome to PyADBCXY  
 
 [![build](https://github.com/cs107-BCXY/cs107-FinalProject/actions/workflows/workflow.yml/badge.svg?branch=main)](https://github.com/cs107-BCXY/cs107-FinalProject/actions/workflows/workflow.yml)
 [![codecov](https://codecov.io/gh/cs107-BCXY/cs107-FinalProject/branch/main/graph/badge.svg?token=LJX9AH62PE)](https://codecov.io/gh/cs107-BCXY/cs107-FinalProject)  
 
-PyAD is an automatic differentiation software package that can calculate the values and derivatives of complex functions while maintaining high levels of accuracy.
+PyADBCXY is an automatic differentiation software package that can calculate the values and derivatives of complex functions while maintaining high levels of accuracy.
 
 ## Contributors  
 
@@ -20,16 +19,16 @@ Group Members:
 
 Install the package with pip:
 
-    pip install PyAD
+    pip install PyADBCXY
 
 Then you can run a simple example such as
 
 ```python
-import PyAD
-x = PyAD.Variable(3)            # instantiate x variable
-y = PyAD.Variable(4., 5.)       # instantiate y variable
+import PyADBCXY
+x = PyADBCXY.Variable(3)            # instantiate x variable
+y = PyADBCXY.Variable(4., 5.)       # instantiate y variable
 f = lambda x, y: x + y          # define function of interest
-fmode = PyAD.Forward(f, (x, y)) # instantiate forward mode
+fmode = PyADBCXY.Forward(f, (x, y)) # instantiate forward mode
 fmode.calculate()               # evaluate function at x and y
 print(fmode.value)              # print value of f at x and y
 print(fmode.derivative)         # print derivative of f and x and y

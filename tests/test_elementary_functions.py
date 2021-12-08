@@ -1,7 +1,7 @@
 import unittest
 import math
-from src.PyAD.variable import Variable
-from src.PyAD.elementary_functions import *
+from src.pyadbcxy.variable import Variable
+from src.pyadbcxy.elementary_functions import *
 
 
 class TestElementaryFunctions(unittest.TestCase):

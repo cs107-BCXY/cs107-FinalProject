@@ -1,4 +1,4 @@
-# PyAD-BCXY
+# PyADBCXY
 
 ## Introduction
 
@@ -32,7 +32,7 @@ for example.
 ### What can we do instead?
 One option is to explicitly write down a function which computes the exact derivatives by using the rules that we know from calculus. However, this quickly becomes an error-prone and tedious exercise. **There is another way!** The field of [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) provides methods for automatically computing *exact* derivatives (up to floating-point error) given only the function <img src="https://latex.codecogs.com/svg.latex?f"> itself. Some methods use many fewer evaluations of <img src="https://latex.codecogs.com/svg.latex?f"> than would be required when using finite differences. In the best case, the exact gradient of <img src="https://latex.codecogs.com/svg.latex?f"> can be evaluated for the cost of <img src="https://latex.codecogs.com/svg.latex?\mathcal{O}(1)"> evaluations of <img src="https://latex.codecogs.com/svg.latex?f"> itself. The caveat is that <img src="https://latex.codecogs.com/svg.latex?f"> cannot be considered a black box; instead, we require either access to the source code of <img src="https://latex.codecogs.com/svg.latex?f"> or a way to plug in a special type of number using operator overloading.
 
-## How to Use the Package [BCXY](https://github.com/cs107-BCXY/cs107-FinalProject)
+## How to Use the Package [PyADBCXY](https://github.com/cs107-BCXY/cs107-FinalProject)
 
 Eventually the package will be uploaded via PyPi for download. It is ready to be used by simply cloning our project git __(see Installation Instructions below for details)__. 
 
