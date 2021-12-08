@@ -19,16 +19,16 @@ Group Members:
 
 Install the package with pip:
 
-    pip install PyADBCXY
+    pip install pyadbcxy
 
 Then you can run a simple example such as
 
 ```python
-import PyADBCXY
-x = PyADBCXY.Variable(3)            # instantiate x variable
-y = PyADBCXY.Variable(4., 5.)       # instantiate y variable
+import pyadbcxy as ad
+x = ad.Variable(3)            # instantiate x variable
+y = ad.Variable(4., 5.)       # instantiate y variable
 f = lambda x, y: x + y              # define function of interest
-fmode = PyADBCXY.Forward(f, (x, y)) # instantiate forward mode
+fmode = ad.Forward(f, (x, y)) # instantiate forward mode
 fmode.calculate()                   # evaluate function at x and y
 print(fmode.value)                  # print value of f at x and y
 print(fmode.derivative)             # print derivative of f and x and y
