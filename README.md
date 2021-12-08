@@ -35,7 +35,7 @@ print(fmode.value)              # print value of f at x and y
 print(fmode.derivative)         # print derivative of f and x and y
 ```
 
-For further details on package usage as well as the math behind it, please see the [`documentation`](/docs) directory.
+For further details on package usage as well as the math behind it, please see the [`documentation`](/docs/documentation.md) directory.
 
 ## For developers
 
