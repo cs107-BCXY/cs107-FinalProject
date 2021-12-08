@@ -6,11 +6,15 @@ tests=(
     tests/test_forward.py
 )
 
-unit='-m unittest'
-if [[ $# -gt 0 && ${1} == 'pytest'* ]]; then
-    driver="${@}"
+if [[ $# -gt 0 && ${1} == 'coverage' ]]; then
+    coverage run --source=src -m unittest discover --start-directory tests --pattern test_*.py
+    coverage report --show-missing
 else
-    driver="python ${@} ${unit}"
+    unit='-m unittest'
+    if [[ $# -gt 0 && ${1} == 'pytest'* ]]; then
+        driver="${@}"
+    else
+        driver="python ${@} ${unit}"
+    fi
+    ${driver} ${tests[@]}
 fi
-
-${driver} ${tests[@]}
