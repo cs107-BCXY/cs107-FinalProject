@@ -35,7 +35,7 @@ print(fmode.value)              # print value of f at x and y
 print(fmode.derivative)         # print derivative of f and x and y
 ```
 
-For further details on package usage as well as the math behind it, please see the [`documentation`](/docs/documentation.md).
+For further details on package usage as well as the math behind it, please see the [documentation](/docs/documentation.md).
 
 ## For developers
 
@@ -50,7 +50,11 @@ Then, move into the repository and install the package dependencies
 
 #### Testing
 
-To run the tests, you can run the test driver script. The default testing framework is [`unittest`](https://docs.python.org/3/library/unittest.html) and can be run with:
+To run the tests, you can execute
+
+    python -m unittest discover -s tests -p 'test_*.py'
+
+Alternatively, you can run the test driver script. The default testing framework is [`unittest`](https://docs.python.org/3/library/unittest.html) and can be run with:
 
     bash tests/run_tests.sh
 
