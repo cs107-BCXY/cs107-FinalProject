@@ -91,14 +91,14 @@ class RevMod:
     ### function creating gradient ***
 
     def gradient(self):
-        if self.grad is None:
+        if self.grad == None:
             grad = 0
             for der, child in self.children:
                 grad += der * child.gradient()
             self.grad = grad
-        return self.grad
+        return self.grad # returns or updates gradient
 
-
+    ## will just return the value
     def get_value(self):
         return self.val
 
