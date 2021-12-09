@@ -18,8 +18,7 @@ class RevMod:
     >>> z.val
     6
     >>> z.gradient()
-
-
+    1
     """
 
     def __init__(self, val):
@@ -35,14 +34,22 @@ class RevMod:
         return (f'RevMod({self.val}), Its Gradient: {self.grad}')
 
 
-
 ## will just return the value
     def get_val(self):
         return self.val
 
+### function creating gradient ***
+
+    def gradient(self):
+        if self.grad == None:
+            grad = 0
+            for der, child in self.children:
+                grad += der * child.gradient()
+            self.grad = grad
+        return self.grad # returns or updates gradient
+
 
 ## basic operations in rev mode
-
 
     def __mul__(self, other):
         try:
@@ -113,11 +120,11 @@ class RevMod:
 
     # raddition
     def __radd__(self, other):
-        return self.add(other)
+        return self.__add__(other)
 
     # rmultiplication
     def __rmul__(self, other):
-        return self.mul(other)
+        return self.__mul__(other)
 
     # rsubtraction
     def __rsub__(self,other):
@@ -131,21 +138,10 @@ class RevMod:
     def __rtruediv__(self, other):
         new_val = other / self.val
         new_RevMod = RevMod(new_val)
-        self.children.append(( -other / self.val ** 2, new_RevMod))
+        self.children.append(( - other / self.val ** 2, new_RevMod))
         self.grad = None
         return new_RevMod
 
-
-
-    ### function creating gradient ***
-
-    def gradient(self):
-        if self.grad == None:
-            grad = 0
-            for der, child in self.children:
-                grad += der * child.gradient()
-            self.grad = grad
-        return self.grad # returns or updates gradient
 
     # cosine
     def cos(self):
@@ -166,6 +162,27 @@ class RevMod:
         new_RevMod = RevMod(np.sin(val))
         self.children.append((np.cos(self.val), new_RevMod)) #cosx
         return new_RevMod
+
+    # handling exponential function
+    def __pow__(self, other):
+        if not isinstance(other, RevMod):
+            pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # if __name__ == '__main__':
