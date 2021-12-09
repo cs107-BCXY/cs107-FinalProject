@@ -2,8 +2,8 @@
 #########################################
 .idea/*
 .vscode/
-.DS_store
 .coverage
+.DS_Store
 __pycache__/
 .pytest_cache/
 
@@ -21,3 +21,4 @@ doc/build
 doc/cdoc/build
 # Egg metadata
 *.egg-info
+>>>>>>> dev-vectorize
