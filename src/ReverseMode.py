@@ -7,12 +7,21 @@ For reverse mode autodiff implementation
 
 
 class RevMod:
-"""
-RevMod is the class for implementing the reverse mode auto differentiation including 
-instantiating the class, storing children, evaluating gradient and all required basic
-operations.
+    """
+    RevMod is the class for implementing the reverse mode auto differentiation including 
+    instantiating the class, storing children, evaluating gradient and all required basic
+    operations. 
 
-"""
+    >>> x = RevMod(3)
+    >>> y = RevMod(3)
+    >>> z = x + y
+    >>> z.val
+    6
+    >>> z.gradient()
+
+
+    """
+
     def __init__(self, val):
         self.val = val
         self.grad = 1
@@ -106,6 +115,10 @@ operations.
     def __radd__(self, other):
         return self.add(other)
 
+    def __rmul__(self, other):
+        return self.mul(other)
+
+
 
 
 
@@ -141,9 +154,11 @@ operations.
         return new_RevMod
 
 
-
-
-
+if __name__ == '__main__':
+    x = RevMod(4)
+    y = RevMod(4)
+    z = x + y
+    print(z.val)
 #Still needed to add
 # negation 
 # exp
