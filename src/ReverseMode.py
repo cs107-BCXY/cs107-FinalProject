@@ -142,6 +142,7 @@ class RevMod:
         self.grad = None
         return new_RevMod
 
+    ## Trigonomic Functions:
 
     # cosine
     def cos(self):
@@ -188,15 +189,48 @@ class RevMod:
         self.grad = None
         return new_RevMod
 
+    def arccos(x):
+        """arc cosine func"""
+        new_RevMod = ReverseADNode(np.arccos(self.val))
+        self.children.append((-1 / np.sqrt( 1- self.val ** 2), new_RevMod ))
+        self.grad = None
+        return new_RevMod
+        
+    def arctan(x):
+        """arc tangent func"""
+        new_RevMod  = ReverseADNode(np.arctan(x.value))
+        self.children.append((1 / (1 + self.val ** 2), new_RevMod ))
+        self.grad = None
+        return new_RevMod
 
-    # handling exponential function
-    def __pow__(self, other):
+    def arcsin(x):
+        """arc sine func"""
+        new_RevMod  = ReverseADNode(np.arcsin(self.val))
+        self.children.append((1 / np.sqrt(1 - self.val **2 ), new_RevMod ))
+        self.grad = None
+        return new_RevMod
+
+
+
+    # Other Functions as needed or required:
+
+    def sqrt(self): #square root 
+        val = np.sqrt(self.val)
+        new_RD = RD(val)
+        self.children.append(( 0.5*self.val**(-0.5), new_RD))  
+        self.grad = None
+        return new_RD
+
+    def exp(self): #exponential func
+        val = np.exp(self.val)
+        new_RD = RD(val)
+        self.children.append((np.exp(self.val), new_RD))
+        self.grad = None
+        return new_RD
+
+    def __pow__(self, other): # handling exponential function
         if not isinstance(other, RevMod):
             pass
-
-
-
-
 
 
 
