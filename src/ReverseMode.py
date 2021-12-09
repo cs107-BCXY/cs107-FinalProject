@@ -237,6 +237,13 @@ class RevMod:
         self.grad = None
         return new_RevMod
 
+    def log(self, base): # log function
+        new_val = np.log(self.val)/ np.log(base)
+        new_RevMod = RevMod(new_val)
+        self.children.append((1 / (self.val * np.log(base)), new_RevMod))
+        self.grad = None
+        return new_RevMod
+ 
     def __pow__(self, other):
         try:
             new_val = self.val ** other.val
@@ -279,10 +286,10 @@ class RevMod:
 
 
 
-# if __name__ == '__main__':
-#     x = RevMod(3)
-#     y = RevMod(5)
-#     z = x ** y - 2 ** x 
-#     print(z.val, y.children, x.gradient(), y.grad)
+if __name__ == '__main__':
+    x = RevMod(2)
+    y = RevMod(5)
+    z = x.log(2)
+    print(z.val, y.children, x.gradient(), y.grad)
 
 
