@@ -1,6 +1,7 @@
 import unittest
-from src.elementary_functions import *
 import math
+from src.pyadbcxy.variable import Variable
+from src.pyadbcxy.elementary_functions import *
 
 
 class TestElementaryFunctions(unittest.TestCase):

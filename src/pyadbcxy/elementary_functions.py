@@ -1,10 +1,15 @@
 """
-This file contains all of the elementary functions for the cs107-BCXY package. It implements the behavior
-of basic functions on the Variable objects that are not dunder methods. Such functions include trigonometric
-functions, logarithms, etcetera.
+This file contains all of the elementary functions for the cs107-BCXY package.
+It implements the behavior of basic functions on the Variable objects that are
+not dunder methods. Such functions include trigonometric functions, logarithms,
+etcetera.
 """
 import numpy as np
-from src.variable import Variable
+from .variable import Variable
+
+
+__all__ = ["log", "exp", "root", "sin", "sinh", "arcsin", "cos", "cosh",
+           "arccos", "tan", "tanh", "arctan", "logistic"]
 
 
 def log(input, base=np.e):

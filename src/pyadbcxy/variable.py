@@ -6,6 +6,9 @@ Variable.
 import numpy as np
 
 
+__all__ = ["Variable"]
+
+
 class Variable(object):
 	"""
 	This class implements all variables, to include the basic operations necessary

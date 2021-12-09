@@ -1,7 +1,8 @@
 import unittest
 import copy
-from src.elementary_functions import *
-from src.forward import Forward
+from src.pyadbcxy.elementary_functions import *
+from src.pyadbcxy.variable import Variable
+from src.pyadbcxy.forward import Forward
 
 
 class TestForward(unittest.TestCase):

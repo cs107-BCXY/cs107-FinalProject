@@ -4,6 +4,9 @@ which implements the forward mode of automatic differentiation.
 """
 
 
+__all__ = ["Forward"]
+
+
 class Forward(object):
     """
     This class implements the forward mode of automatic differentiation. The user inputs the
