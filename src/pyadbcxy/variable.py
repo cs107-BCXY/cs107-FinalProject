@@ -3,7 +3,10 @@ This file contains the Variable module for the cs107-BCXY package. It includes t
 which implements the creation of the Variable object, as well as numerous basic operations on the
 Variable.
 """
-import math
+import numpy as np
+
+
+__all__ = ["Variable"]
 
 
 class Variable(object):
@@ -309,15 +312,16 @@ class Variable(object):
 
 		Examples
 		--------
+		>>> Variable(3) ** Variable(4., 5.)
+		Variable(val = 81.0, der = 552.9379769105844)
 		"""
-		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
 			return Variable(self.val**other, other*self.val**(other - 1)*self.der)
 		elif isinstance(other, Variable):
 			if self.val > 0:
 				return Variable(self.val**other.val,
 								self.val**other.val * (
-										math.log(self.val) * other.der
+										np.log(self.val) * other.der
 										+ self.der / self.val * other.val))
 			else:
 				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
@@ -336,11 +340,12 @@ class Variable(object):
 
 		Examples
 		--------
+		>>> 6 ** Variable(3)
+		Variable(val = 216, der = 387.0200453532599)
 		"""
-		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
 			if other > 0:
-				return Variable(other**self.val, other**self.val*math.log(other)*self.der)
+				return Variable(other**self.val, other**self.val*np.log(other)*self.der)
 			else:
 				raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 		else:
@@ -359,8 +364,15 @@ class Variable(object):
 
 		Examples
 		--------
+		>>> Variable(3, 4) == Variable(3, 4)
+		True
+		>>> Variable(3, 4) == Variable(7, 4)
+		False
+		>>> Variable(3, 4) == Variable(7, 8)
+		False
+		>>> 7 == Variable(7, 4)
+		False
 		"""
-		# TODO: write examples for docstring
 		if isinstance(other, Variable):
 			return self.val == other.val and self.der == other.der
 		return False

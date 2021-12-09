@@ -10,6 +10,7 @@ jobs:
       - name: Generate test Report
         run: |
           pip install coverage
+          pip install -r requirements.txt
           coverage run --source=src -m unittest discover --start-directory tests --pattern test_*.py --verbose
           coverage xml
           coverage report --show-missing --fail-under=90
