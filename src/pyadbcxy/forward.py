@@ -25,8 +25,13 @@ class Forward(object):
     9
     >>> fmode.derivative
     6
+    >>> fmode = Forward(lambda x: (exp(cos(x)))/(sin(x)**2), Variable(3))
+    >>> fmode.calculate()
+    >>> fmode.value
+    18.658405892057388
+    >>> fmode.derivative
+    259.153784690042
     """
-    # TODO: write more examples for the doctstring, including complicated functions
 
     def __init__(self, func, vars):
         """Constructor for the Forward class.
