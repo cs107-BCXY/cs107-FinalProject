@@ -4,6 +4,9 @@ which implements the forward mode of automatic differentiation.
 """
 
 
+__all__ = ["Forward"]
+
+
 class Forward(object):
     """
     This class implements the forward mode of automatic differentiation. The user inputs the
@@ -22,8 +25,14 @@ class Forward(object):
     9
     >>> fmode.derivative
     6
+    # A rather complicated function with a single variable
+    >>> fmode = Forward(lambda x: (exp(cos(x)))/(sin(x)**2), Variable(3))
+    >>> fmode.calculate()
+    >>> fmode.value
+    18.658405892057388
+    >>> fmode.derivative
+    259.153784690042
     """
-    # TODO: write more examples for the doctstring, including complicated functions
 
     def __init__(self, func, vars):
         """Constructor for the Forward class.
@@ -57,8 +66,15 @@ class Forward(object):
 
         Args:
             func (function): new function to implement forward mode on
+
+        Example
+        -------
+        >>> x = Variable(3)
+        >>> f = lambda t: t**2
+        >>> fmode = Forward(f, x)
+        >>> g = lambda t: exp(-t ** 2)
+        >>> fmode.func = g
         """
-        # TODO: write examples for docstring
         self._func = func
 
     @vars.setter
@@ -68,8 +84,17 @@ class Forward(object):
 
         Args:
             vars (Variable or tuple/list of Variables): new Variable(s) to implement forward mode on
+
+        Example
+        -------
+        >>> x = Variable(3)
+        >>> f = lambda t: t**2
+        >>> fmode = Forward(f, x)
+        >>> y = Variable(4, 5)
+        >>> fmode.vars = y
+        >>> z = [Variable(6), Variable(7, 8)]
+        >>> fmode.vars = z
         """
-        # TODO: write examples for docstring
         if not isinstance(vars, list) and not isinstance(vars, tuple):
             self._vars = [vars]
         else:

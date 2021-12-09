@@ -6,6 +6,9 @@ Variable.
 import numpy as np
 
 
+__all__ = ["Variable"]
+
+
 class Variable(object):
 	"""
 	This class implements all variables, to include the basic operations necessary
@@ -309,8 +312,9 @@ class Variable(object):
 
 		Examples
 		--------
+		>>> Variable(3) ** Variable(4., 5.)
+		Variable(val = 81.0, der = 552.9379769105844)
 		"""
-		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
 			return Variable(self.val**other, other*self.val**(other - 1)*self.der)
 		elif isinstance(other, Variable):
@@ -336,8 +340,9 @@ class Variable(object):
 
 		Examples
 		--------
+		>>> 6 ** Variable(3)
+		Variable(val = 216, der = 387.0200453532599)
 		"""
-		# TODO: write examples for docstring
 		if isinstance(other, int) or isinstance(other, float):
 			if other > 0:
 				return Variable(other**self.val, other**self.val*np.log(other)*self.der)
@@ -359,8 +364,15 @@ class Variable(object):
 
 		Examples
 		--------
+		>>> Variable(3, 4) == Variable(3, 4)
+		True
+		>>> Variable(3, 4) == Variable(7, 4)
+		False
+		>>> Variable(3, 4) == Variable(7, 8)
+		False
+		>>> 7 == Variable(7, 4)
+		False
 		"""
-		# TODO: write examples for docstring
 		if isinstance(other, Variable):
 			return self.val == other.val and self.der == other.der
 		return False
