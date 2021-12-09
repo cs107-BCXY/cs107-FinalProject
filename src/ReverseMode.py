@@ -145,32 +145,54 @@ class RevMod:
 
     # cosine
     def cos(self):
-        new_RevMod = RevMod(val)
+        new_RevMod = RevMod(np.cos(val))
+        self.grad = None
         self.children.append((-np.sin(self.val), new_RevMod)) # -sinx
         return new_RevMod
 
     # tangent
     def tan(self):
-        val = np.tan(val)
-        new_RevMod = RevMod(val)
-        self.children.append(( 1/(np.cos(self.val)**2), new_RevMod)) # 1/ sec **2 x
+        new_RevMod = RevMod(np.tan(val))
+        self.children.append(( 1/(np.cos(self.val) ** 2), new_RevMod)) # 1/ sec **2 x
         self.grad = None
         return new_RevMod
 
     # sin function
     def sin(self):
         new_RevMod = RevMod(np.sin(val))
+        self.grad = None
         self.children.append((np.cos(self.val), new_RevMod)) #cosx
         return new_RevMod
+
+    # adding hyperbolic functions:
+
+    def cosh(self):
+        """hyperbolic cosine function"""
+        new_RevMod = RevMod(np.cosh(self.val))
+        self.children.append((np.sinh(self.val), new_RevMod))
+        self.grad = None
+        return new_RevMod
+
+
+    def tanh(self):
+        """hyperbolic tangent function"""
+        new_RevMod = RevMod(np.tanh(self.val))
+        self.children.append((1 / np.cosh(self.val) ** 2, new_RevMod))  
+        self.grad = None
+        return new_RevMod
+
+    def sinh(self):
+        """hyperbolic sine function"""
+        new_RevMod = RevMod(np.sinh(self.val))
+        self.children.append((np.cosh(self.val), new_RevMod))
+        self.grad = None
+        return new_RevMod
+
 
     # handling exponential function
     def __pow__(self, other):
         if not isinstance(other, RevMod):
             pass
-
-
-
-
 
 
 
