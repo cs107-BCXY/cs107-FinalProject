@@ -242,7 +242,21 @@ class RevMod:
             pass
 
 
-
+    def __pow__(self, other):
+        try:
+            val_div = self.val ** other.val
+            # der_div = other.val * self.val**(other.val-1) * self.der + np.log(self.val) * self.val**other.val * other.der
+            new_RevMod = RevMod(val_div)
+            self.children.append((other.val * self.val ** (other.val -1 ), new_RevMod))
+            self.grad = None
+            other.children.append((np.log(self.val) * self.val ** other.val , new_RevMod))
+            other.grad = None
+        except AttributeError: # when not RevMod class
+            val_div = self.val ** other
+            new_RevMod = RevMod(val_div)
+            self.children.append((other*self.val**(other-1), new_RevMod))
+            self.grad = None
+        return new_RevMod
 
 
 
@@ -253,7 +267,7 @@ class RevMod:
 if __name__ == '__main__':
     x = RevMod(4)
     y = RevMod(4)
-    z = np.tan(x + 3 * y)
-    print(z.val, y.gradient())
+    z = x ** y - 2 ** x 
+    print(z.val, y.children, x.gradient(), y.gradient(), y.grad)
 
 
