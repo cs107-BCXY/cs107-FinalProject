@@ -6,6 +6,9 @@ For reverse mode autodiff implementation
 """
 
 
+__all__ = ["Reverse"]
+
+
 class Reverse:
     """
     RevMod is the class for implementing the reverse mode auto differentiation including 
@@ -26,7 +29,7 @@ class Reverse:
         self.grad = 1
         self.children = []
 
-## Adding a repr rev class
+    ## Adding a repr rev class
     def __repr__(self):
         return (f'RevMod({self.val})')
 
@@ -34,11 +37,11 @@ class Reverse:
         return (f'RevMod({self.val}), Its Gradient: {self.grad}')
 
 
-## will just return the value
+    ## will just return the value
     def get_val(self):
         return self.val
 
-### function creating gradient ***
+    ### function creating gradient ***
 
     def gradient(self):
         if self.grad == None:
@@ -49,7 +52,7 @@ class Reverse:
         return self.grad # returns or updates gradient
 
 
-## basic operations in rev mode
+    ## basic operations in rev mode
 
     def __mul__(self, other):
         try:
