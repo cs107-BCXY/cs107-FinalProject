@@ -24,8 +24,9 @@ def log(input, base=np.e):
 
     Examples
     --------
+    >>> log(Variable(4., 5.))
+    Variable(val = 1.3862943611198906, der = 1.25)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         if base == 1:
             # as per math.log standard
@@ -64,8 +65,9 @@ def exp(input):
 
     Examples
     --------
+    >>> exp(Variable(4., 5.))
+    Variable(val = 54.598150033144236, der = 272.9907501657212)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.exp(input)
     elif isinstance(input, Variable):
@@ -85,8 +87,9 @@ def root(input, n=2):
 
     Examples
     --------
+    >>> root(Variable(4., 5.))
+    Variable(val = 2.0, der = 0.25)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return input**(1.0/n)
     elif isinstance(input, Variable):
@@ -105,8 +108,9 @@ def sin(input):
 
     Examples
     --------
+    >>> sin(Variable(4., 5.))
+    Variable(val = -0.7568024953079282, der = -3.2682181043180596)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.sin(input)
     elif isinstance(input, Variable):
@@ -125,8 +129,9 @@ def sinh(input):
 
     Examples
     --------
+    >>> sinh(Variable(4., 5.))
+    Variable(val = 27.28991719712775, der = 136.54116418008243)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.sinh(input)
     elif isinstance(input, Variable):
@@ -145,8 +150,9 @@ def arcsin(input):
 
     Examples
     --------
+    >>> arcsin(Variable(0.9, 0.5))
+    Variable(val = 1.1197695149986342, der = 1.147078669352809)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         if input < -1 or input > 1:
             raise ValueError("math domain error")
@@ -169,8 +175,9 @@ def cos(input):
 
     Examples
     --------
+    >>> cos(Variable(4., 5.))
+    Variable(val = -0.6536436208636119, der = 3.7840124765396412)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.cos(input)
     elif isinstance(input, Variable):
@@ -189,8 +196,9 @@ def cosh(input):
 
     Examples
     --------
+    >>> cosh(Variable(4., 5.))
+    Variable(val = 27.308232836016487, der = 136.44958598563875)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.cosh(input)
     elif isinstance(input, Variable):
@@ -209,8 +217,9 @@ def arccos(input):
 
     Examples
     --------
+    >>> arccos(Variable(0.9, 0.5))
+    Variable(val = 0.45102681179626236, der = -1.147078669352809)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         if input < -1 or input > 1:
             raise ValueError("math domain error")
@@ -233,8 +242,9 @@ def tan(input):
 
     Examples
     --------
+    >>> tan(Variable(0.9, 0.5))
+    Variable(val = 1.2601582175503392, der = 1.2939993666298242)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.tan(input)
     elif isinstance(input, Variable):
@@ -253,8 +263,9 @@ def tanh(input):
 
     Examples
     --------
+    >>> tanh(Variable(0.9, 0.5))
+    Variable(val = 0.7162978701990245, der = 0.24345868057417075)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.tanh(input)
     elif isinstance(input, Variable):
@@ -273,8 +284,9 @@ def arctan(input):
 
     Examples
     --------
+    >>> arctan(Variable(0.9, 0.5))
+    Variable(val = 0.7328151017865066, der = 0.27624309392265195)
     """
-    # TODO: write examples for docstring
     if isinstance(input, int) or isinstance(input, float):
         return np.arctan(input)
     elif isinstance(input, Variable):
@@ -293,8 +305,7 @@ def logistic(input):
 
     Examples
     --------
+    >>> logistic(Variable(3))
+    Variable(val = 0.9525741268224334, der = 0.045176659730912144)
     """
-    # TODO: write examples for docstring
     return 1/(1 + exp(-1*input))
-
-# TODO: potentially define more basic functions (e.g. inverse hyperbolic functions)
