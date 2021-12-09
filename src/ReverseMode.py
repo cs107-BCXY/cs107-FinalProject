@@ -146,30 +146,34 @@ class RevMod:
 
     # cosine
     def cos(self):
-        new_RevMod = RevMod(np.cos(val))
-        self.grad = None
+        new_val = np.cos(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((-np.sin(self.val), new_RevMod)) # -sinx
+        self.grad = None
         return new_RevMod
 
     # tangent
     def tan(self):
-        new_RevMod = RevMod(np.tan(val))
+        new_val = np.tan(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append(( 1/(np.cos(self.val) ** 2), new_RevMod)) # 1/ sec **2 x
         self.grad = None
         return new_RevMod
 
     # sin function
     def sin(self):
-        new_RevMod = RevMod(np.sin(val))
-        self.grad = None
+        new_val = np.csin(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((np.cos(self.val), new_RevMod)) #cosx
+        self.grad = None
         return new_RevMod
 
     # adding hyperbolic functions:
 
     def cosh(self):
         """hyperbolic cosine function"""
-        new_RevMod = RevMod(np.cosh(self.val))
+        new_val = np.cosh(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((np.sinh(self.val), new_RevMod))
         self.grad = None
         return new_RevMod
@@ -177,35 +181,40 @@ class RevMod:
 
     def tanh(self):
         """hyperbolic tangent function"""
-        new_RevMod = RevMod(np.tanh(self.val))
+        new_val = np.tanh(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((1 / np.cosh(self.val) ** 2, new_RevMod))  
         self.grad = None
         return new_RevMod
 
     def sinh(self):
         """hyperbolic sine function"""
-        new_RevMod = RevMod(np.sinh(self.val))
+        new_val = np.sinh(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((np.cosh(self.val), new_RevMod))
         self.grad = None
         return new_RevMod
 
     def arccos(x):
         """arc cosine func"""
-        new_RevMod = ReverseADNode(np.arccos(self.val))
+        new_val = np.arccos(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((-1 / np.sqrt( 1- self.val ** 2), new_RevMod ))
         self.grad = None
         return new_RevMod
         
     def arctan(x):
         """arc tangent func"""
-        new_RevMod  = ReverseADNode(np.arctan(x.value))
+        new_val = np.arctan(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((1 / (1 + self.val ** 2), new_RevMod ))
         self.grad = None
         return new_RevMod
 
     def arcsin(x):
         """arc sine func"""
-        new_RevMod  = ReverseADNode(np.arcsin(self.val))
+        new_val = np.arcsin(self.val)
+        new_RevMod = RevMod(new_val)
         self.children.append((1 / np.sqrt(1 - self.val **2 ), new_RevMod ))
         self.grad = None
         return new_RevMod
@@ -215,18 +224,18 @@ class RevMod:
     # Other Functions as needed or required:
 
     def sqrt(self): #square root 
-        val = np.sqrt(self.val)
-        new_RD = RD(val)
-        self.children.append(( 0.5*self.val**(-0.5), new_RD))  
+        new_val = np.sqrt(self.val)
+        new_RevMod = RevMod(new_val)
+        self.children.append(( 0.5 * self.val ** (-0.5), new_RevMod))  
         self.grad = None
-        return new_RD
+        return new_RevMod
 
     def exp(self): #exponential func
-        val = np.exp(self.val)
-        new_RD = RD(val)
-        self.children.append((np.exp(self.val), new_RD))
+        new_val = np.exp(self.val)
+        new_RevMod = RevMod(new_val)
+        self.children.append((np.exp(self.val), new_RevMod))
         self.grad = None
-        return new_RD
+        return new_RevMod
 
     def __pow__(self, other): # handling exponential function
         if not isinstance(other, RevMod):
@@ -241,13 +250,10 @@ class RevMod:
 
 
 
-# if __name__ == '__main__':
-#     x = RevMod(4)
-#     y = RevMod(4)
-#     z = x + y
-#     print(z.val)
-#Still needed to add
-# negation 
-# exp
-# eq. ne etc.. comparison dunder methods?
+if __name__ == '__main__':
+    x = RevMod(4)
+    y = RevMod(4)
+    z = np.tan(x + 3 * y)
+    print(z.val, y.gradient())
+
 
