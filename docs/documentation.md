@@ -133,7 +133,7 @@ Our package lists `numpy` as our only external dependency.
 
 All of our elementary functions that are not dunder methods are contained within our [`elementary_functions`](/src/elementary_functions.py) module. Each defined function can take a Variable, floating point number, or integer as an input. If the input is a Variable, a new Variable object will be returned with the updated value and derivative.
 
-### Extension - `Reverse Mode` 
+## Extension - `Reverse Mode` 
 
 Finally, we have created the extension feature to handle automatic differentiation using reverse mode. The reverse mode module works by instantiating a `Reverse` object for each variable with some assigned value. It is capable of supporting reverse mode autodifferentiation for all basic arithmetic operations, trigonometric-- including hyperbolic and inverse trig functions, exponential, and comparison methods `__ne__` and `__eq__`, and logarithmic operations. As needed, the reverse mode feature appends the values of adjoints and child within each relative variable for computing the derivative. 
 
