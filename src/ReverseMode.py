@@ -111,15 +111,29 @@ class RevMod:
 
     ## adding section to address reversed operands:
 
-    # radd
+    # raddition
     def __radd__(self, other):
         return self.add(other)
 
+    # rmultiplication
     def __rmul__(self, other):
         return self.mul(other)
 
+    # rsubtraction
+    def __rsub__(self,other):
+        new_val = other - self.val
+        new_RevMod= RevMod(new_val)
+        self.children.append((1, new_RevMod))
+        self.grad = None
+        return new_RevMod
 
-
+    # rtruedivision
+    def __rtruediv__(self, other):
+        new_val = other / self.val
+        new_RevMod = RevMod(new_val)
+        self.children.append(( -other / self.val ** 2, new_RevMod))
+        self.grad = None
+        return new_RevMod
 
 
 
@@ -154,11 +168,11 @@ class RevMod:
         return new_RevMod
 
 
-if __name__ == '__main__':
-    x = RevMod(4)
-    y = RevMod(4)
-    z = x + y
-    print(z.val)
+# if __name__ == '__main__':
+#     x = RevMod(4)
+#     y = RevMod(4)
+#     z = x + y
+#     print(z.val)
 #Still needed to add
 # negation 
 # exp

@@ -1,10 +1,7 @@
 ## Test cases for reverse mode of Autodiff
 
-import numpy as np
 import unittest
 from src.ReverseMode import RevMod
-
-
 
 
 ## first Testing addition case
@@ -13,6 +10,7 @@ class TestReverseMode(unittest.TestCase):
     def setup(self):
         '''fixing values'''
         self.x = RevMod(3)
+        self.y = RevMod(4)
 
     def test_self_val(self):
         self.x = RevMod(3)
@@ -34,11 +32,11 @@ class TestReverseMode(unittest.TestCase):
         summed = x + 3
         self.assertTrue(float(summed.get_val()) == 6 and float(summed.gradient()) == 1)
 
-
-
-
-
-
+    def test_sub(self):
+        x = RevMod(3)
+        y = RevMod(5)
+        z = y - z
+        self.assertEqual((float(z.get_value())) == 2) & (float(z.gradient()) == 1.0)
 
 
 
