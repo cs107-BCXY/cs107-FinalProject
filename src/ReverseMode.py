@@ -7,6 +7,12 @@ For reverse mode autodiff implementation
 
 
 class RevMod:
+"""
+RevMod is the class for implementing the reverse mode auto differentiation including 
+instantiating the class, storing children, evaluating gradient and all required basic
+operations.
+
+"""
     def __init__(self, val):
         self.val = val
         self.grad = 1
@@ -19,6 +25,13 @@ class RevMod:
     def __str__(self):
         return (f'RevMod({self.val}), Its Gradient: {self.grad}')
 
+
+
+## will just return the value
+    def get_val(self):
+        return self.val
+
+
 ## basic operations in rev mode
 
 
@@ -30,9 +43,10 @@ class RevMod:
             self.grad = None
             other.children.append((self.val, new_RevMod))
             other.grad = None
-        except AttributeError: #incase not of class
+            # now include when attribute error
+        except AttributeError:
             val_mul = self.val * other
-            new_RevMod = RevMod(val_mul)
+            new_RevMod = RevMod(val_mul) # instantiate class
             self.children.append((other, new_RevMod))
             self.grad = None
         return new_RevMod
@@ -86,6 +100,14 @@ class RevMod:
 
         return new_RevMod
 
+    ## adding section to address reversed operands:
+
+    # radd
+    def __radd__(self, other):
+        return self.add(other)
+
+
+
 
 
     ### function creating gradient ***
@@ -97,16 +119,6 @@ class RevMod:
                 grad += der * child.gradient()
             self.grad = grad
         return self.grad # returns or updates gradient
-
-    ## will just return the value
-    def get_value(self):
-        return self.val
-
-    def __repr__(self):
-        return (f"{class_name=type(self).__name__}(value={self.val}, derivative={self.grad})")
-
-    def __str__(self):
-        return (f'RevMod({self.val})')
 
     # cosine
     def cos(self):
