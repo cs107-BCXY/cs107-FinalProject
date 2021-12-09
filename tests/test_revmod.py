@@ -70,6 +70,7 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(x.gradient(), -5)
 
     def test_div(self):
+        """ Testing when division is on Revmod"""
         x = RevMod(3)
         y = RevMod(5)
         z = x / y
@@ -78,6 +79,7 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(y.gradient(), -0.12)
 
     def test_rdiv(self):
+        """ Testing when division is on Revmod and int number"""
         x = RevMod(3)
         z = x / 5
         self.assertEqual(z.val, (0.6))
@@ -87,15 +89,5 @@ class TestReverseMode(unittest.TestCase):
 
 
 
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     unittest.main()
-

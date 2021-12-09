@@ -237,37 +237,52 @@ class RevMod:
         self.grad = None
         return new_RevMod
 
-    def __pow__(self, other): # handling exponential function
-        if not isinstance(other, RevMod):
-            pass
-
-
     def __pow__(self, other):
         try:
-            val_div = self.val ** other.val
+            new_val = self.val ** other.val
             # der_div = other.val * self.val**(other.val-1) * self.der + np.log(self.val) * self.val**other.val * other.der
-            new_RevMod = RevMod(val_div)
+            new_RevMod = RevMod(new_val)
             self.children.append((other.val * self.val ** (other.val -1 ), new_RevMod))
             self.grad = None
             other.children.append((np.log(self.val) * self.val ** other.val , new_RevMod))
             other.grad = None
-        except AttributeError: # when not RevMod class
-            val_div = self.val ** other
-            new_RevMod = RevMod(val_div)
+        # when not RevMod class 
+        except AttributeError: 
+            new_val = self.val ** other
+            new_RevMod = RevMod(new_val)
             self.children.append((other*self.val**(other-1), new_RevMod))
             self.grad = None
         return new_RevMod
 
 
+    def __rpow__(self, other):
+        new_val = other ** self.val
+        new_RevMod = RevMod(new_val)
+        self.children.append((np.log(other) * (other ** self.val), new_RevMod))
+        self.grad = None
+        return new_RevMod
+
+    # _equal and not equal
+    def __eq__(self, other):
+        if not isinstance(other, RevMod):
+            return False
+        if self.val != other.val:
+            return False
+        if not self.grad or not other.grad:
+            return False
+        else:
+            return self.gradient() == other.gradient()
+        
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 
 
 
-
-if __name__ == '__main__':
-    x = RevMod(4)
-    y = RevMod(4)
-    z = x ** y - 2 ** x 
-    print(z.val, y.children, x.gradient(), y.gradient(), y.grad)
+# if __name__ == '__main__':
+#     x = RevMod(3)
+#     y = RevMod(5)
+#     z = x ** y - 2 ** x 
+#     print(z.val, y.children, x.gradient(), y.grad)
 
 
