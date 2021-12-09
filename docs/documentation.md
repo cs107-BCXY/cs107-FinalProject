@@ -137,9 +137,6 @@ All of our elementary functions that are not dunder methods are contained within
 
 Finally, we have created the extension feature to handle automatic differentiation using reverse mode. The reverse mode module works by instantiating a `Reverse` object for each variable with some assigned value. It is capable of supporting reverse mode autodifferentiation for all basic arithmetic operations, trigonometric-- including hyperbolic and inverse trig functions, exponential, and comparison methods `__ne__` and `__eq__`, and logarithmic operations. As needed, the reverse mode feature appends the values of adjoints and child within each relative variable for computing the derivative. 
 
-Description of your extension (the feature(s) you implemented in addition to the minimum requirements.)
-Additional information or background needed to understand your extension
-This could include required mathematics or other concepts
 
 ## Future Features
 
@@ -147,7 +144,6 @@ At this point, we are not tracking the computational graph of the automatic diff
 
 As [External Dependencies](#external-dependencies) states, we are currently not relying on any external libraries and instead are using the built-in [`math`](https://docs.python.org/3/library/math.html) library. In order to extend our package to handle multi-function and multi-variable inputs, we recognize that we will need to replace this with [`NumPy`](https://numpy.org/doc/stable/index.html).  
 
-Finally, we plan on adding another module to handle automatic differentiation using reverse mode. The reverse mode module will work by instantiating a `RevMod` object with some value. It will eventually be able to support running the reverse mode autodifferentiation for all arithmetic operations, trigonometric functions, exponential, and comparison methods, for which we will look into all `__ne__`, `__eq__`, `__lt__` etc.. as was suggested for the forward mode in the final deliverables. We may be also considering briefly reorganizing our test and src directories to separate the forward and reverse mode subsections
 
 
 
