@@ -238,11 +238,14 @@ class RevMod:
         return new_RevMod
 
     def log(self, base): # log function
-        new_val = np.log(self.val)/ np.log(base)
-        new_RevMod = RevMod(new_val)
-        self.children.append((1 / (self.val * np.log(base)), new_RevMod))
-        self.grad = None
-        return new_RevMod
+        if self.val < 0:
+            raise ValueError(f"Log cannot be negative for this implementation")
+        else:
+            new_val = np.log(self.val)/ np.log(base)
+            new_RevMod = RevMod(new_val)
+            self.children.append((1 / (self.val * np.log(base)), new_RevMod))
+            self.grad = None
+            return new_RevMod
  
     def __pow__(self, other):
         try:
