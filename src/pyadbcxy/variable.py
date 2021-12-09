@@ -382,8 +382,3 @@ class Variable(object):
 
 	def __repr__(self) -> str:
 		return str(self)
-
-
-if __name__ == '__main__':
-	a = Variable(3) ** Variable(4., 5.)
-	print(a)
