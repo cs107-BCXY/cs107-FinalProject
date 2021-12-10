@@ -1,15 +1,17 @@
+"""
+This file contains the Reverse module for the PyADBCXY package. It includes the Reverse class,
+which implements the reverse mode of automatic differentiation.
+"""
+from typing import Type
 import numpy as np
-import inspect
-
-"""
-For reverse mode autodiff implementation
-
-"""
 
 
-class Reverse:
+__all__ = ["Reverse"]
+
+
+class Reverse(object):
     """
-    RevMod is the class for implementing the reverse mode auto differentiation including 
+    Reverse is the class for implementing the reverse mode auto differentiation including 
     instantiating the class, storing children, evaluating gradient and all required basic
     operations. 
 
@@ -104,7 +106,7 @@ class Reverse:
             self.grad = None
             return new_RevMod
         else:
-            raise AttributeError("Reverse mode calculation only accepts Reverse object, int, float types.")
+            raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
     def __add__(self, other):
         """Overload of the '+' operator (Reverse + other). Calculates the value and derivative resulting
@@ -145,7 +147,7 @@ class Reverse:
             self.grad = None
             return new_RevMod
         else:
-            raise AttributeError("Reverse mode calculation only accepts Reverse object, int, float types.")
+            raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
     def __sub__(self, other):
         """Overload of the '-' operator (Reverse - other). Calculates the value and derivative resulting
@@ -186,7 +188,7 @@ class Reverse:
             self.grad = None
             return new_RevMod
         else:
-            raise AttributeError("Reverse mode calculation only accepts Reverse object, int, float types.")
+            raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
 
     def __truediv__(self, other):
@@ -232,7 +234,7 @@ class Reverse:
             self.grad = None
             return new_RevMod
         else:
-            raise AttributeError("Reverse mode calculation only accepts Reverse object, int, float types.")
+            raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
     def __radd__(self, other):
         """Overload of the '+' operator (Reverse + other). Calculates the value and derivative resulting
@@ -276,7 +278,7 @@ class Reverse:
             self.grad = None
             return new_RevMod
         else:
-            raise AttributeError("Reverse mode calculation only accepts Reverse object, int, float types.")
+            raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
 
     def __rtruediv__(self, other):
@@ -298,7 +300,7 @@ class Reverse:
             self.grad = None
             return new_RevMod
         else:
-            raise AttributeError("Reverse mode calculation only accepts Reverse object, int, float types.")
+            raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
     def cos(self):
         """Calculates trigonometric cosine of the current Reverse object.
@@ -567,14 +569,14 @@ class Reverse:
                 other.children.append((np.log(self.val) * self.val ** other.val , new_RevMod))
                 other.grad = None
                 return new_RevMod
-            elif isinstace(other, Reverse):
+            elif isinstance(other, Reverse):
                 new_val = self.val ** other
                 new_RevMod = Reverse(new_val)
                 self.children.append((other*self.val**(other-1), new_RevMod))
                 self.grad = None
                 return new_RevMod
             else:
-                raise AttributeError("Reverse mode calculation only accepts Reverse object, int, float types.")
+                raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
         else:
             raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 
