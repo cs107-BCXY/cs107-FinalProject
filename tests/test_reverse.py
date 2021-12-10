@@ -98,12 +98,10 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(z.val, 6)
         self.assertEqual(z.grad, 1)
 
-    # def test_rmul(self):
-    #     """ Testing when multiplication is on Revmod and int number"""
-    #     x = Reverse(3)
-    #     z = -5 * x
-    #     self.assertEqual(z.val, -15)
-    #     self.assertEqual(z.gradient(), 1)
+    def test_rmul(self):
+        z = -5 * self.x
+        self.assertEqual(z.val, -15)
+        # self.assertEqual(z.grad, -5)
 
 
     # def test_rdiv(self):
