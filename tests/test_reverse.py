@@ -1,4 +1,5 @@
 import math
+from typing import Type
 import unittest
 from src.pyadbcxy.reverse import Reverse
 
@@ -103,6 +104,13 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(z.val, -15)
         # self.assertEqual(z.grad, -5)
 
+    def test_rsub(self):
+        z = 5 - self.x
+        self.assertEqual(z.val, 2)
+        self.assertEqual(z.grad, 1)
+
+        with self.assertRaises(TypeError):
+            [] - self.x
 
     # def test_rdiv(self):
     #     """ Testing when division is on Revmod and int number"""
@@ -111,12 +119,7 @@ class TestReverseMode(unittest.TestCase):
     #     self.assertEqual(z.val, (0.6))
 
 
-    # def test_rsub(self):
-    #     """Testing When subtraction on Class RevMod and number"""
-    #     y = Reverse(2)
-    #     z = 5 - y
-    #     self.assertTrue(float(z.get_val()) == 3) and (float(z.gradient()) == 1.0)
-
+    
     # def test_cos(self):
     #     """
     #     Test the cos function.
