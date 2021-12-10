@@ -158,6 +158,15 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(z.val, math.cosh(x.val))
         # self.assertEqual(z.grad, math.sinh(x.val))
 
+    def test_tanh(self):
+        """
+        Test the tanh.
+        """
+        x = Reverse(1)
+        z = x.tanh()
+        self.assertEqual(z.val, math.tanh(x.val))
+        # self.assertEqual(z.grad, (1 - math.tanh(x.val)**2))
+
     # def test_sinh(self):
     #     """
     #     Test the sinh.
@@ -166,16 +175,6 @@ class TestReverseMode(unittest.TestCase):
     #     sinh_result = v.sinh()
     #     self.assertEqual(sinh_result.val, math.sinh(v.val))
     #     self.assertEqual(sinh_result.grad, v.cosh().val * v.grad)
-
-    # def test_tanh(self):
-    #     """
-    #     Test the cosh.
-    #     """
-    #     v = Reverse(0.9, 0.5)
-    #     tanh_result = v.tanh()
-    #     self.assertEqual(tanh_result.val, math.tanh(v.val))
-    #     self.assertEqual(tanh_result.grad, (1 - math.tanh(v.val)**2) * v.grad)
-
 
 if __name__ == "__main__":
     unittest.main()
