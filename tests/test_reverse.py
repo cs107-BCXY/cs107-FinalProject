@@ -140,14 +140,14 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(z.val, math.tan(v.val))
         # self.assertEqual(z.grad, 1/math.cos(v.val)**2)
 
-    # def test_sin(self):
-    #     """
-    #     Test the sin function.
-    #     """
-    #     v = Reverse(4, 5)
-    #     result = v.sin()
-    #     self.assertAlmostEqual(result.val, math.sin(v.val), places=6)
-    #     self.assertEqual(result.grad, -3.2682181043180596)
+    def test_sin(self):
+        """
+        Test the sin function.
+        """
+        v = Reverse(math.pi/2)
+        z = v.sin()
+        self.assertEqual(z.val, math.sin(v.val))
+        # self.assertEqual(z.grad, math.cos(v.val))
 
     # def test_cosh(self):
     #     """
