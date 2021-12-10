@@ -101,7 +101,7 @@ class TestReverseMode(unittest.TestCase):
     def test_rmul(self):
         z = -5 * self.x
         self.assertEqual(z.val, -15)
-        self.assertEqual(z.grad, -5)
+        self.assertEqual(self.x.grad, -5)
 
     def test_rsub(self):
         z = 5 - self.x
@@ -114,7 +114,7 @@ class TestReverseMode(unittest.TestCase):
     def test_rdiv(self):
         z = 9 / self.x
         self.assertEqual(z.val, 3.0)
-        self.assertEqual(z.grad, -1.0)
+        self.assertEqual(self.x.grad, -1.0)
 
         with self.assertRaises(ZeroDivisionError):
             9 / Reverse(0)
@@ -129,7 +129,7 @@ class TestReverseMode(unittest.TestCase):
         v = Reverse(math.pi)
         z = v.cos()
         self.assertEqual(z.val, math.cos(v.val))
-        self.assertEqual(z.grad, -math.sin(v.val))
+        self.assertEqual(v.grad, -math.sin(v.val))
 
     def test_tan(self):
         """
@@ -138,7 +138,7 @@ class TestReverseMode(unittest.TestCase):
         v = Reverse(math.pi/4)
         z = v.tan()
         self.assertEqual(z.val, math.tan(v.val))
-        self.assertEqual(z.grad, 1/math.cos(v.val)**2)
+        self.assertEqual(v.grad, 1/math.cos(v.val)**2)
 
     def test_sin(self):
         """
@@ -147,7 +147,7 @@ class TestReverseMode(unittest.TestCase):
         v = Reverse(math.pi/2)
         z = v.sin()
         self.assertEqual(z.val, math.sin(v.val))
-        self.assertEqual(z.grad, math.cos(v.val))
+        self.assertEqual(v.grad, math.cos(v.val))
 
     def test_cosh(self):
         """
@@ -156,7 +156,7 @@ class TestReverseMode(unittest.TestCase):
         x = Reverse(1)
         z = x.cosh()
         self.assertEqual(z.val, math.cosh(x.val))
-        self.assertEqual(z.grad, math.sinh(x.val))
+        self.assertEqual(x.grad, math.sinh(x.val))
 
     def test_tanh(self):
         """
@@ -165,7 +165,7 @@ class TestReverseMode(unittest.TestCase):
         x = Reverse(1)
         z = x.tanh()
         self.assertEqual(z.val, math.tanh(x.val))
-        self.assertEqual(z.grad, (1 - math.tanh(x.val)**2))
+        self.assertAlmostEqual(x.grad, (1 - math.tanh(x.val)**2))
 
     def test_sinh(self):
         """
@@ -174,7 +174,7 @@ class TestReverseMode(unittest.TestCase):
         x = Reverse(2)
         z = x.sinh()
         self.assertEqual(z.val, math.sinh(x.val))
-        self.assertEqual(z.grad, math.cosh(x.val))
+        self.assertEqual(x.grad, math.cosh(x.val))
 
     # TODO: test arccos
     # TODO: test arctan
