@@ -112,12 +112,16 @@ class TestReverseMode(unittest.TestCase):
         with self.assertRaises(TypeError):
             [] - self.x
 
-    # def test_rdiv(self):
-    #     """ Testing when division is on Revmod and int number"""
-    #     x = Reverse(5)
-    #     z = 3 / x
-    #     self.assertEqual(z.val, (0.6))
+    def test_rdiv(self):
+        z = 9 / self.x
+        self.assertEqual(z.val, 3.0)
+        # self.assertEqual(z.grad, -1.0)
 
+        with self.assertRaises(ZeroDivisionError):
+            9 / Reverse(0)
+
+        with self.assertRaises(TypeError):
+            [] / self.x
 
     
     # def test_cos(self):
