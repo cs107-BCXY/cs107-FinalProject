@@ -113,7 +113,7 @@ class Reverse(object):
             other (Reverse object, int, or float): item to be added to the Reverse
 
         Returns:
-            Reverse object: resulting Reverse object
+            Reverse: resulting Reverse object
 
         Examples
         --------
@@ -154,7 +154,7 @@ class Reverse(object):
             other (Reverse object, int, or float): item to be added to the Reverse
 
         Returns:
-            Reverse object: resulting Reverse object
+            Reverse: resulting Reverse object
 
         Examples
         --------
@@ -195,7 +195,7 @@ class Reverse(object):
             other (Reverse object, int, or float): item to be added to the Reverse
 
         Returns:
-            Reverse object: resulting Reverse object
+            Reverse: resulting Reverse object
 
         Examples
         --------
@@ -281,7 +281,7 @@ class Reverse(object):
             other (Reverse object, int, or float): item to add Reverse to
 
         Returns:
-            Reverse object: resulting Reverse object
+            Reverse: resulting Reverse object
         
         Examples
         --------
@@ -300,7 +300,7 @@ class Reverse(object):
             other (Reverse object, int, or float): item to be multiplied with the Reverse
 
         Returns:
-            Reverse object: resulting Reverse object
+            Reverse: resulting Reverse object
         
         Examples
         --------
@@ -312,14 +312,21 @@ class Reverse(object):
         return self.__mul__(other)
 
     def __rsub__(self, other):
-        """Overload of the '-' operator (Reverse - other). Calculates the value and derivative resulting
-        from the addition of two Reverse objects or a Reverse object and other object.
+        """Overload of the '-' operator (other - Reverse). Calculates the value and derivative resulting
+        from the subtraction of two Reverse objects or a Reverse object from another object.
 
         Args:
-            other (Reverse object, int, or float): item to be added to the Reverse
+            other (Reverse object, int, or float): item to subtract Reverse from
 
         Returns:
-            Reverse object: resulting Variable object
+            Reverse: resulting Reverse object
+
+        Examples
+        --------
+        >>> x = Reverse(3)
+        >>> z = 5 - x
+        >>> print(z)
+        Reverse(val = 2, grad = 1)
         """
         if isinstance(other, Reverse) or isinstance(other, int) or isinstance(other, float):
             new_val = other - self.val
