@@ -147,7 +147,7 @@ class Reverse(object):
             raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
     def __add__(self, other):
-        """Overload of the '+' operator (Reverse + other). Calculates the value and derivative resulting
+        """Overload of the '+' operator (Reverse + other). Calculates the value and gradient resulting
         from the addition of two Reverse objects or a Reverse object and other object.
 
         Args:
@@ -162,13 +162,13 @@ class Reverse(object):
         >>> x2 = Reverse(4)
         >>> x3 = x1 + x2
         >>> print(x3)
-        "Reverse(val = 7, der = 2)"
+        Reverse(val = 7, grad = 2)
         >>> x4 = x1 + 5
         >>> print(x4)
-        "Reverse(val = 8, der = 1)
+        Reverse(val = 8, grad = 1)
         >>> x5 = x2 + 2.0
         >>> print(x5)
-        "Reverse(val = 6.0, der = 1)
+        Reverse(val = 6.0, grad = 1)
         """
         if isinstance(other, Reverse):
             val_add = self.val + other.val
