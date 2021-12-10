@@ -281,7 +281,7 @@ class Reverse(object):
             other (Reverse object, int, or float): item to add Reverse to
 
         Returns:
-            Reverse object: resulting Variable object
+            Reverse object: resulting Reverse object
         
         Examples
         --------
@@ -292,16 +292,22 @@ class Reverse(object):
         """
         return self.__add__(other)
 
-    # rmultiplication
     def __rmul__(self, other):
-        """Overload of the '+' operator (Reverse + other). Calculates the value and derivative resulting
-        from the addition of two Reverse objects or a Reverse object and other object.
+        """Overload of the '*' operator (other * Reverse). Calculates the value and derivative resulting
+        from the multiplication of two Reverse objects or other object and Reverse object.
 
         Args:
-            other (Reverse object, int, or float): item to be added to the Reverse
+            other (Reverse object, int, or float): item to be multiplied with the Reverse
 
         Returns:
-            Reverse object: resulting Variable object
+            Reverse object: resulting Reverse object
+        
+        Examples
+        --------
+        >>> x = Reverse(3)
+        >>> z = -5 * x
+        >>> print(z)
+        Reverse(val = -15, grad = -5)
         """
         return self.__mul__(other)
 
