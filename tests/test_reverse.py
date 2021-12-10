@@ -27,8 +27,7 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(self.y.val, 5)
         self.assertEqual(self.y.grad, 2)
 
-    def test_mul_reverse(self):
-        """ Testing when multiplication on class RevMod """
+    def test_mul(self):
         z = self.x * self.y
         self.assertEqual(z.val, 12)
         # self.assertEqual(z.grad, 7) # TODO: are we sure this is correct?
@@ -40,41 +39,21 @@ class TestReverseMode(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.x * []
 
-    # def test_mul_value(self):
-    #     x = Reverse(3)
-    #     y = 5
-    #     z = x * y
-    #     self.assertEqual(z.val, 15)
-    #     self.assertEqual(x.gradient(), 5)
+    def test_add(self):
+        z = self.x + self.y
+        self.assertEqual(z.val, 7)
+        # self.assertEqual(z.grad, 2) # TODO: are we sure this is correct?
+        
+        z = self.x + 5
+        self.assertEqual(z.val, 8)
+        self.assertEqual(z.grad, 1)
 
-    # def test_mul_errorcatching(self):
-    #     x = Reverse(3)
-    #     y = []
-    #     with self.assertRaises(AttributeError):
-    #         z = x * y
+        z = self.y + 2.0
+        self.assertEqual(z.val, 6.0)
+        self.assertEqual(z.grad, 1)
 
-    # def test_add(self):
-    #     """Testing When addition on Class RevMod objects"""
-    #     x = Reverse(3, 1)
-    #     y = Reverse(5, 7)
-    #     summed = x + y
-    #     self.assertEqual(float(summed.get_val()), 8)
-    #     self.assertEqual(summed.gradient(), 15)
-
-    # def test_add_value(self):
-    #     """Testing When addition on Class RevMod objects"""
-    #     x = Reverse(3, 1)
-    #     y = 5
-    #     summed = x + y
-    #     self.assertEqual(float(summed.get_val()), 8)
-    #     self.assertEqual(summed.gradient(), 1)
-
-    # def test_add_errorcatching(self):
-    #     """Testing When addition on Class RevMod objects"""
-    #     x = Reverse(3, 1)
-    #     y = []
-    #     with self.assertRaises(AttributeError):
-    #         z = x + y
+        with self.assertRaises(TypeError):
+            self.x + []
 
     # def test_sub(self):
     #     """Testing when subtraction on Class RevMod objects"""
