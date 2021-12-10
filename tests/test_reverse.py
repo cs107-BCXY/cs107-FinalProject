@@ -77,12 +77,6 @@ class TestReverseMode(unittest.TestCase):
         with self.assertRaises(AttributeError):
             z = x + y
 
-    def test_radd(self):
-        """Testing when addition on Class RevMod and number"""
-        x = Reverse(3)
-        summed = x + 3
-        self.assertTrue(float(summed.get_val()) == 6 and float(summed.gradient()) == 1)
-
     def test_sub(self):
         """Testing when subtraction on Class RevMod objects"""
         x = Reverse(3)
@@ -90,19 +84,19 @@ class TestReverseMode(unittest.TestCase):
         z = y - x
         self.assertTrue(float(z.get_val()) == 2) and (float(z.gradient()) == 1.0)
 
-    def test_rsub(self):
-        """Testing When subtraction on Class RevMod and number"""
-        y = Reverse(5)
-        z = y - 2
-        self.assertTrue(float(z.get_val()) == 3) and (float(z.gradient()) == 1.0)
+    def test_sub_value(self):
+        """Testing When addition on Class RevMod objects"""
+        x = Reverse(3, 1)
+        y = 5
+        summed = x - y
+        self.assertEqual(float(summed.get_val()), -2)
 
-
-    def test_rmul(self):
-        """ Testing when multiplication is on Revmod and int number"""
-        x = Reverse(3)
-        z = x * -5
-        self.assertEqual(z.val, -15)
-        self.assertEqual(z.gradient(), 1)
+    def test_sub_errorcatching(self):
+        """Testing When addition on Class RevMod objects"""
+        x = Reverse(3, 1)
+        y = []
+        with self.assertRaises(AttributeError):
+            z = x - y
 
     def test_div(self):
         """ Testing when division is on Revmod"""
@@ -113,12 +107,54 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(float(x.gradient()), 0.2)
         self.assertEqual(y.gradient(), -0.12)
 
+    def test_div_zero_div(self):
+        """ Testing when division is on Revmod"""
+        x = Reverse(3)
+        y = Reverse(0)
+        with self.assertRaises(ZeroDivisionError):
+            z = x / y
+
+    def test_div_value(self):
+        """ Testing when division is on Revmod"""
+        x = Reverse(3)
+        y = 5
+        z = x / y
+        self.assertEqual(z.val, (0.6))
+
+    def test_div_errorcatching(self):
+        """ Testing when division is on Revmod"""
+        x = Reverse(3)
+        y = []
+        with self.assertRaises(AttributeError):
+            z = x / y
+
+    def test_radd(self):
+        """Testing when addition on Class RevMod and number"""
+        x = Reverse(3)
+        summed = 3 + x
+        self.assertTrue(float(summed.get_val()) == 6 and float(summed.gradient()) == 1)
+
+    def test_rmul(self):
+        """ Testing when multiplication is on Revmod and int number"""
+        x = Reverse(3)
+        z = -5 * x
+        self.assertEqual(z.val, -15)
+        self.assertEqual(z.gradient(), 1)
+
+
     def test_rdiv(self):
         """ Testing when division is on Revmod and int number"""
-        x = Reverse(3)
-        z = x / 5
+        x = Reverse(5)
+        z = 3 / x
         self.assertEqual(z.val, (0.6))
         self.assertEqual(float(x.gradient()), 0.2)
+
+    def test_rsub(self):
+        """Testing When subtraction on Class RevMod and number"""
+        y = Reverse(2)
+        z = 5 - y
+        self.assertTrue(float(z.get_val()) == 3) and (float(z.gradient()) == 1.0)
+
 
 
 
