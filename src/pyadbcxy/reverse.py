@@ -337,16 +337,22 @@ class Reverse(object):
         else:
             raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
-
     def __rtruediv__(self, other):
-        """Overload of the '/' operator (Variable / other). Calculates the value and derivative resulting
-        from the division of one Variable (or other object) from a Variable.
+        """Overload of the '/' operator (other / Reverse). Calculates the value and derivative resulting
+        from the division of one object by a Reverse object.
 
         Args:
-            other (Variable, int, or float): item the Variable is to be divided by
+            other (Reverse, int, or float): item to divide by Reverse object
 
         Returns:
-            Variable: resulting Variable object
+            Reverse: resulting Reverse object
+
+        Examples
+        --------
+        >>> x = Reverse(3)
+        >>> z = 9 / x
+        >>> print(z)
+        Reverse(val = 3.0, grad = -1.0)
         """
         if isinstance(other, Reverse) or isinstance(other, int) or isinstance(other, float):
             if self.val == 0:
