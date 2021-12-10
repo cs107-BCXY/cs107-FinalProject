@@ -378,7 +378,7 @@ class Reverse(object):
         --------
         >>> v = Reverse(pi, 1)
         >>> v.cos()
-        Reverse(val = -1, grad = 1)
+        Reverse(val = -1, grad = -1.2246467991473532e-16)
         """
         new_val = np.cos(self.val)
         new_RevMod = Reverse(new_val)
