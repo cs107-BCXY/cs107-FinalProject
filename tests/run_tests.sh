@@ -4,6 +4,7 @@ tests=(
     tests/test_variable.py
     tests/test_elementary_functions.py
     tests/test_forward.py
+    tests/test_reverse.py
 )
 
 if [[ $# -gt 0 && ${1} == 'coverage' ]]; then
