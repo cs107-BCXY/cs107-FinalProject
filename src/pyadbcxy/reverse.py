@@ -512,6 +512,7 @@ class Reverse(object):
         >>> r.arccos()
         Reverse(val = 0.45102681179626236, grad = -1.147078669352809)
         """
+        # TODO: raise ValueError if self.val outside of domain (NumPy won't, it just returns nan)
         new_val = np.arccos(self.val)
         new_RevMod = Reverse(new_val)
         self._children.append((-1 / np.sqrt( 1- self.val ** 2), new_RevMod ))
@@ -553,13 +554,12 @@ class Reverse(object):
         >>> r = Reverse(0.9, 0.5)
         Reverse(val = 1.1197695149986342, grad = 1.147078669352809)
         """
+        # TODO: raise ValueError if self.val outside of domain (NumPy won't, it just returns nan)
         new_val = np.arcsin(self.val)
         new_RevMod = Reverse(new_val)
         self._children.append((1 / np.sqrt(1 - self.val**2 ), new_RevMod ))
         self.grad = None
         return new_RevMod
-
-
 
     def exp(self):
         """Calculates exponential (exp()) of Reverse object and returns a Reverse object back.
@@ -582,9 +582,6 @@ class Reverse(object):
         self.grad = None
         return new_RevMod
 
-
-
-
     def log(self, base=np.e):
         """Calculates logarithm (log()) of Reverse, int, or float and returns the result.
 
@@ -600,7 +597,8 @@ class Reverse(object):
         >>> r.log()
         Reverse(val = 1.3862943611198906, grad = 1.25)
         """
-        if self.val < 0:
+        # TODO: raise ZeroDivisionError if base == 1
+        if self.val <= 0:
             raise ValueError(f"Log cannot be negative for this implementation")
         else:
             new_val = np.log(self.val)/ np.log(base)
@@ -608,7 +606,6 @@ class Reverse(object):
             self._children.append((1 / (self.val * np.log(base)), new_RevMod))
             self.grad = None
             return new_RevMod
- 
 
     def __pow__(self, other):
         """Overload of the '**' or 'pow()' operator (Reverse**other). Calculates the value and derivative resulting
@@ -646,8 +643,6 @@ class Reverse(object):
         else:
             raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
 
-
-
     def __rpow__(self, other):
         """Overload of the '**' or 'pow()' operator (other**Reverse). Calculates the value and derivative resulting
         from raising other to the power of the Reverse.
@@ -674,7 +669,6 @@ class Reverse(object):
                 raise ValueError('math domain error: the base of exponentiation cannot be non-positive')
         else:
             raise TypeError(f"unsupported operand type(s) for ** or power: '{type(other)}' and '{type(self)}'")
-
 
     def __eq__(self, other):
         """Overload of the '==' operator. Determines whether Reverse is equal to
