@@ -203,13 +203,13 @@ class Reverse(object):
         >>> x2 = Reverse(4)
         >>> x3 = x1 - x2
         >>> print(x3)
-        "Reverse(val = -1, der = 0)"
+        Reverse(val = -1, grad = 0)
         >>> x4 = x1 - 5
         >>> print(x4)
-        "Reverse(val = -2, der = 1)
+        Reverse(val = -2, grad = 1)
         >>> x5 = x2 - 2.0
         >>> print(x5)
-        "Reverse(val = 1.0, der = 1)
+        Reverse(val = 2.0, grad = 1)
         """
         if isinstance(other, Reverse):
             val_sub = self.val - other.val
