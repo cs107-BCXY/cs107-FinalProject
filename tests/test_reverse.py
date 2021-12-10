@@ -93,11 +93,10 @@ class TestReverseMode(unittest.TestCase):
         with self.assertRaises(TypeError):
             x / []
 
-    # def test_radd(self):
-    #     """Testing when addition on Class RevMod and number"""
-    #     x = Reverse(3)
-    #     summed = 3 + x
-    #     self.assertTrue(float(summed.get_val()) == 6 and float(summed.gradient()) == 1)
+    def test_radd(self):
+        z = 3 + self.x
+        self.assertEqual(z.val, 6)
+        self.assertEqual(z.grad, 1)
 
     # def test_rmul(self):
     #     """ Testing when multiplication is on Revmod and int number"""
