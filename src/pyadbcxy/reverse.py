@@ -243,15 +243,15 @@ class Reverse(object):
         --------
         >>> x1 = Reverse(8)
         >>> x2 = Reverse(4)
-        >>> x3 = x1 - x2
+        >>> x3 = x1 / x2
         >>> print(x3)
-        "Reverse(val = 1, grad = 2)"
-        >>> x4 = x1 - 3
+        Reverse(val = 2.0, grad = 1)
+        >>> x4 = x1 / 2
         >>> print(x4)
-        "Reverse(val = 1, grad = 1)
-        >>> x5 = x2 - 1.0
+        Reverse(val = 4.0, grad = 4.0)
+        >>> x5 = x2 / 2.0
         >>> print(x5)
-        "Reverse(val = 2.0, grad = 1)
+        Reverse(val = 2.0, grad = 0.5)
         """
         if isinstance(other, Reverse):
             if other.val == 0:
