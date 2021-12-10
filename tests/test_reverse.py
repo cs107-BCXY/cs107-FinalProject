@@ -2,7 +2,7 @@
 
 import unittest
 from src.pyadbcxy.reverse import Reverse
-
+import math
 
 ## first Testing addition case
 
@@ -147,7 +147,7 @@ class TestReverseMode(unittest.TestCase):
         x = Reverse(5)
         z = 3 / x
         self.assertEqual(z.val, (0.6))
-        self.assertEqual(float(x.gradient()), 0.2)
+
 
     def test_rsub(self):
         """Testing When subtraction on Class RevMod and number"""
@@ -155,9 +155,59 @@ class TestReverseMode(unittest.TestCase):
         z = 5 - y
         self.assertTrue(float(z.get_val()) == 3) and (float(z.gradient()) == 1.0)
 
+    def test_cos(self):
+        """
+        Test the cos function.
+        """
+        v = Reverse(math.pi, 1)
+        cos_result = v.cos()
+        self.assertEqual(cos_result.val, math.cos(v.val))
+        self.assertEqual(cos_result.grad, 1)
 
+    def test_tan(self):
+        """
+        Test the tan function.
+        """
+        v = Reverse(0.9, 0.5)
+        result = v.tan()
+        self.assertEqual(result.val, math.tan(v.val))
+        self.assertAlmostEqual(result.grad, 1.2939993666298242, places=6)
 
+    def test_sin(self):
+        """
+        Test the sin function.
+        """
+        v = Reverse(4, 5)
+        result = v.sin()
+        self.assertAlmostEqual(result.val, math.sin(v.val), places=6)
+        self.assertEqual(result.grad, -3.2682181043180596)
 
+    def test_cosh(self):
+        """
+        Test the cosh.
+        """
+        v = Reverse(4, 5)
+        cosh_result = v.cosh()
+        self.assertEqual(cosh_result.val, math.cosh(v.val))
+        self.assertEqual(cosh_result.grad, math.sinh(v.val) * v.grad)
+
+    def test_sinh(self):
+        """
+        Test the sinh.
+        """
+        v = Reverse(4, 5)
+        sinh_result = v.sinh()
+        self.assertEqual(sinh_result.val, math.sinh(v.val))
+        self.assertEqual(sinh_result.grad, v.cosh().val * v.grad)
+
+    def test_tanh(self):
+        """
+        Test the cosh.
+        """
+        v = Reverse(0.9, 0.5)
+        tanh_result = v.tanh()
+        self.assertEqual(tanh_result.val, math.tanh(v.val))
+        self.assertEqual(tanh_result.grad, (1 - math.tanh(v.val)**2) * v.grad)
 
 
 
