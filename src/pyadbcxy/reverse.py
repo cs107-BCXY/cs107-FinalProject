@@ -486,9 +486,10 @@ class Reverse(object):
 
         Examples
         --------
-        >>> r = Reverse(4., 5.)
-        >>> r.sinh()
-        Reverse(val = 27.28991719712775, grad = 136.54116418008243)
+        >>> x = Reverse(2)
+        >>> z = x.sinh()
+        >>> print(z)
+        Reverse(val = 3.626860407847019, grad = 3.7621956910836314)
         """
         new_val = np.sinh(self.val)
         new_RevMod = Reverse(new_val)
@@ -708,14 +709,3 @@ class Reverse(object):
         
     def __ne__(self, other):
         return not self.__eq__(other)
-
-
-
-
-if __name__ == '__main__':
-    x = Reverse(2)
-    y = Reverse(5)
-    z = x.log(2)
-    print(z.val, y._children, x.grad, y.grad)
-
-
