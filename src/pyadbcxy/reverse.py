@@ -376,8 +376,9 @@ class Reverse(object):
 
         Examples
         --------
-        >>> v = Reverse(pi, 1)
-        >>> v.cos()
+        >>> x = Reverse(np.pi, 1)
+        >>> z = x.cos()
+        >>> print(z)
         Reverse(val = -1, grad = -1.2246467991473532e-16)
         """
         new_val = np.cos(self.val)
@@ -397,8 +398,9 @@ class Reverse(object):
 
         Examples
         --------
-        >>> v = Reverse(np.pi/4)
-        >>> v.tan()
+        >>> x = Reverse(np.pi / 4)
+        >>> z = x.tan()
+        >>> print(z)
         Reverse(val = 0.9999999999999999, grad = 1.9999999999999996)
         """
         new_val = np.tan(self.val)
@@ -418,9 +420,10 @@ class Reverse(object):
 
         Examples
         --------
-        >>> r = Reverse(4., 5.)
-        >>> r.sin()
-        Reverse(val = -0.7568024953079282, grad = -3.2682181043180596)
+        >>> x = Reverse(np.pi / 2)
+        >>> z = x.sin()
+        >>> print(z)
+        Reverse(val = 1.0, grad = 6.123233995736766e-17)
         """
         new_val = np.sin(self.val)
         new_RevMod = Reverse(new_val)
