@@ -453,7 +453,6 @@ class Reverse(object):
         self.grad = None
         return new_RevMod
 
-
     def tanh(self):
         """Calculates hyperbolic tanh of Reverse and returns the result.
 
@@ -465,9 +464,10 @@ class Reverse(object):
 
         Examples
         --------
-        >>> v = Reverse(0.9, 0.5)
-        >>> v.tanh()
-        Reverse(val = 0.7162978701990245, grad = 0.24345868057417075)
+        >>> x = Reverse(1)
+        >>> z = x.tanh()
+        >>> print(z)
+        Reverse(val = 0.7615941559557649, grad = 0.41997434161402614)
         """
         new_val = np.tanh(self.val)
         new_RevMod = Reverse(new_val)
