@@ -19,7 +19,7 @@ class Reverse(object):
     >>> z = x + y
     >>> z.val
     6
-    >>> z.gradient()
+    >>> z.grad
     1
     """
     def __init__(self, val, grad=1):
@@ -29,8 +29,8 @@ class Reverse(object):
             val (int or float): value of the Reverse
             grad (int or float, optional): derivative of the Reverse. Defaults to 1.
         """
-        self.val = val
-        self.grad = grad
+        self._val = val
+        self._grad = grad
         self.children = []
 
     def __repr__(self):
@@ -39,32 +39,70 @@ class Reverse(object):
     def __str__(self):
         return f"Reverse(val = {self.val}, grad = {self.grad})"
 
-    def get_val(self):
+    @property
+    def val(self):
         """Get the value of the Reverse
 
         Examples
         --------
         >>> x = Reverse(3)
-        >>> x.get_val()
+        >>> x.val
         3
         """
-        return self.val
+        return self._val
 
-    def gradient(self):
-        """Get the derivative of the Reverse
+    @property
+    def grad(self):
+        """Get the gradient of the Reverse object
 
         Examples
         --------
         >>> x = Reverse(3)
-        >>> x.gradient()
+        >>> x.grad
         1
         """
-        if self.grad == None:
+        if self._grad == None:
             grad = 0
             for der, child in self.children:
-                grad += der * child.gradient()
-            self.grad = grad
-        return self.grad # returns or updates gradient
+                grad += der * child.grad
+            self._grad = grad
+        return self._grad # returns or updates gradient
+
+    @val.setter
+    def val(self, val):
+        """Set the value of the Reverse object
+        
+        Args:
+            val (int or float): new value of the Reverse object
+
+        Examples
+        --------
+        >>> x = Reverse(3)
+        >>> x.val
+        3
+        >>> x.val = 4
+        >>> x.val
+        4
+        """
+        self._val = val
+
+    @grad.setter
+    def grad(self, grad):
+        """Set the gradient of the Reverse object
+
+        Args:
+            grad (int, float, or array): new gradient of the Reverse object
+
+        Examples
+        --------
+        >>> x.Variable(3)
+        >>> x.grad
+        1
+        >>> x.grad = 2
+        >>> x.grad
+        2
+        """
+        self._grad = grad
 
     def __mul__(self, other):
         """Overload of the '*' operator (Reverse * other). Calculates the value and derivative resulting
@@ -638,7 +676,7 @@ class Reverse(object):
         if not self.grad or not other.grad:
             return False
         else:
-            return self.gradient() == other.gradient()
+            return self.grad == other.grad
         
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -650,6 +688,6 @@ if __name__ == '__main__':
     x = Reverse(2)
     y = Reverse(5)
     z = x.log(2)
-    print(z.val, y.children, x.gradient(), y.grad)
+    print(z.val, y.children, x.grad, y.grad)
 
 
