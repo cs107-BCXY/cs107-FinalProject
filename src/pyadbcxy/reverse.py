@@ -2,7 +2,6 @@
 This file contains the Reverse module for the PyADBCXY package. It includes the Reverse class,
 which implements the reverse mode of automatic differentiation.
 """
-from typing import Type
 import numpy as np
 
 
@@ -35,10 +34,10 @@ class Reverse(object):
         self.children = []
 
     def __repr__(self):
-        return (f'RevMod({self.val})')
+        return f"Reverse(val = {self.val})"
 
     def __str__(self):
-        return (f'RevMod({self.val}), Its Gradient: {self.grad}')
+        return f"Reverse(val = {self.val}, grad = {self.grad})"
 
     def get_val(self):
         """Get the value of the Reverse
