@@ -228,7 +228,6 @@ class Reverse(object):
         else:
             raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
-
     def __truediv__(self, other):
         """Overload of the '/' operator (Reverse / other). Calculates the value and derivative resulting
         from the division of one Reverse (or other object) from a Reverse.
@@ -275,14 +274,21 @@ class Reverse(object):
             raise TypeError("Reverse mode calculation only accepts Reverse object, int, float types.")
 
     def __radd__(self, other):
-        """Overload of the '+' operator (Reverse + other). Calculates the value and derivative resulting
-        from the addition of two Reverse objects or a Reverse object and other object.
+        """Overload of the '+' operator (other + Reverse). Calculates the value and derivative resulting
+        from the addition of two Reverse objects or a other object and Reverse object.
 
         Args:
-            other (Reverse object, int, or float): item to be added to the Reverse
+            other (Reverse object, int, or float): item to add Reverse to
 
         Returns:
             Reverse object: resulting Variable object
+        
+        Examples
+        --------
+        >>> x = Reverse(3)
+        >>> z = 3 + x
+        >>> print(z)
+        Reverse(val = 6, grad = 1)
         """
         return self.__add__(other)
 
