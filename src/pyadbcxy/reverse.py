@@ -431,8 +431,6 @@ class Reverse(object):
         self.grad = None
         return new_RevMod
 
-    # adding hyperbolic functions:
-
     def cosh(self):
         """Calculates hyperbolic cosine of Reverse and returns the result.
 
@@ -444,9 +442,10 @@ class Reverse(object):
 
         Examples
         --------
-        >>> v = Reverse(4., 5.)
-        >>> v.cosh()
-        Reverse(val = 27.308232836016487, grad = 136.44958598563875)
+        >>> x = Reverse(1)
+        >>> z = x.cosh()
+        >>> print(z)
+        Reverse(val = 1.5430806348152437, grad = 1.1752011936438014)
         """
         new_val = np.cosh(self.val)
         new_RevMod = Reverse(new_val)
