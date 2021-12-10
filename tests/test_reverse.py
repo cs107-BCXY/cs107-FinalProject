@@ -1,5 +1,4 @@
 import math
-from typing import Type
 import unittest
 from src.pyadbcxy.reverse import Reverse
 
@@ -123,15 +122,14 @@ class TestReverseMode(unittest.TestCase):
         with self.assertRaises(TypeError):
             [] / self.x
 
-    
-    # def test_cos(self):
-    #     """
-    #     Test the cos function.
-    #     """
-    #     v = Reverse(math.pi, 1)
-    #     cos_result = v.cos()
-    #     self.assertEqual(cos_result.val, math.cos(v.val))
-    #     self.assertEqual(cos_result.grad, 1)
+    def test_cos(self):
+        """
+        Test the cos function.
+        """
+        v = Reverse(math.pi)
+        z = v.cos()
+        self.assertEqual(z.val, math.cos(v.val))
+        # self.assertAlmostEqual(z.grad, 0, places=15)
 
     # def test_tan(self):
     #     """
