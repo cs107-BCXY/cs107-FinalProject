@@ -387,7 +387,7 @@ class Reverse(object):
         return new_RevMod
 
     def tan(self):
-        """Calculates trigonometric cosine of the current Reverse object.
+        """Calculates trigonometric tangent of the current Reverse object.
 
         Args:
             none
@@ -397,9 +397,9 @@ class Reverse(object):
 
         Examples
         --------
-        >>> v = Reverse(0.9, 0.5)
+        >>> v = Reverse(np.pi/4)
         >>> v.tan()
-        Reverse(val = 1.2601582175503392, grad = 1.2939993666298242)
+        Reverse(val = 0.9999999999999999, grad = 1.9999999999999996)
         """
         new_val = np.tan(self.val)
         new_RevMod = Reverse(new_val)
