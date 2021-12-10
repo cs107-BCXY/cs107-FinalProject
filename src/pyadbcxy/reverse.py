@@ -22,6 +22,7 @@ class Reverse(object):
     >>> z.grad
     1
     """
+
     def __init__(self, val, grad=1):
         """Constructor for Reverse class
 
@@ -31,7 +32,7 @@ class Reverse(object):
         """
         self._val = val
         self._grad = grad
-        self.children = []
+        self._children = []
 
     def __repr__(self):
         return f"Reverse(val = {self.val})"
@@ -63,10 +64,10 @@ class Reverse(object):
         """
         if self._grad == None:
             grad = 0
-            for der, child in self.children:
+            for der, child in self._children:
                 grad += der * child.grad
             self._grad = grad
-        return self._grad # returns or updates gradient
+        return self._grad
 
     @val.setter
     def val(self, val):
@@ -105,7 +106,7 @@ class Reverse(object):
         self._grad = grad
 
     def __mul__(self, other):
-        """Overload of the '*' operator (Reverse * other). Calculates the value and derivative resulting
+        """Overload of the '*' operator (Reverse * other). Calculates the value and gradient resulting
         from the multiplication of two Reverse objects or a Reverse object and other object.
 
         Args:
@@ -120,7 +121,7 @@ class Reverse(object):
         >>> x2 = Reverse(4)
         >>> x3 = x1 * x2
         >>> print(x3)
-        "Reverse(val = 12, der = 7)"
+        Reverse(val = 12, grad = 7)
         >>> x4 = x1 * 3
         >>> print(x4)
         "Reverse(val = 9, der = 3)"
@@ -131,15 +132,15 @@ class Reverse(object):
         if isinstance(other, Reverse):
             val_mul = self.val * other.val
             new_RevMod = Reverse(val_mul)
-            self.children.append((other.val, new_RevMod))
+            self._children.append((other.val, new_RevMod))
             self.grad = None
-            other.children.append((self.val, new_RevMod))
+            other._children.append((self.val, new_RevMod))
             other.grad = None
             return new_RevMod
         elif isinstance(other, float) or isinstance(other, int):
             val_mul = self.val * other
             new_RevMod = Reverse(val_mul) # instantiate class
-            self.children.append((other, new_RevMod))
+            self._children.append((other, new_RevMod))
             self.grad = None
             return new_RevMod
         else:
@@ -172,15 +173,15 @@ class Reverse(object):
         if isinstance(other, Reverse):
             val_add = self.val + other.val
             new_RevMod = Reverse(val_add)
-            self.children.append((1, new_RevMod))
+            self._children.append((1, new_RevMod))
             self.grad = None
-            other.children.append((1, new_RevMod))
+            other._children.append((1, new_RevMod))
             other.grad = None
             return new_RevMod
         elif isinstance(other, float) or isinstance(other, int):
             val_add = self.val + other
             new_RevMod = Reverse(val_add)
-            self.children.append((1, new_RevMod))
+            self._children.append((1, new_RevMod))
             self.grad = None
             return new_RevMod
         else:
@@ -213,15 +214,15 @@ class Reverse(object):
         if isinstance(other, Reverse):
             val_sub = self.val - other.val
             new_RevMod = Reverse(val_sub)
-            self.children.append((1, new_RevMod))
+            self._children.append((1, new_RevMod))
             self.grad = None
-            other.children.append((-1, new_RevMod))
+            other._children.append((-1, new_RevMod))
             other.grad = None
             return new_RevMod
         elif isinstance(other, float) or isinstance(other, int):
             val_sub = self.val - other
             new_RevMod = Reverse(val_sub)
-            self.children.append((1, new_RevMod))
+            self._children.append((1, new_RevMod))
             self.grad = None
             return new_RevMod
         else:
@@ -257,9 +258,9 @@ class Reverse(object):
                 raise ZeroDivisionError("Cannot divide the variable with 0.")
             val_div = self.val / other.val
             new_RevMod = Reverse(val_div)
-            self.children.append(( 1 / other.val, new_RevMod))
+            self._children.append(( 1 / other.val, new_RevMod))
             self.grad = None
-            other.children.append(( - self.val / (other.val ** 2) , new_RevMod))  # need confirmation
+            other._children.append(( - self.val / (other.val ** 2) , new_RevMod))  # need confirmation
             other.grad = None
             return new_RevMod
         elif isinstance(other, float) or isinstance(other, int):
@@ -267,7 +268,7 @@ class Reverse(object):
                 raise ZeroDivisionError("Cannot divide the variable with 0.")
             val_div = self.val / other
             new_RevMod = Reverse(val_div)
-            self.children.append(( 1 / other, new_RevMod))
+            self._children.append(( 1 / other, new_RevMod))
             self.grad = None
             return new_RevMod
         else:
@@ -311,7 +312,7 @@ class Reverse(object):
         if isinstance(other, Reverse) or isinstance(other, int) or isinstance(other, float):
             new_val = other - self.val
             new_RevMod= Reverse(new_val)
-            self.children.append((1, new_RevMod))
+            self._children.append((1, new_RevMod))
             self.grad = None
             return new_RevMod
         else:
@@ -333,7 +334,7 @@ class Reverse(object):
                 raise ZeroDivisionError("Cannot divide the variable with 0.")
             new_val = other / self.val
             new_RevMod = Reverse(new_val)
-            self.children.append(( - other / self.val ** 2, new_RevMod))
+            self._children.append(( - other / self.val ** 2, new_RevMod))
             self.grad = None
             return new_RevMod
         else:
@@ -356,7 +357,7 @@ class Reverse(object):
         """
         new_val = np.cos(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((-np.sin(self.val), new_RevMod)) # -sinx
+        self._children.append((-np.sin(self.val), new_RevMod)) # -sinx
         self.grad = None
         return new_RevMod
 
@@ -377,7 +378,7 @@ class Reverse(object):
         """
         new_val = np.tan(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append(( 1/(np.cos(self.val) ** 2), new_RevMod)) # 1/ sec **2 x
+        self._children.append(( 1/(np.cos(self.val) ** 2), new_RevMod)) # 1/ sec **2 x
         self.grad = None
         return new_RevMod
 
@@ -398,7 +399,7 @@ class Reverse(object):
         """
         new_val = np.sin(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((np.cos(self.val), new_RevMod)) #cosx
+        self._children.append((np.cos(self.val), new_RevMod)) #cosx
         self.grad = None
         return new_RevMod
 
@@ -421,7 +422,7 @@ class Reverse(object):
         """
         new_val = np.cosh(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((np.sinh(self.val), new_RevMod))
+        self._children.append((np.sinh(self.val), new_RevMod))
         self.grad = None
         return new_RevMod
 
@@ -443,7 +444,7 @@ class Reverse(object):
         """
         new_val = np.tanh(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((1 / np.cosh(self.val) ** 2, new_RevMod))  
+        self._children.append((1 / np.cosh(self.val) ** 2, new_RevMod))  
         self.grad = None
         return new_RevMod
 
@@ -464,7 +465,7 @@ class Reverse(object):
         """
         new_val = np.sinh(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((np.cosh(self.val), new_RevMod))
+        self._children.append((np.cosh(self.val), new_RevMod))
         self.grad = None
         return new_RevMod
 
@@ -485,7 +486,7 @@ class Reverse(object):
         """
         new_val = np.arccos(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((-1 / np.sqrt( 1- self.val ** 2), new_RevMod ))
+        self._children.append((-1 / np.sqrt( 1- self.val ** 2), new_RevMod ))
         self.grad = None
         return new_RevMod
         
@@ -506,7 +507,7 @@ class Reverse(object):
         """
         new_val = np.arctan(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((1 / (1 + self.val ** 2), new_RevMod ))
+        self._children.append((1 / (1 + self.val ** 2), new_RevMod ))
         self.grad = None
         return new_RevMod
 
@@ -526,7 +527,7 @@ class Reverse(object):
         """
         new_val = np.arcsin(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((1 / np.sqrt(1 - self.val**2 ), new_RevMod ))
+        self._children.append((1 / np.sqrt(1 - self.val**2 ), new_RevMod ))
         self.grad = None
         return new_RevMod
 
@@ -549,7 +550,7 @@ class Reverse(object):
         """
         new_val = np.exp(self.val)
         new_RevMod = Reverse(new_val)
-        self.children.append((np.exp(self.val), new_RevMod))
+        self._children.append((np.exp(self.val), new_RevMod))
         self.grad = None
         return new_RevMod
 
@@ -576,7 +577,7 @@ class Reverse(object):
         else:
             new_val = np.log(self.val)/ np.log(base)
             new_RevMod = Reverse(new_val)
-            self.children.append((1 / (self.val * np.log(base)), new_RevMod))
+            self._children.append((1 / (self.val * np.log(base)), new_RevMod))
             self.grad = None
             return new_RevMod
  
@@ -601,15 +602,15 @@ class Reverse(object):
                 new_val = self.val ** other.val
                 # der_div = other.val * self.val**(other.val-1) * self.der + np.log(self.val) * self.val**other.val * other.der
                 new_RevMod = Reverse(new_val)
-                self.children.append((other.val * self.val ** (other.val -1 ), new_RevMod))
+                self._children.append((other.val * self.val ** (other.val -1 ), new_RevMod))
                 self.grad = None
-                other.children.append((np.log(self.val) * self.val ** other.val , new_RevMod))
+                other._children.append((np.log(self.val) * self.val ** other.val , new_RevMod))
                 other.grad = None
                 return new_RevMod
             elif isinstance(other, Reverse):
                 new_val = self.val ** other
                 new_RevMod = Reverse(new_val)
-                self.children.append((other*self.val**(other-1), new_RevMod))
+                self._children.append((other*self.val**(other-1), new_RevMod))
                 self.grad = None
                 return new_RevMod
             else:
@@ -638,7 +639,7 @@ class Reverse(object):
             if other > 0:
                 new_val = other ** self.val
                 new_RevMod = Reverse(new_val)
-                self.children.append((np.log(other) * (other ** self.val), new_RevMod))
+                self._children.append((np.log(other) * (other ** self.val), new_RevMod))
                 self.grad = None
                 return new_RevMod
             else:
@@ -688,6 +689,6 @@ if __name__ == '__main__':
     x = Reverse(2)
     y = Reverse(5)
     z = x.log(2)
-    print(z.val, y.children, x.grad, y.grad)
+    print(z.val, y._children, x.grad, y.grad)
 
 
