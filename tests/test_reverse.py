@@ -55,26 +55,21 @@ class TestReverseMode(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.x + []
 
-    # def test_sub(self):
-    #     """Testing when subtraction on Class RevMod objects"""
-    #     x = Reverse(3)
-    #     y = Reverse(5)
-    #     z = y - x
-    #     self.assertTrue(float(z.get_val()) == 2) and (float(z.gradient()) == 1.0)
+    def test_sub(self):
+        z = self.x - self.y
+        self.assertEqual(z.val, -1)
+        # self.assertEqual(z.grad, 0) # TODO: are we sure this is correct?
 
-    # def test_sub_value(self):
-    #     """Testing When addition on Class RevMod objects"""
-    #     x = Reverse(3, 1)
-    #     y = 5
-    #     summed = x - y
-    #     self.assertEqual(float(summed.get_val()), -2)
+        z = self.x - 5
+        self.assertEqual(z.val, -2)
+        self.assertEqual(z.grad, 1)
 
-    # def test_sub_errorcatching(self):
-    #     """Testing When addition on Class RevMod objects"""
-    #     x = Reverse(3, 1)
-    #     y = []
-    #     with self.assertRaises(AttributeError):
-    #         z = x - y
+        z = self.y - 2.0
+        self.assertEqual(z.val, 2.0)
+        self.assertEqual(z.grad, 1)
+
+        with self.assertRaises(TypeError):
+            self.x - []
 
     # def test_div(self):
     #     """ Testing when division is on Revmod"""
