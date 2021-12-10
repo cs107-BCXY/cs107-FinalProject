@@ -129,16 +129,16 @@ class TestReverseMode(unittest.TestCase):
         v = Reverse(math.pi)
         z = v.cos()
         self.assertEqual(z.val, math.cos(v.val))
-        # self.assertAlmostEqual(z.grad, 0, places=15)
+        # self.assertEqual(z.grad, -math.sin(v.val))
 
-    # def test_tan(self):
-    #     """
-    #     Test the tan function.
-    #     """
-    #     v = Reverse(0.9, 0.5)
-    #     result = v.tan()
-    #     self.assertEqual(result.val, math.tan(v.val))
-    #     self.assertAlmostEqual(result.grad, 1.2939993666298242, places=6)
+    def test_tan(self):
+        """
+        Test the tan function.
+        """
+        v = Reverse(math.pi/4)
+        z = v.tan()
+        self.assertEqual(z.val, math.tan(v.val))
+        # self.assertEqual(z.grad, 1/math.cos(v.val)**2)
 
     # def test_sin(self):
     #     """
