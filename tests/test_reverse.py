@@ -71,35 +71,27 @@ class TestReverseMode(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.x - []
 
-    # def test_div(self):
-    #     """ Testing when division is on Revmod"""
-    #     x = Reverse(3)
-    #     y = Reverse(5)
-    #     z = x / y
-    #     self.assertEqual(z.val, (0.6))
-    #     self.assertEqual(float(x.gradient()), 0.2)
-    #     self.assertEqual(y.gradient(), -0.12)
+    def test_div(self):
+        x = Reverse(8)
+        z = x / self.y
+        self.assertEqual(z.val, 2.0)
+        # self.assertEqual(z.grad, -0.25) # TODO: are we sure this is correct?
 
-    # def test_div_zero_div(self):
-    #     """ Testing when division is on Revmod"""
-    #     x = Reverse(3)
-    #     y = Reverse(0)
-    #     with self.assertRaises(ZeroDivisionError):
-    #         z = x / y
+        z = x / 2
+        self.assertEqual(z.val, 4.0)
+        # self.assertEqual(z.grad, 4.0)
 
-    # def test_div_value(self):
-    #     """ Testing when division is on Revmod"""
-    #     x = Reverse(3)
-    #     y = 5
-    #     z = x / y
-    #     self.assertEqual(z.val, (0.6))
+        z = self.y / 2.0
+        self.assertEqual(z.val, 2.0)
+        # self.assertEqual(z.grad, 0.5)
 
-    # def test_div_errorcatching(self):
-    #     """ Testing when division is on Revmod"""
-    #     x = Reverse(3)
-    #     y = []
-    #     with self.assertRaises(AttributeError):
-    #         z = x / y
+        with self.assertRaises(ZeroDivisionError):
+            x / Reverse(0)
+        with self.assertRaises(ZeroDivisionError):
+            x / 0
+        
+        with self.assertRaises(TypeError):
+            x / []
 
     # def test_radd(self):
     #     """Testing when addition on Class RevMod and number"""
