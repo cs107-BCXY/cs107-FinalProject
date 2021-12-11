@@ -33,7 +33,7 @@ class Reverse:
         self.children = []
 
     def __repr__(self):
-        return (f'RevMod({self.val})')
+        return (f'RevMod({self.val}, {self.grad})')
 
     def __str__(self):
         return (f'RevMod({self.val}), Its Gradient: {self.grad}')
