@@ -85,13 +85,13 @@ class TestForward(unittest.TestCase):
         """Test forward mode on a simple scalar function with a two variable inputs."""
         self.fmode2.calculate()
         self.assertEqual(self.fmode2.value, 7.0)
-        self.assertEqual(self.fmode2.derivative, 6.0)
+        self.assertEqual(self.fmode2.derivative, [1, 5.0])
 
         f = lambda x, y: x*y
         fmode = Forward(f, (self.x, self.y))
         fmode.calculate()
         self.assertEqual(fmode.value, 12.0)
-        self.assertEqual(fmode.derivative, 19.0)
+        self.assertEqual(fmode.derivative, [4.0, 15.0])
 
     # TODO: add tests for more complicated functions of two variables
     # not necessary for Milestone 2, as instructions state "for this

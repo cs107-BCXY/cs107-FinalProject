@@ -128,6 +128,32 @@ class Forward(object):
         Returns:
             float or int: derivative of the function evaluated at the Variable
         """
-        if not self._res:
-            raise AttributeError("value and derivative have not been calculated yet, call 'calculate' method")
-        return self._res.der
+        if isinstance(self.vars, list) or isinstance(self.vars, tuple):
+            if not self._res:
+                raise AttributeError("value and derivative have not been calculated yet, call 'calculate' method")
+            var_count = len(self.vars)
+            der_vector = []
+            for i in range(var_count):
+                input_arr = []
+                for j in range(var_count):
+                    if j != i:
+                        input_arr.append(self.vars[j].val)
+                    else:
+                        input_arr.append(self.vars[j])
+                result = self._func(*input_arr)
+                der_vector.append(result.der)
+            if len(der_vector) == 1:
+                return der_vector[0]
+            else:
+                return der_vector
+        else:
+            if not self._res:
+                raise AttributeError("value and derivative have not been calculated yet, call 'calculate' method")
+            else:
+                return self._res.der
+
+
+
+
+
+
