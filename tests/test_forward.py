@@ -11,6 +11,7 @@ class TestForward(unittest.TestCase):
         """Prepare the test fixture. Executed before each test method."""
         self.x = Variable(3)
         self.y = Variable(4., 5.)
+        self.z = Variable(1, 2)
         self.simple_single_var = lambda x: x**2
         self.simple_two_vars = lambda x, y: x + y
         self.fmode1 = Forward(self.simple_single_var, self.x)
@@ -92,6 +93,13 @@ class TestForward(unittest.TestCase):
         fmode.calculate()
         self.assertEqual(fmode.value, 12.0)
         self.assertEqual(fmode.derivative, [4.0, 15.0])
+
+    def test_three_variables(self):
+        f = lambda x, y, z: cos(x)*y-sin(z)
+        fmode = Forward(f, (self.x, self.y, self.z))
+        fmode.calculate()
+        self.assertAlmostEqual(fmode.value, -4.801440971209678, 7)
+        self.assertEqual(fmode.derivative, [-0.5644800322394689, -4.949962483002227, -1.0806046117362795])
 
     # TODO: add tests for more complicated functions of two variables
     # not necessary for Milestone 2, as instructions state "for this
