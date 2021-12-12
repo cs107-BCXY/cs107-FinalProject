@@ -64,7 +64,7 @@ fmode.derivative      # gives the derivative of f at x
 ### Directory Structure 
 Our directory structure will be the following.
 <div class="highlight"><pre><span></span><code>cs107-FinalProject/
-└── .github
+├── .github
 │   └── workflows
 │       └── workflow.yml
 ├── docs
