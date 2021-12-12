@@ -102,17 +102,9 @@ Our main source code are placed in the directory [`src`](/src) and our tests are
 - `variables.py` - this module handles our implementation of real variables within automatic differentiation.  
 
 ### Installation Instructions
-The package will be released on [`PyPI`](https://pypi.org/) and can be easily installed using the command
+The package is now released on [`PyPI`](https://pypi.org/) and can be easily installed using the command
 ```
 pip install pyadbcxy
-```
-For now the package isn't on [`PyPI`](https://pypi.org/) yet, so one can download the repository with the command
-```
-git clone https://github.com/cs107-BCXY/cs107-FinalProject.git
-```
-and install the dependencies via
-```
-pip install -r requirements.txt
 ```
 
 ## Implementation Details
