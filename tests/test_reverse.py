@@ -10,9 +10,9 @@ class TestReverseMode(unittest.TestCase):
         self.y = Reverse(4)
 
     def test_repr_str(self):
-        self.assertEqual(repr(self.x), "Reverse(val = 3)")
+        self.assertEqual(repr(self.x), "Reverse(val = 3, grad = 1)")
         self.assertEqual(str(self.x), "Reverse(val = 3, grad = 1)")
-        self.assertEqual(repr(self.y), "Reverse(val = 4)")
+        self.assertEqual(repr(self.y), "Reverse(val = 4, grad = 1)")
         self.assertEqual(str(self.y), "Reverse(val = 4, grad = 1)")
 
     def test_getters(self):
@@ -30,11 +30,13 @@ class TestReverseMode(unittest.TestCase):
     def test_mul(self):
         z = self.x * self.y
         self.assertEqual(z.val, 12)
-        self.assertEqual(z.grad, 7) # TODO: are we sure this is correct?
+        self.assertEqual(self.x.grad, 4)
+        self.assertEqual(self.y.grad, 3) # TODO: are we sure this is correct?
 
-        z = self.x * 5
+        x = Reverse(3)
+        z = x * 5
         self.assertEqual(z.val, 15)
-        self.assertEqual(z.grad, 5)
+        self.assertEqual(x.grad, 5)
 
         with self.assertRaises(TypeError):
             self.x * []
@@ -42,8 +44,9 @@ class TestReverseMode(unittest.TestCase):
     def test_add(self):
         z = self.x + self.y
         self.assertEqual(z.val, 7)
-        self.assertEqual(z.grad, 2) # TODO: are we sure this is correct?
-        
+        self.assertEqual(self.x.grad, 1) # TODO: are we sure this is correct?
+        self.assertEqual(self.y.grad, 1)
+
         z = self.x + 5
         self.assertEqual(z.val, 8)
         self.assertEqual(z.grad, 1)
@@ -58,7 +61,8 @@ class TestReverseMode(unittest.TestCase):
     def test_sub(self):
         z = self.x - self.y
         self.assertEqual(z.val, -1)
-        self.assertEqual(z.grad, 0) # TODO: are we sure this is correct?
+        self.assertEqual(self.x.grad, 1)
+        self.assertEqual(self.y.grad, -1) # TODO: are we sure this is correct?
 
         z = self.x - 5
         self.assertEqual(z.val, -2)
@@ -75,15 +79,17 @@ class TestReverseMode(unittest.TestCase):
         x = Reverse(8)
         z = x / self.y
         self.assertEqual(z.val, 2.0)
-        self.assertEqual(z.grad, -0.25) # TODO: are we sure this is correct?
+        self.assertEqual(x.grad, 0.25) # TODO: are we sure this is correct?
 
+        x = Reverse(8)
         z = x / 2
         self.assertEqual(z.val, 4.0)
-        self.assertEqual(z.grad, 4.0)
+        self.assertEqual(x.grad, 0.5)
 
-        z = self.y / 2.0
+        y = Reverse(4)
+        z = y / 2.0
         self.assertEqual(z.val, 2.0)
-        self.assertEqual(z.grad, 0.5)
+        self.assertEqual(y.grad, 0.5)
 
         with self.assertRaises(ZeroDivisionError):
             x / Reverse(0)
@@ -176,16 +182,75 @@ class TestReverseMode(unittest.TestCase):
         self.assertEqual(z.val, math.sinh(x.val))
         self.assertEqual(x.grad, math.cosh(x.val))
 
-    # TODO: test arccos
-    # TODO: test arctan
-    # TODO: test arcsin
-    # TODO: test exp
-    # TODO: test log
-    # TODO: test __pow__
-    # TODO: test __rpow__
+    def test_arccos(self):
+        """
+        Test the arccos
+        """
+        x = Reverse(0.5)
+        z = x.arccos()
+        self.assertEqual(z.val, math.acos(x.val))
+        self.assertAlmostEqual(x.grad, (-1 / math.sqrt( 1 - x.val ** 2)))
+
+    def test_arctan(self):
+        """
+        Test the arctan
+        """
+        x = Reverse(0.5)
+        z = x.arctan()
+        self.assertEqual(z.val, math.atan(x.val))
+        self.assertAlmostEqual(x.grad, (1 / (1 + x.val ** 2)))        
+
+    def test_arcsin(self):
+        """
+        Test the arcsin
+        """
+        x = Reverse(0.5)
+        z = x.arcsin()
+        self.assertEqual(z.val, math.asin(x.val))
+        self.assertAlmostEqual(x.grad, (1 / math.sqrt(1 - x.val ** 2 )))
+
+    def test_exp(self):
+        """
+        Test the exponential
+        """
+        x = Reverse(3)
+        z = x.exp()
+        self.assertEqual(z.val, math.exp(x.val))
+        self.assertAlmostEqual(x.grad, math.exp(x.val))
+
+    def test_log(self):
+        """
+        Test the logarithm
+        """
+        x = Reverse(3)
+        z = x.log()
+        self.assertEqual(z.val, math.log(x.val))
+        self.assertAlmostEqual(x.grad, (1 / (x.val * math.log(math.e))))
+
+    def test_pow(self):
+        """
+        Test power, revpower
+        """
+        x = Reverse(3)
+        y = Reverse(4)
+        z = x ** 3
+        self.assertEqual(z.val, 27)
+        self.assertEqual(x.grad, 27)
+
+        x = Reverse(3)
+        y = Reverse(4)
+        z = x ** y
+        self.assertEqual(z.val, 81)
+        self.assertEqual(x.grad, 108)
+
+        x = Reverse(3)
+        y = Reverse(4)
+        z = 3 ** y
+        self.assertEqual(z.val, 81)
+        self.assertEqual(y.grad, math.log(3) * (3 ** 4))
+
     # TODO: test __eq__
     # TODO: test __ne__
-
 
 if __name__ == "__main__":
     unittest.main()
