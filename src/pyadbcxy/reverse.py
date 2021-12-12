@@ -31,10 +31,10 @@ class Reverse:
 
     ## Adding a repr rev class
     def __repr__(self):
-        return (f'RevMod({self.val})')
+        return (f'Reverse({self.val})')
 
     def __str__(self):
-        return (f'RevMod({self.val}), Its Gradient: {self.grad}')
+        return (f'Reverse({self.val}), its Gradient: {self.grad}')
 
 
     ## will just return the value

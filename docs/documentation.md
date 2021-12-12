@@ -68,22 +68,29 @@ Our directory structure will be the following.
 │   └── workflows
 │       └── workflow.yml
 ├── docs
-│   └── milestone1.md
-│   └── documentation.md
+│   ├── documentation.md
+│   ├── milestone1.md
+│   └── milestone2.md
 ├── src
-│   └── __init__.py
-│   └── elementary_functions.py
-│   └── forward.py
-│   └── variable.py
+│   └── pyadbcxy
+│       ├── __init__.py
+│       ├── elementary_functions.py
+│       ├── forward.py
+│       ├── reverse.py
+│       └── variable.py
 ├── tests
-│   └── __init__.py
-│   └── test_elementary_functions.py 
-│   └── test_forward.py
+│   ├── __init__.py
+│   ├── run_tests.sh
+│   ├── test_elementary_functions.py
+│   ├── test_forward.py
+│   ├── test_reverse.py
 │   └── test_variable.py
 ├── .gitignore
 ├── LICENSE
 ├── README.md
-└── requirements.txt
+├── pyproject.toml
+├── requirements.txt
+└── setup.cfg
 </code></pre></div>
 
 Our main source code are placed in the directory [`src`](/src) and our tests are put in the directory [`tests`](/tests). Our package documentation will located in the [`docs`](/docs) directory. Top-level package information and documents (e.g. our licensing) will be in the root directory.
@@ -91,20 +98,13 @@ Our main source code are placed in the directory [`src`](/src) and our tests are
 ### Modules
 - `elementary_functions.py` - this module contains our definitions of all elementary functions. 
 - `forward.py` - this module facilitates the forward mode of automatic differentiation. 
+- `reverse.py` - extension of the project, the reverse mode.
 - `variables.py` - this module handles our implementation of real variables within automatic differentiation.  
 
 ### Installation Instructions
-The package will be released on [`PyPI`](https://pypi.org/) and can be easily installed using the command
+The package is now released on [`PyPI`](https://pypi.org/) and can be easily installed using the command
 ```
-pip install cs107-BCXY
-```
-For now the package isn't on [`PyPI`](https://pypi.org/) yet, so one can download the repository with the command
-```
-git clone https://github.com/cs107-BCXY/cs107-FinalProject.git
-```
-and install the dependencies via
-```
-pip install -r requirements.txt
+pip install pyadbcxy
 ```
 
 ## Implementation Details
@@ -127,19 +127,27 @@ Aside from its getter and setter methods, the ``Forward`` class has only one oth
 
 ### External Dependencies
 
-At this point in development, there are no external dependencies to our package. We are relying heavily on the built-in [`math`](https://docs.python.org/3/library/math.html) library.
+Our package lists `numpy` as our only external dependency.
 
 ### Elementary Functions
 
 All of our elementary functions that are not dunder methods are contained within our [`elementary_functions`](/src/elementary_functions.py) module. Each defined function can take a Variable, floating point number, or integer as an input. If the input is a Variable, a new Variable object will be returned with the updated value and derivative.
 
+## Extension - `Reverse Mode` 
+
+Finally, we have created the extension feature to handle automatic differentiation using reverse mode. The reverse mode module works by instantiating a `Reverse` object for each variable with some assigned value. It is capable of supporting reverse mode autodifferentiation for all basic arithmetic operations, trigonometric-- including hyperbolic and inverse trig functions, exponential, and comparison methods `__ne__` and `__eq__`, and logarithmic operations. As needed, the reverse mode feature appends the values of adjoints and child within each relative variable for computing the derivative. Additionally, the derivatives are saved in original variables by calling the `grad` decorator. 
+
+## Broader Impact and Inclusivity Statement
+
+We strove to create a convenient way to automatically differentiate smoothly and accurately. The automatic differentiation package is able to efficiently compute the derivatives of functions of any numerical inputs granted they are mathematically valid in the constraints of functions, including integers, floats, single and multiple variables. Traditionally in finite differentiation, users need to select an epsilon value for the algorithm that calculates the difference of slope. The choice of epsilon will impact the accuracy of the derivative especially since computationally the rounding error may be a specific problem. Our package eliminates this process for users by adopting autodifferentation method.
+
+While automatic differentiation is proven to be powerful in calculating accurate derivatives, such function does not prevail in common machine learning packages. In neural networks and regression based models, gradient descent is widely used to find the optimal parameters. Automatic differentiation assists this process so that any differentiation, even when the algebraic form is hard to compute, can be done easily. This broadens the range of models one can choose from without concerning the complexity of their derivatives. If used responsibly, the benefit of a wider range of models and increasing accuracy can be broadcast to many fields including public health and medicine, where models are rather complicated.
+
+We strongly believe in the importance of inclusivity of our package. We worked to ensure that our package is accessible to all and is licensed as such. We ensured proper documentation and simple and straightforward usage instruction that is easy to follow. The creation of this package was conducted through teamwork where every member was respected and represented, and contributed to the outcome. The coding process was discussed among members of the team as well as researched online through open source.
+
+Our purpose in this development was to at once enrichment or own understanding of the mathematical and programming grounds of a commonly used and powerful tool as well as provide a basis for others to refer to and build upon. We discourage any illegal and unethical use of our package in projects that harm a particular group based on attributes including (but not limited to) age, culture, ethnicity, gender identity or expression, national origin, physical or mental difference, politics, race, religion, sex, sexual orientation, socio-economic status, and subculture.
+
+
 ## Future Features
 
-At this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to.  
-
-As [External Dependencies](#external-dependencies) states, we are currently not relying on any external libraries and instead are using the built-in [`math`](https://docs.python.org/3/library/math.html) library. In order to extend our package to handle multi-function and multi-variable inputs, we recognize that we will need to replace this with [`NumPy`](https://numpy.org/doc/stable/index.html).  
-
-Finally, we plan on adding another module to handle automatic differentiation using reverse mode. The reverse mode module will work by instantiating a `RevMod` object with some value. It will eventually be able to support running the reverse mode autodifferentiation for all arithmetic operations, trigonometric functions, exponential, and comparison methods, for which we will look into all `__ne__`, `__eq__`, `__lt__` etc.. as was suggested for the forward mode in the final deliverables. We may be also considering briefly reorganizing our test and src directories to separate the forward and reverse mode subsections
-
-
-
+One area of development is the higher order derivatives in which we can compute the Hessian matrix, or an arbitrary order of derivatives. Additionally, batch differentiation may be a further area of implementation so that instead of differentiating hte function at one set of variable values [x,y...] at a time, we can provide the option to differentiate a matrix of values where each row is one set of variable values. At this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to. Additionally, as a further case of reverse mode, back propagation may be a consideration while leveraging and/or adjusting our current design for its application.
