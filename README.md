@@ -68,3 +68,13 @@ Finally, if you'd like to see the code coverage report, you can do so with the [
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) for more details.
+
+## Broader Impact and Inclusivity Statement
+
+We strove to create a convenient way to automatically differentiate smoothly and accurately. The automatic differentiation package is able to efficiently compute the derivatives of functions of any numerical inputs granted they are mathematically valid in the constraints of functions, including integers, floats, single and multiple variables. Traditionally in finite differentiation, users need to select an epsilon value for the algorithm that calculates the difference of slope. The choice of epsilon will impact the accuracy of the derivative especially since computationally the rounding error may be a specific problem. Our package eliminates this process for users by adopting autodifferentation method.
+
+While automatic differentiation is proven to be powerful in calculating accurate derivatives, such function does not prevail in common machine learning packages. In neural networks and regression based models, gradient descent is widely used to find the optimal parameters. Automatic differentiation assists this process so that any differentiation, even when the algebraic form is hard to compute, can be done easily. This broadens the range of models one can choose from without concerning the complexity of their derivatives. If used responsibly, the benefit of a wider range of models and increasing accuracy can be broadcast to many fields including public health and medicine, where models are rather complicated.
+
+We strongly believe in the importance of inclusivity of our package. We worked to ensure that our package is accessible to all and is licensed as such. We ensured proper documentation and simple and straightforward usage instruction that is easy to follow. The creation of this package was conducted through teamwork where every member was respected and represented, and contributed to the outcome. The coding process was discussed among members of the team as well as researched online through open source.
+
+Our purpose in this development was to at once enrichment or own understanding of the mathematical and programming grounds of a commonly used and powerful tool as well as provide a basis for others to refer to and build upon. We discourage any illegal and unethical use of our package in projects that harm a particular group based on attributes including (but not limited to) age, culture, ethnicity, gender identity or expression, national origin, physical or mental difference, politics, race, religion, sex, sexual orientation, socio-economic status, and subculture.
