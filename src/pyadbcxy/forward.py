@@ -131,7 +131,7 @@ class Forward(object):
         """
         if not self._res:
             raise AttributeError("value and derivative have not been calculated yet, call 'calculate' method")
-        if non_differential == True:
+        if non_differential:
             return self._res.der
         if isinstance(self.vars, list) or isinstance(self.vars, tuple):
             var_count = len(self.vars)
@@ -154,9 +154,3 @@ class Forward(object):
                 return der_vector
         else:
             return self._res.der
-
-
-
-
-
-
