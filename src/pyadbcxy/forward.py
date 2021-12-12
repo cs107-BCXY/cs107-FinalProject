@@ -104,6 +104,7 @@ class Forward(object):
         """Evaluate the given function with the Variables"""
         self._res = self._func(*self._vars) # will be a Variable object
 
+
     @property
     def value(self):
         """Get the value of the function evaluated at the Variables.
@@ -119,7 +120,7 @@ class Forward(object):
         return self._res.val
 
     @property
-    def derivative(self):
+    def derivative(self, non_differential=False):
         """Get the derivative of the function evaluated at the Variables.
 
         Raises:
@@ -130,4 +131,26 @@ class Forward(object):
         """
         if not self._res:
             raise AttributeError("value and derivative have not been calculated yet, call 'calculate' method")
-        return self._res.der
+        if non_differential:
+            return self._res.der
+        if isinstance(self.vars, list) or isinstance(self.vars, tuple):
+            var_count = len(self.vars)
+            der_vector = []
+
+            # goes into a loop where only the ith partial derivatives is treated as a variable
+            # all other variables are treated as only numerical values
+            for i in range(var_count):
+                input_arr = []
+                for j in range(var_count):
+                    if j != i:
+                        input_arr.append(self.vars[j].val)
+                    else:
+                        input_arr.append(self.vars[j])
+                result = self._func(*input_arr)
+                der_vector.append(result.der)
+            if len(der_vector) == 1:
+                return der_vector[0]
+            else:
+                return der_vector
+        else:
+            return self._res.der
