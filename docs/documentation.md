@@ -162,9 +162,10 @@ Instead of differentiating the function at one set of variable values [x, y, ...
 
 3. **Differentiating functions without instantiating them into numerical values (inspired by sympy)**:
 Refer to the below for a sympy example in which $xsin(x^2)+1$ is taken for the first order derivative to get $2x^2cos(x^2)+sin(x^2)$ without evaluating the function derivative on a specific value. However, this is done with only text expression and it would be of great use if we could ouput the first derivative in lambda function format.
- ![""](./sympy.png "Sympy example of taking derivatives").
+ ![""](./sympy.png "Sympy example of taking derivatives")
 
 4. **Backpropagation**:
 Last functionality is the classif backpropagation. Artificial neural networks' each iteration is computed with two passes. Forward pass: in which data is fed in the forward direction through the network and loss function is calculated from the output values. Reverse pass: goes through each layer in reverse to measure the error contribution from each connection, and finally tweaks the connection weights to reduce the function loss.
-Therefore, we also look forward to use our currently implemented forward and reverse mode to implement the backpropagation process
+Therefore, we also look forward to use our currently implemented forward and reverse mode to implement the backpropagation process.
+ ![""](./nn.png "nn picture")
 
