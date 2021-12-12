@@ -64,26 +64,33 @@ fmode.derivative      # gives the derivative of f at x
 ### Directory Structure 
 Our directory structure will be the following.
 <div class="highlight"><pre><span></span><code>cs107-FinalProject/
-├── .github
-│   └── workflows
-│       └── workflow.yml
-├── docs
-│   └── milestone1.md
-│   └── documentation.md
-├── src
-│   └── __init__.py
-│   └── elementary_functions.py
-│   └── forward.py
-│   └── variable.py
-├── tests
-│   └── __init__.py
-│   └── test_elementary_functions.py 
-│   └── test_forward.py
-│   └── test_variable.py
-├── .gitignore
+.
 ├── LICENSE
 ├── README.md
-└── requirements.txt
+├── demo.py
+├── docs
+│   ├── documentation.md
+│   ├── milestone1.md
+│   └── milestone2.md
+├── pyproject.toml
+├── requirements.txt
+├── setup.cfg
+├── src
+│   ├── __pycache__
+│   └── pyadbcxy
+│       ├── __init__.py
+│       ├── __pycache__
+│       ├── elementary_functions.py
+│       ├── forward.py
+│       ├── reverse.py
+│       └── variable.py
+└── tests
+    ├── __init__.py
+    ├── run_tests.sh
+    ├── test_elementary_functions.py
+    ├── test_forward.py
+    ├── test_reverse.py
+    └── test_variable.py
 </code></pre></div>
 
 Our main source code are placed in the directory [`src`](/src) and our tests are put in the directory [`tests`](/tests). Our package documentation will located in the [`docs`](/docs) directory. Top-level package information and documents (e.g. our licensing) will be in the root directory.
@@ -135,14 +142,12 @@ All of our elementary functions that are not dunder methods are contained within
 
 ## Extension - `Reverse Mode` 
 
-Finally, we have created the extension feature to handle automatic differentiation using reverse mode. The reverse mode module works by instantiating a `Reverse` object for each variable with some assigned value. It is capable of supporting reverse mode autodifferentiation for all basic arithmetic operations, trigonometric-- including hyperbolic and inverse trig functions, exponential, and comparison methods `__ne__` and `__eq__`, and logarithmic operations. As needed, the reverse mode feature appends the values of adjoints and child within each relative variable for computing the derivative. 
+Finally, we have created the extension feature to handle automatic differentiation using reverse mode. The reverse mode module works by instantiating a `Reverse` object for each variable with some assigned value. It is capable of supporting reverse mode autodifferentiation for all basic arithmetic operations, trigonometric-- including hyperbolic and inverse trig functions, exponential, and comparison methods `__ne__` and `__eq__`, and logarithmic operations. As needed, the reverse mode feature appends the values of adjoints and child within each relative variable for computing the derivative. Additionally, the derivatives are saved in original variables by calling the `grad` decorator. 
 
 
 ## Future Features
 
-At this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to.  
-
-As [External Dependencies](#external-dependencies) states, we are currently not relying on any external libraries and instead are using the built-in [`math`](https://docs.python.org/3/library/math.html) library. In order to extend our package to handle multi-function and multi-variable inputs, we recognize that we will need to replace this with [`NumPy`](https://numpy.org/doc/stable/index.html).  
+One area of development is the higher order derivatives in which we can compute the Hessian matrix, or an arbitrary order of derivatives. Additionally, batch differentiation may be a further area of implementation so that instead of differentiating hte function at one set of variable values [x,y...] at a time, we can provide the option to differentiate a matrix of values where each row is one set of variable values. At this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to. Additionally, as a further case of reverse mode, back propagation may be a consideration while leveraging and/or adjusting our current design for its application.
 
 
 
