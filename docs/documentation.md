@@ -64,33 +64,33 @@ fmode.derivative      # gives the derivative of f at x
 ### Directory Structure 
 Our directory structure will be the following.
 <div class="highlight"><pre><span></span><code>cs107-FinalProject/
-.
-├── LICENSE
-├── README.md
-├── demo.py
+└── .github
+│   └── workflows
+│       └── workflow.yml
 ├── docs
 │   ├── documentation.md
 │   ├── milestone1.md
 │   └── milestone2.md
-├── pyproject.toml
-├── requirements.txt
-├── setup.cfg
 ├── src
-│   ├── __pycache__
 │   └── pyadbcxy
 │       ├── __init__.py
-│       ├── __pycache__
 │       ├── elementary_functions.py
 │       ├── forward.py
 │       ├── reverse.py
 │       └── variable.py
-└── tests
-    ├── __init__.py
-    ├── run_tests.sh
-    ├── test_elementary_functions.py
-    ├── test_forward.py
-    ├── test_reverse.py
-    └── test_variable.py
+├── tests
+│   ├── __init__.py
+│   ├── run_tests.sh
+│   ├── test_elementary_functions.py
+│   ├── test_forward.py
+│   ├── test_reverse.py
+│   └── test_variable.py
+├── .gitignore
+├── LICENSE
+├── README.md
+├── pyproject.toml
+├── requirements.txt
+└── setup.cfg
 </code></pre></div>
 
 Our main source code are placed in the directory [`src`](/src) and our tests are put in the directory [`tests`](/tests). Our package documentation will located in the [`docs`](/docs) directory. Top-level package information and documents (e.g. our licensing) will be in the root directory.
@@ -98,12 +98,13 @@ Our main source code are placed in the directory [`src`](/src) and our tests are
 ### Modules
 - `elementary_functions.py` - this module contains our definitions of all elementary functions. 
 - `forward.py` - this module facilitates the forward mode of automatic differentiation. 
+- `reverse.py` - extension of the project, the reverse mode.
 - `variables.py` - this module handles our implementation of real variables within automatic differentiation.  
 
 ### Installation Instructions
 The package will be released on [`PyPI`](https://pypi.org/) and can be easily installed using the command
 ```
-pip install cs107-BCXY
+pip install pyadbcxy
 ```
 For now the package isn't on [`PyPI`](https://pypi.org/) yet, so one can download the repository with the command
 ```
@@ -158,7 +159,3 @@ Our purpose in this development was to at once enrichment or own understanding o
 ## Future Features
 
 One area of development is the higher order derivatives in which we can compute the Hessian matrix, or an arbitrary order of derivatives. Additionally, batch differentiation may be a further area of implementation so that instead of differentiating hte function at one set of variable values [x,y...] at a time, we can provide the option to differentiate a matrix of values where each row is one set of variable values. At this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to. Additionally, as a further case of reverse mode, back propagation may be a consideration while leveraging and/or adjusting our current design for its application.
-
-
-
-
