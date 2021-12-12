@@ -8,7 +8,7 @@ import numpy as np
 __all__ = ["Reverse"]
 
 
-class Reverse(object):
+class Reverse:
     """
     Reverse is the class for implementing the reverse mode auto differentiation including 
     instantiating the class, storing children, evaluating gradient and all required basic
