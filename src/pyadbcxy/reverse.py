@@ -624,6 +624,7 @@ class Reverse(object):
         """
         if self.val > 0:
             if isinstance(other, int) or isinstance(other, float):
+                other = Reverse(other)
                 new_val = self.val ** other.val
                 # der_div = other.val * self.val**(other.val-1) * self.der + np.log(self.val) * self.val**other.val * other.der
                 new_RevMod = Reverse(new_val)
@@ -633,9 +634,9 @@ class Reverse(object):
                 other.grad = None
                 return new_RevMod
             elif isinstance(other, Reverse):
-                new_val = self.val ** other
+                new_val = self.val ** other.val
                 new_RevMod = Reverse(new_val)
-                self._children.append((other*self.val**(other-1), new_RevMod))
+                self._children.append((other.val * self.val**(other.val -1), new_RevMod))
                 self.grad = None
                 return new_RevMod
             else:
@@ -660,9 +661,10 @@ class Reverse(object):
         """
         if isinstance(other, int) or isinstance(other, float):
             if other > 0:
-                new_val = other ** self.val
+                other = Reverse(other)
+                new_val = other.val ** self.val
                 new_RevMod = Reverse(new_val)
-                self._children.append((np.log(other) * (other ** self.val), new_RevMod))
+                self._children.append((np.log(other.val) * (other.val ** self.val), new_RevMod))
                 self.grad = None
                 return new_RevMod
             else:
