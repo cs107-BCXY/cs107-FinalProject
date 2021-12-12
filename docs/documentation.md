@@ -39,24 +39,21 @@ Eventually the package will be uploaded via PyPi for download. It is ready to be
 ### Demo
 
 ```python
-from src.variable import Variable
-from src.elementary_functions import *
-from src.forward import Forward
+import pyadbcxy as ad
 
-x = Variable(3)       # instantiate Variable object
-x.val                 # gives the value of x
-x.der                 # gives the derivative of x
+x = ad.Variable(3)        # instantiate Variable object
+x.val                     # gives the value of x
+x.der                     # gives the derivative of x
 
-z = x ** 2            # create new Variable object equal to x^2
-z.val                 # gives value of z
-z.der                 # gives the derivative of x
+z = x ** 2                # create new Variable object equal to x^2
+z.val                     # gives value of z
+z.der                     # gives the derivative of x
 
-f = lambda x: sin(x)  # define a function
-fmode = Forward(f, x) # instantiate Forward object with f and x
-fmode.calculate()     # evaluate f at x
-fmode.value           # gives the value of f at x 
-fmode.derivative      # gives the derivative of f at x
-
+f = lambda x: ad.sin(x)   # define a function
+fmode = ad.Forward(f, x)  # instantiate Forward object with f and x
+fmode.calculate()         # evaluate f at x
+fmode.value               # gives the value of f at x 
+fmode.derivative          # gives the derivative of f at x
 ```
 
 ## Software Organization 
