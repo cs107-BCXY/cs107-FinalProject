@@ -135,11 +135,27 @@ All of our elementary functions that are not dunder methods are contained within
 
 ## Future Features
 
-At this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to.  
+As AD becomes the go to method for calculating gradients, we propose the following future work to make our package more versatile.
+
+In terms of architecture, at this point, we are not tracking the computational graph of the automatic differentiation process. That is, we are need keeping a log of the sub-values and sub-derivatives for every sub-function within the function of interest. Instead, the variable's value and derivative are merely updated, as explained in [Data Structures](#data-structures). This is a potential area of future development, and either the standard Python list or dictionary could be used for this. Instead of simply updating the variable's value and derivative, a running record could be appended/added to.  
+
+In terms of specific functionalities, there are four additional functionalities that we are looking to add:
+
+1. **Higher order derivatives**:
+Within this functionality, we compute the hessian matrix, or an arbitrary order of derivatives. For example, the second order derivative of $f(x,y,z)$ would be a 3*3 matrix. However, the arithmetic rules quickly grow complicated: complexity is quadratic in the highest derivative degree. Instead, truncated Taylor polynomial algebra can be used. The resulting arithmetic, defined on generalized dual numbers, allows efficient computation using functions as if they were a data type. Once the Taylor polynomial of a function is known, the derivatives are easily extracted.
+
+2. **Batch differentiation**:
+Instead of differentiating the function at one set of variable values [x, y, ...] at a time, we can provide the option to differentiate a matrix of values where each row is one set of variable values just like how we train and predict datasets in modern commercial packages. We aim to use parallel computing techniques to make such process streamlined and fast.
+
+3. **Differentiating functions without instantiating them into numerical values (inspired by sympy)**:
+Provides the functionality to generate a first order derivative lambda function of the input function without instantiating them into numerical values.
+
+4. **Backpropagation**:
+Last functionality is the classif backpropagation. Artificial neural networks' each iteration is computed with two passes. Forward pass: in which data is fed in the forward direction through the network and loss function is calculated from the output values. Reverse pass: goes through each layer in reverse to measure the error contribution from each connection, and finally tweaks the connection weights to reduce the function loss.
+Therefore, we also look forward to use our currently implemented forward and reverse mode to implement the backpropagation process
 
 As [External Dependencies](#external-dependencies) states, we are currently not relying on any external libraries and instead are using the built-in [`math`](https://docs.python.org/3/library/math.html) library. In order to extend our package to handle multi-function and multi-variable inputs, we recognize that we will need to replace this with [`NumPy`](https://numpy.org/doc/stable/index.html).  
 
-Finally, we plan on adding another module to handle automatic differentiation using reverse mode. The reverse mode module will work by instantiating a `RevMod` object with some value. It will eventually be able to support running the reverse mode autodifferentiation for all arithmetic operations, trigonometric functions, exponential, and comparison methods, for which we will look into all `__ne__`, `__eq__`, `__lt__` etc.. as was suggested for the forward mode in the final deliverables. We may be also considering briefly reorganizing our test and src directories to separate the forward and reverse mode subsections
 
 
 
